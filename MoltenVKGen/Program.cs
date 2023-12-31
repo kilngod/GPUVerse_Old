@@ -7,8 +7,8 @@ class Program
 {
     static void Main(string[] args)
     {
-        string vkFile = "..\\net7.0\\KhronosRegistry\\vk.xml";
-        string outputPath = "..\\..\\..\\..\\GPUVulkan\\VulkanGenerated";
+        string vkFile = "..\\net8.0\\KhronosRegistry\\vk.xml";
+        string outputPath = "..\\..\\..\\..\\GPUMauiLib\\VulkanGenerated";
 
         if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
         {

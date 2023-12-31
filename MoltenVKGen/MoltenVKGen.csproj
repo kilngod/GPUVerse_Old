@@ -11,4 +11,11 @@
       <Content Include="VulkanGen\.DS_Store" />
     </ItemGroup>
 
+    <ItemGroup>
+      <None Remove="KhronosRegistry\vk.xml" />
+      <Content Include="KhronosRegistry\vk.xml">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+    </ItemGroup>
+
 </Project>
