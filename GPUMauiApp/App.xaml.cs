@@ -1,50 +1,11 @@
-﻿// ---------------------------------------------------------------------------------------
-//                                        ILGPU
-//                           Copyright (c) 2023 ILGPU Project
-//                                    www.ilgpu.net
-//
-// File: .cs
-//
-// This file is part of ILGPU and is distributed under the University of Illinois Open
-// Source License. See LICENSE.txt for details.
-// ---------------------------------------------------------------------------------------
+﻿namespace GPUMauiApp;
 
-using GPUMauiApp.Pages;
-using GPUGraphicsMaui;
-
-namespace GPUMauiApp
+public partial class App : Application
 {
-    public partial class App : Application
+    public App()
     {
-        public App()
-        {
-            InitializeComponent();
+        InitializeComponent();
 
-            MainPage = new GPUViewPage();
-        }
-
-
-        protected override Window CreateWindow(IActivationState activationState)
-        {
-
-            GPUWindow window = null;
-            if (Windows.Count > 0)
-                return Windows[0];
-
-
-            if (this.MainPage != null)
-            {
-                window = new GPUWindow(MainPage);
-            }
-            else
-            {
-                window = new GPUWindow();
-            }
-#if WINDOWS
-            window.App = this;
-#endif
-
-            return window;
-        }
+        MainPage = new AppShell();
     }
 }

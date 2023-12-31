@@ -3,11 +3,29 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GPUMauiApp", "GPUMauiApp\GPUMauiApp.csproj", "{628596F8-07A5-4C9C-9263-E7FE178E1E1E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GPUMauiLib", "GPUMauiLib\GPUMauiLib.csproj", "{BDB931EB-6D28-4DFA-B097-BB23002BF2D2}"
+EndProject
 Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1393488A-DD55-433B-9062-E0CAD1D7512D}
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{628596F8-07A5-4C9C-9263-E7FE178E1E1E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{628596F8-07A5-4C9C-9263-E7FE178E1E1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{628596F8-07A5-4C9C-9263-E7FE178E1E1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{628596F8-07A5-4C9C-9263-E7FE178E1E1E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BDB931EB-6D28-4DFA-B097-BB23002BF2D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BDB931EB-6D28-4DFA-B097-BB23002BF2D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BDB931EB-6D28-4DFA-B097-BB23002BF2D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BDB931EB-6D28-4DFA-B097-BB23002BF2D2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 EndGlobal
