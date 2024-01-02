@@ -17,7 +17,7 @@ namespace GPUVulkan
         {
             
             NativeLib = LoadNativeLibrary();
-            LoadFuncionPointers();
+          
         }
 
         private static NativeLibrary LoadNativeLibrary()

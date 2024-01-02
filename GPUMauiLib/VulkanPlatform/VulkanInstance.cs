@@ -362,7 +362,7 @@ VK_MVK_moltenvk
             
             VulkanHelpers.CheckErrors(VulkanNative.vkCreateInstance(&instanceCreateInfo, null, &instance));
             (support as VulkanSupport).SetInstance(instance);
-            VulkanNative.LoadFuncionPointers(instance);
+        //    VulkanNative.LoadFuncionPointers(instance);
             
 
 

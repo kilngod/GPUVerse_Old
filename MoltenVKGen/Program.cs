@@ -291,37 +291,44 @@ class Program
             file.WriteLine("}");
         }
 
-        // Commands
+        // Commands for iOS/Macatalyst
         using (StreamWriter file = File.CreateText(Path.Combine(outputPath, "Commands.cs")))
         {
             file.WriteLine("using System;");
             file.WriteLine("using System.Runtime.InteropServices;\n");
             file.WriteLine("#nullable disable\n");
-            file.WriteLine("namespace GPUVulkan");
-            file.WriteLine("{");
+            file.WriteLine("namespace GPUVulkan;");
+            //file.WriteLine("{");
             file.WriteLine("\tpublic static unsafe partial class VulkanNative");
             file.WriteLine("\t{");
+            
+            file.WriteLine("");
+            file.WriteLine("");
+            file.WriteLine("\t\tconst string libraryName = \"libvulkan.so\";");
+            file.WriteLine("");
+            file.WriteLine("");
+            file.WriteLine("");
 
             foreach (var command in vulkanVersion.Commands)
             {
                 string convertedType = Helpers.ConvertToCSharpType(command.Prototype.Type, 0, vulkanSpec);
 
-                file.WriteLine("\t\t[UnmanagedFunctionPointer(CallConv)]");
+                file.WriteLine("\t\t[DllImport (libraryName)]");
 
-                // Delegate
+            /*    // Delegate
                 file.WriteLine(
                     $"\t\tprivate delegate {convertedType} {command.Prototype.Name}Delegate({command.GetParametersSignature(vulkanSpec)});");
 
                 // internal function
                 file.WriteLine($"\t\tprivate static {command.Prototype.Name}Delegate {command.Prototype.Name}_ptr;");
-
+*/
                 // public function
                 file.WriteLine(
-                    $"\t\tpublic static {convertedType} {command.Prototype.Name}({command.GetParametersSignature(vulkanSpec)})");
-                file.WriteLine(
-                    $"\t\t\t=> {command.Prototype.Name}_ptr({command.GetParametersSignature(vulkanSpec, useTypes: false)});\n");
+                    $"\t\tpublic static extern {convertedType} {command.Prototype.Name}({command.GetParametersSignature(vulkanSpec)});\n\n");
+                //file.WriteLine($"\t\t\t=> {command.Prototype.Name}_ptr({command.GetParametersSignature(vulkanSpec, useTypes: false)});\n");
             }
 
+            /*
             file.WriteLine($"\t\tpublic static void LoadFuncionPointers(VkInstance instance = default)");
             file.WriteLine("\t\t{");
             file.WriteLine("\t\t\tif (instance != default)");
@@ -335,10 +342,11 @@ class Program
                 file.WriteLine(
                     $"\t\t\tNativeLib.LoadFunction(\"{command.Prototype.Name}\",  out {command.Prototype.Name}_ptr);");
             }
+            */
 
             file.WriteLine("\t\t}");
-            file.WriteLine("\t}");
-            file.WriteLine("}");
+           // file.WriteLine("\t}");
+            //file.WriteLine("}");
         }
     }
 }
