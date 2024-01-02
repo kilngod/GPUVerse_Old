@@ -363,6 +363,14 @@ namespace GPUVulkan
 	}
 
 	[StructLayout(LayoutKind.Sequential)]
+	public unsafe partial struct VkBufferUsageFlags2CreateInfoKHR
+	{
+		public VkStructureType sType;
+		public void* pNext;
+		public ulong usage;
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
 	public unsafe partial struct VkBufferCreateInfo
 	{
 		public VkStructureType sType;
@@ -723,6 +731,24 @@ namespace GPUVulkan
 		public VkPipelineLayout layout;
 		public VkPipeline basePipelineHandle;
 		public int basePipelineIndex;
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
+	public unsafe partial struct VkComputePipelineIndirectBufferInfoNV
+	{
+		public VkStructureType sType;
+		public void* pNext;
+		public ulong deviceAddress;
+		public ulong size;
+		public ulong pipelineDeviceAddressCaptureReplay;
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
+	public unsafe partial struct VkPipelineCreateFlags2CreateInfoKHR
+	{
+		public VkStructureType sType;
+		public void* pNext;
+		public ulong flags;
 	}
 
 	[StructLayout(LayoutKind.Sequential)]
@@ -1692,6 +1718,25 @@ namespace GPUVulkan
 	}
 
 	[StructLayout(LayoutKind.Sequential)]
+	public unsafe partial struct VkLayerSettingsCreateInfoEXT
+	{
+		public VkStructureType sType;
+		public void* pNext;
+		public uint settingCount;
+		public VkLayerSettingEXT* pSettings;
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
+	public unsafe partial struct VkLayerSettingEXT
+	{
+		public byte* pLayerName;
+		public byte* pSettingName;
+		public VkLayerSettingTypeEXT type;
+		public uint valueCount;
+		public void* pValues;
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
 	public unsafe partial struct VkApplicationParametersEXT
 	{
 		public VkStructureType sType;
@@ -1878,6 +1923,16 @@ namespace GPUVulkan
 	}
 
 	[StructLayout(LayoutKind.Sequential)]
+	public unsafe partial struct VkPhysicalDeviceDeviceGeneratedCommandsComputeFeaturesNV
+	{
+		public VkStructureType sType;
+		public void* pNext;
+		public VkBool32 deviceGeneratedCompute;
+		public VkBool32 deviceGeneratedComputePipelines;
+		public VkBool32 deviceGeneratedComputeCaptureReplay;
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
 	public unsafe partial struct VkDevicePrivateDataCreateInfo
 	{
 		public VkStructureType sType;
@@ -2044,6 +2099,21 @@ namespace GPUVulkan
 		public VkPipeline pipeline;
 		public VkIndirectCommandsLayoutNV indirectCommandsLayout;
 		public uint maxSequencesCount;
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
+	public unsafe partial struct VkPipelineIndirectDeviceAddressInfoNV
+	{
+		public VkStructureType sType;
+		public void* pNext;
+		public VkPipelineBindPoint pipelineBindPoint;
+		public VkPipeline pipeline;
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
+	public unsafe partial struct VkBindPipelineIndirectCommandNV
+	{
+		public ulong pipelineAddress;
 	}
 
 	[StructLayout(LayoutKind.Sequential)]
@@ -3728,6 +3798,57 @@ namespace GPUVulkan
 	}
 
 	[StructLayout(LayoutKind.Sequential)]
+	public unsafe partial struct VkPhysicalDeviceMaintenance5FeaturesKHR
+	{
+		public VkStructureType sType;
+		public void* pNext;
+		public VkBool32 maintenance5;
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
+	public unsafe partial struct VkPhysicalDeviceMaintenance5PropertiesKHR
+	{
+		public VkStructureType sType;
+		public void* pNext;
+		public VkBool32 earlyFragmentMultisampleCoverageAfterSampleCounting;
+		public VkBool32 earlyFragmentSampleMaskTestBeforeSampleCounting;
+		public VkBool32 depthStencilSwizzleOneSupport;
+		public VkBool32 polygonModePointSize;
+		public VkBool32 nonStrictSinglePixelWideLinesUseParallelogram;
+		public VkBool32 nonStrictWideLinesUseParallelogram;
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
+	public unsafe partial struct VkPhysicalDeviceMaintenance6FeaturesKHR
+	{
+		public VkStructureType sType;
+		public void* pNext;
+		public VkBool32 maintenance6;
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
+	public unsafe partial struct VkPhysicalDeviceMaintenance6PropertiesKHR
+	{
+		public VkStructureType sType;
+		public void* pNext;
+		public VkBool32 blockTexelViewCompatibleMultipleLayers;
+		public uint maxCombinedImageSamplerDescriptorCount;
+		public VkBool32 fragmentShadingRateClampCombinerInputs;
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
+	public unsafe partial struct VkRenderingAreaInfoKHR
+	{
+		public VkStructureType sType;
+		public void* pNext;
+		public uint viewMask;
+		public uint colorAttachmentCount;
+		public VkFormat* pColorAttachmentFormats;
+		public VkFormat depthAttachmentFormat;
+		public VkFormat stencilAttachmentFormat;
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
 	public unsafe partial struct VkDescriptorSetLayoutSupport
 	{
 		public VkStructureType sType;
@@ -4020,11 +4141,11 @@ namespace GPUVulkan
 	}
 
 	[StructLayout(LayoutKind.Sequential)]
-	public unsafe partial struct VkCalibratedTimestampInfoEXT
+	public unsafe partial struct VkCalibratedTimestampInfoKHR
 	{
 		public VkStructureType sType;
 		public void* pNext;
-		public VkTimeDomainEXT timeDomain;
+		public VkTimeDomainKHR timeDomain;
 	}
 
 	[StructLayout(LayoutKind.Sequential)]
@@ -4297,19 +4418,19 @@ namespace GPUVulkan
 	}
 
 	[StructLayout(LayoutKind.Sequential)]
-	public unsafe partial struct VkVertexInputBindingDivisorDescriptionEXT
+	public unsafe partial struct VkVertexInputBindingDivisorDescriptionKHR
 	{
 		public uint binding;
 		public uint divisor;
 	}
 
 	[StructLayout(LayoutKind.Sequential)]
-	public unsafe partial struct VkPipelineVertexInputDivisorStateCreateInfoEXT
+	public unsafe partial struct VkPipelineVertexInputDivisorStateCreateInfoKHR
 	{
 		public VkStructureType sType;
 		public void* pNext;
 		public uint vertexBindingDivisorCount;
-		public VkVertexInputBindingDivisorDescriptionEXT* pVertexBindingDivisors;
+		public VkVertexInputBindingDivisorDescriptionKHR* pVertexBindingDivisors;
 	}
 
 	[StructLayout(LayoutKind.Sequential)]
@@ -4318,6 +4439,15 @@ namespace GPUVulkan
 		public VkStructureType sType;
 		public void* pNext;
 		public uint maxVertexAttribDivisor;
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
+	public unsafe partial struct VkPhysicalDeviceVertexAttributeDivisorPropertiesKHR
+	{
+		public VkStructureType sType;
+		public void* pNext;
+		public uint maxVertexAttribDivisor;
+		public VkBool32 supportsNonZeroFirstInstance;
 	}
 
 	[StructLayout(LayoutKind.Sequential)]
@@ -4472,7 +4602,7 @@ namespace GPUVulkan
 	}
 
 	[StructLayout(LayoutKind.Sequential)]
-	public unsafe partial struct VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT
+	public unsafe partial struct VkPhysicalDeviceVertexAttributeDivisorFeaturesKHR
 	{
 		public VkStructureType sType;
 		public void* pNext;
@@ -5480,11 +5610,11 @@ namespace GPUVulkan
 		public uint MSize;
 		public uint NSize;
 		public uint KSize;
-		public VkComponentTypeNV AType;
-		public VkComponentTypeNV BType;
-		public VkComponentTypeNV CType;
-		public VkComponentTypeNV DType;
-		public VkScopeNV scope;
+		public VkComponentTypeKHR AType;
+		public VkComponentTypeKHR BType;
+		public VkComponentTypeKHR CType;
+		public VkComponentTypeKHR DType;
+		public VkScopeKHR scope;
 	}
 
 	[StructLayout(LayoutKind.Sequential)]
@@ -6814,6 +6944,14 @@ namespace GPUVulkan
 	}
 
 	[StructLayout(LayoutKind.Sequential)]
+	public unsafe partial struct VkPhysicalDeviceClusterCullingShaderVrsFeaturesHUAWEI
+	{
+		public VkStructureType sType;
+		public void* pNext;
+		public VkBool32 clusterShadingRate;
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
 	public unsafe partial struct VkBufferCopy2
 	{
 		public VkStructureType sType;
@@ -7304,6 +7442,119 @@ namespace GPUVulkan
 	}
 
 	[StructLayout(LayoutKind.Sequential)]
+	public unsafe partial struct VkPhysicalDeviceHostImageCopyFeaturesEXT
+	{
+		public VkStructureType sType;
+		public void* pNext;
+		public VkBool32 hostImageCopy;
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
+	public unsafe partial struct VkPhysicalDeviceHostImageCopyPropertiesEXT
+	{
+		public VkStructureType sType;
+		public void* pNext;
+		public uint copySrcLayoutCount;
+		public VkImageLayout* pCopySrcLayouts;
+		public uint copyDstLayoutCount;
+		public VkImageLayout* pCopyDstLayouts;
+		public fixed byte optimalTilingLayoutUUID[(int)VulkanNative.VK_UUID_SIZE];
+		public VkBool32 identicalMemoryTypeRequirements;
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
+	public unsafe partial struct VkMemoryToImageCopyEXT
+	{
+		public VkStructureType sType;
+		public void* pNext;
+		public void* pHostPointer;
+		public uint memoryRowLength;
+		public uint memoryImageHeight;
+		public VkImageSubresourceLayers imageSubresource;
+		public VkOffset3D imageOffset;
+		public VkExtent3D imageExtent;
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
+	public unsafe partial struct VkImageToMemoryCopyEXT
+	{
+		public VkStructureType sType;
+		public void* pNext;
+		public void* pHostPointer;
+		public uint memoryRowLength;
+		public uint memoryImageHeight;
+		public VkImageSubresourceLayers imageSubresource;
+		public VkOffset3D imageOffset;
+		public VkExtent3D imageExtent;
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
+	public unsafe partial struct VkCopyMemoryToImageInfoEXT
+	{
+		public VkStructureType sType;
+		public void* pNext;
+		public VkHostImageCopyFlagsEXT flags;
+		public VkImage dstImage;
+		public VkImageLayout dstImageLayout;
+		public uint regionCount;
+		public VkMemoryToImageCopyEXT* pRegions;
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
+	public unsafe partial struct VkCopyImageToMemoryInfoEXT
+	{
+		public VkStructureType sType;
+		public void* pNext;
+		public VkHostImageCopyFlagsEXT flags;
+		public VkImage srcImage;
+		public VkImageLayout srcImageLayout;
+		public uint regionCount;
+		public VkImageToMemoryCopyEXT* pRegions;
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
+	public unsafe partial struct VkCopyImageToImageInfoEXT
+	{
+		public VkStructureType sType;
+		public void* pNext;
+		public VkHostImageCopyFlagsEXT flags;
+		public VkImage srcImage;
+		public VkImageLayout srcImageLayout;
+		public VkImage dstImage;
+		public VkImageLayout dstImageLayout;
+		public uint regionCount;
+		public VkImageCopy2* pRegions;
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
+	public unsafe partial struct VkHostImageLayoutTransitionInfoEXT
+	{
+		public VkStructureType sType;
+		public void* pNext;
+		public VkImage image;
+		public VkImageLayout oldLayout;
+		public VkImageLayout newLayout;
+		public VkImageSubresourceRange subresourceRange;
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
+	public unsafe partial struct VkSubresourceHostMemcpySizeEXT
+	{
+		public VkStructureType sType;
+		public void* pNext;
+		public ulong size;
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
+	public unsafe partial struct VkHostImageCopyDevicePerformanceQueryEXT
+	{
+		public VkStructureType sType;
+		public void* pNext;
+		public VkBool32 optimalDeviceAccess;
+		public VkBool32 identicalMemoryLayout;
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
 	public unsafe partial struct VkPhysicalDeviceVulkanSC10Properties
 	{
 		public VkStructureType sType;
@@ -7608,6 +7859,24 @@ namespace GPUVulkan
 	}
 
 	[StructLayout(LayoutKind.Sequential)]
+	public unsafe partial struct VkPhysicalDeviceVideoMaintenance1FeaturesKHR
+	{
+		public VkStructureType sType;
+		public void* pNext;
+		public VkBool32 videoMaintenance1;
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
+	public unsafe partial struct VkVideoInlineQueryInfoKHR
+	{
+		public VkStructureType sType;
+		public void* pNext;
+		public VkQueryPool queryPool;
+		public uint firstQuery;
+		public uint queryCount;
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
 	public unsafe partial struct VkVideoDecodeH264ProfileInfoKHR
 	{
 		public VkStructureType sType;
@@ -7757,6 +8026,22 @@ namespace GPUVulkan
 	}
 
 	[StructLayout(LayoutKind.Sequential)]
+	public unsafe partial struct VkVideoEncodeSessionParametersGetInfoKHR
+	{
+		public VkStructureType sType;
+		public void* pNext;
+		public VkVideoSessionParametersKHR videoSessionParameters;
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
+	public unsafe partial struct VkVideoEncodeSessionParametersFeedbackInfoKHR
+	{
+		public VkStructureType sType;
+		public void* pNext;
+		public VkBool32 hasOverrides;
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
 	public unsafe partial struct VkVideoBeginCodingInfoKHR
 	{
 		public VkStructureType sType;
@@ -7800,7 +8085,6 @@ namespace GPUVulkan
 		public VkStructureType sType;
 		public void* pNext;
 		public uint flags;
-		public uint qualityLevel;
 		public VkBuffer dstBuffer;
 		public ulong dstBufferOffset;
 		public ulong dstBufferRange;
@@ -7820,6 +8104,32 @@ namespace GPUVulkan
 	}
 
 	[StructLayout(LayoutKind.Sequential)]
+	public unsafe partial struct VkVideoEncodeQualityLevelInfoKHR
+	{
+		public VkStructureType sType;
+		public void* pNext;
+		public uint qualityLevel;
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
+	public unsafe partial struct VkPhysicalDeviceVideoEncodeQualityLevelInfoKHR
+	{
+		public VkStructureType sType;
+		public void* pNext;
+		public VkVideoProfileInfoKHR* pVideoProfile;
+		public uint qualityLevel;
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
+	public unsafe partial struct VkVideoEncodeQualityLevelPropertiesKHR
+	{
+		public VkStructureType sType;
+		public void* pNext;
+		public VkVideoEncodeRateControlModeFlagsKHR preferredRateControlMode;
+		public uint preferredRateControlLayerCount;
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
 	public unsafe partial struct VkVideoEncodeRateControlInfoKHR
 	{
 		public VkStructureType sType;
@@ -7828,6 +8138,8 @@ namespace GPUVulkan
 		public VkVideoEncodeRateControlModeFlagsKHR rateControlMode;
 		public uint layerCount;
 		public VkVideoEncodeRateControlLayerInfoKHR* pLayers;
+		public uint virtualBufferSizeInMs;
+		public uint initialVirtualBufferSizeInMs;
 	}
 
 	[StructLayout(LayoutKind.Sequential)]
@@ -7839,8 +8151,6 @@ namespace GPUVulkan
 		public ulong maxBitrate;
 		public uint frameRateNumerator;
 		public uint frameRateDenominator;
-		public uint virtualBufferSizeInMs;
-		public uint initialVirtualBufferSizeInMs;
 	}
 
 	[StructLayout(LayoutKind.Sequential)]
@@ -7851,29 +8161,59 @@ namespace GPUVulkan
 		public VkVideoEncodeCapabilityFlagsKHR flags;
 		public VkVideoEncodeRateControlModeFlagsKHR rateControlModes;
 		public uint maxRateControlLayers;
+		public ulong maxBitrate;
 		public uint maxQualityLevels;
-		public VkExtent2D inputImageDataFillAlignment;
+		public VkExtent2D encodeInputPictureGranularity;
 		public VkVideoEncodeFeedbackFlagsKHR supportedEncodeFeedbackFlags;
 	}
 
 	[StructLayout(LayoutKind.Sequential)]
-	public unsafe partial struct VkVideoEncodeH264CapabilitiesEXT
+	public unsafe partial struct VkVideoEncodeH264CapabilitiesKHR
 	{
 		public VkStructureType sType;
 		public void* pNext;
-		public VkVideoEncodeH264CapabilityFlagsEXT flags;
+		public VkVideoEncodeH264CapabilityFlagsKHR flags;
+		public IntPtr maxLevelIdc;
+		public uint maxSliceCount;
 		public uint maxPPictureL0ReferenceCount;
 		public uint maxBPictureL0ReferenceCount;
 		public uint maxL1ReferenceCount;
-		public VkBool32 motionVectorsOverPicBoundariesFlag;
-		public uint maxBytesPerPicDenom;
-		public uint maxBitsPerMbDenom;
-		public uint log2MaxMvLengthHorizontal;
-		public uint log2MaxMvLengthVertical;
+		public uint maxTemporalLayerCount;
+		public VkBool32 expectDyadicTemporalLayerPattern;
+		public int minQp;
+		public int maxQp;
+		public VkBool32 prefersGopRemainingFrames;
+		public VkBool32 requiresGopRemainingFrames;
+		public VkVideoEncodeH264StdFlagsKHR stdSyntaxFlags;
 	}
 
 	[StructLayout(LayoutKind.Sequential)]
-	public unsafe partial struct VkVideoEncodeH264SessionParametersAddInfoEXT
+	public unsafe partial struct VkVideoEncodeH264QualityLevelPropertiesKHR
+	{
+		public VkStructureType sType;
+		public void* pNext;
+		public VkVideoEncodeH264RateControlFlagsKHR preferredRateControlFlags;
+		public uint preferredGopFrameCount;
+		public uint preferredIdrPeriod;
+		public uint preferredConsecutiveBFrameCount;
+		public uint preferredTemporalLayerCount;
+		public VkVideoEncodeH264QpKHR preferredConstantQp;
+		public uint preferredMaxL0ReferenceCount;
+		public uint preferredMaxL1ReferenceCount;
+		public VkBool32 preferredStdEntropyCodingModeFlag;
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
+	public unsafe partial struct VkVideoEncodeH264SessionCreateInfoKHR
+	{
+		public VkStructureType sType;
+		public void* pNext;
+		public VkBool32 useMaxLevelIdc;
+		public IntPtr maxLevelIdc;
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
+	public unsafe partial struct VkVideoEncodeH264SessionParametersAddInfoKHR
 	{
 		public VkStructureType sType;
 		public void* pNext;
@@ -7884,17 +8224,37 @@ namespace GPUVulkan
 	}
 
 	[StructLayout(LayoutKind.Sequential)]
-	public unsafe partial struct VkVideoEncodeH264SessionParametersCreateInfoEXT
+	public unsafe partial struct VkVideoEncodeH264SessionParametersCreateInfoKHR
 	{
 		public VkStructureType sType;
 		public void* pNext;
 		public uint maxStdSPSCount;
 		public uint maxStdPPSCount;
-		public VkVideoEncodeH264SessionParametersAddInfoEXT* pParametersAddInfo;
+		public VkVideoEncodeH264SessionParametersAddInfoKHR* pParametersAddInfo;
 	}
 
 	[StructLayout(LayoutKind.Sequential)]
-	public unsafe partial struct VkVideoEncodeH264DpbSlotInfoEXT
+	public unsafe partial struct VkVideoEncodeH264SessionParametersGetInfoKHR
+	{
+		public VkStructureType sType;
+		public void* pNext;
+		public VkBool32 writeStdSPS;
+		public VkBool32 writeStdPPS;
+		public uint stdSPSId;
+		public uint stdPPSId;
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
+	public unsafe partial struct VkVideoEncodeH264SessionParametersFeedbackInfoKHR
+	{
+		public VkStructureType sType;
+		public void* pNext;
+		public VkBool32 hasStdSPSOverrides;
+		public VkBool32 hasStdPPSOverrides;
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
+	public unsafe partial struct VkVideoEncodeH264DpbSlotInfoKHR
 	{
 		public VkStructureType sType;
 		public void* pNext;
@@ -7902,18 +8262,18 @@ namespace GPUVulkan
 	}
 
 	[StructLayout(LayoutKind.Sequential)]
-	public unsafe partial struct VkVideoEncodeH264VclFrameInfoEXT
+	public unsafe partial struct VkVideoEncodeH264PictureInfoKHR
 	{
 		public VkStructureType sType;
 		public void* pNext;
-		public IntPtr pStdReferenceFinalLists;
 		public uint naluSliceEntryCount;
-		public VkVideoEncodeH264NaluSliceInfoEXT* pNaluSliceEntries;
+		public VkVideoEncodeH264NaluSliceInfoKHR* pNaluSliceEntries;
 		public IntPtr pStdPictureInfo;
+		public VkBool32 generatePrefixNalu;
 	}
 
 	[StructLayout(LayoutKind.Sequential)]
-	public unsafe partial struct VkVideoEncodeH264ProfileInfoEXT
+	public unsafe partial struct VkVideoEncodeH264ProfileInfoKHR
 	{
 		public VkStructureType sType;
 		public void* pNext;
@@ -7921,29 +8281,28 @@ namespace GPUVulkan
 	}
 
 	[StructLayout(LayoutKind.Sequential)]
-	public unsafe partial struct VkVideoEncodeH264NaluSliceInfoEXT
+	public unsafe partial struct VkVideoEncodeH264NaluSliceInfoKHR
 	{
 		public VkStructureType sType;
 		public void* pNext;
-		public uint mbCount;
-		public IntPtr pStdReferenceFinalLists;
+		public int constantQp;
 		public IntPtr pStdSliceHeader;
 	}
 
 	[StructLayout(LayoutKind.Sequential)]
-	public unsafe partial struct VkVideoEncodeH264RateControlInfoEXT
+	public unsafe partial struct VkVideoEncodeH264RateControlInfoKHR
 	{
 		public VkStructureType sType;
 		public void* pNext;
+		public VkVideoEncodeH264RateControlFlagsKHR flags;
 		public uint gopFrameCount;
 		public uint idrPeriod;
 		public uint consecutiveBFrameCount;
-		public VkVideoEncodeH264RateControlStructureEXT rateControlStructure;
 		public uint temporalLayerCount;
 	}
 
 	[StructLayout(LayoutKind.Sequential)]
-	public unsafe partial struct VkVideoEncodeH264QpEXT
+	public unsafe partial struct VkVideoEncodeH264QpKHR
 	{
 		public int qpI;
 		public int qpP;
@@ -7951,7 +8310,7 @@ namespace GPUVulkan
 	}
 
 	[StructLayout(LayoutKind.Sequential)]
-	public unsafe partial struct VkVideoEncodeH264FrameSizeEXT
+	public unsafe partial struct VkVideoEncodeH264FrameSizeKHR
 	{
 		public uint frameISize;
 		public uint framePSize;
@@ -7959,48 +8318,78 @@ namespace GPUVulkan
 	}
 
 	[StructLayout(LayoutKind.Sequential)]
-	public unsafe partial struct VkVideoEncodeH264RateControlLayerInfoEXT
+	public unsafe partial struct VkVideoEncodeH264GopRemainingFrameInfoKHR
 	{
 		public VkStructureType sType;
 		public void* pNext;
-		public uint temporalLayerId;
-		public VkBool32 useInitialRcQp;
-		public VkVideoEncodeH264QpEXT initialRcQp;
-		public VkBool32 useMinQp;
-		public VkVideoEncodeH264QpEXT minQp;
-		public VkBool32 useMaxQp;
-		public VkVideoEncodeH264QpEXT maxQp;
-		public VkBool32 useMaxFrameSize;
-		public VkVideoEncodeH264FrameSizeEXT maxFrameSize;
+		public VkBool32 useGopRemainingFrames;
+		public uint gopRemainingI;
+		public uint gopRemainingP;
+		public uint gopRemainingB;
 	}
 
 	[StructLayout(LayoutKind.Sequential)]
-	public unsafe partial struct VkVideoEncodeH265CapabilitiesEXT
+	public unsafe partial struct VkVideoEncodeH264RateControlLayerInfoKHR
 	{
 		public VkStructureType sType;
 		public void* pNext;
-		public VkVideoEncodeH265CapabilityFlagsEXT flags;
-		public VkVideoEncodeH265CtbSizeFlagsEXT ctbSizes;
-		public VkVideoEncodeH265TransformBlockSizeFlagsEXT transformBlockSizes;
+		public VkBool32 useMinQp;
+		public VkVideoEncodeH264QpKHR minQp;
+		public VkBool32 useMaxQp;
+		public VkVideoEncodeH264QpKHR maxQp;
+		public VkBool32 useMaxFrameSize;
+		public VkVideoEncodeH264FrameSizeKHR maxFrameSize;
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
+	public unsafe partial struct VkVideoEncodeH265CapabilitiesKHR
+	{
+		public VkStructureType sType;
+		public void* pNext;
+		public VkVideoEncodeH265CapabilityFlagsKHR flags;
+		public IntPtr maxLevelIdc;
+		public uint maxSliceSegmentCount;
+		public VkExtent2D maxTiles;
+		public VkVideoEncodeH265CtbSizeFlagsKHR ctbSizes;
+		public VkVideoEncodeH265TransformBlockSizeFlagsKHR transformBlockSizes;
 		public uint maxPPictureL0ReferenceCount;
 		public uint maxBPictureL0ReferenceCount;
 		public uint maxL1ReferenceCount;
-		public uint maxSubLayersCount;
-		public uint minLog2MinLumaCodingBlockSizeMinus3;
-		public uint maxLog2MinLumaCodingBlockSizeMinus3;
-		public uint minLog2MinLumaTransformBlockSizeMinus2;
-		public uint maxLog2MinLumaTransformBlockSizeMinus2;
-		public uint minMaxTransformHierarchyDepthInter;
-		public uint maxMaxTransformHierarchyDepthInter;
-		public uint minMaxTransformHierarchyDepthIntra;
-		public uint maxMaxTransformHierarchyDepthIntra;
-		public uint maxDiffCuQpDeltaDepth;
-		public uint minMaxNumMergeCand;
-		public uint maxMaxNumMergeCand;
+		public uint maxSubLayerCount;
+		public VkBool32 expectDyadicTemporalSubLayerPattern;
+		public int minQp;
+		public int maxQp;
+		public VkBool32 prefersGopRemainingFrames;
+		public VkBool32 requiresGopRemainingFrames;
+		public VkVideoEncodeH265StdFlagsKHR stdSyntaxFlags;
 	}
 
 	[StructLayout(LayoutKind.Sequential)]
-	public unsafe partial struct VkVideoEncodeH265SessionParametersAddInfoEXT
+	public unsafe partial struct VkVideoEncodeH265QualityLevelPropertiesKHR
+	{
+		public VkStructureType sType;
+		public void* pNext;
+		public VkVideoEncodeH265RateControlFlagsKHR preferredRateControlFlags;
+		public uint preferredGopFrameCount;
+		public uint preferredIdrPeriod;
+		public uint preferredConsecutiveBFrameCount;
+		public uint preferredSubLayerCount;
+		public VkVideoEncodeH265QpKHR preferredConstantQp;
+		public uint preferredMaxL0ReferenceCount;
+		public uint preferredMaxL1ReferenceCount;
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
+	public unsafe partial struct VkVideoEncodeH265SessionCreateInfoKHR
+	{
+		public VkStructureType sType;
+		public void* pNext;
+		public VkBool32 useMaxLevelIdc;
+		public IntPtr maxLevelIdc;
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
+	public unsafe partial struct VkVideoEncodeH265SessionParametersAddInfoKHR
 	{
 		public VkStructureType sType;
 		public void* pNext;
@@ -8013,51 +8402,72 @@ namespace GPUVulkan
 	}
 
 	[StructLayout(LayoutKind.Sequential)]
-	public unsafe partial struct VkVideoEncodeH265SessionParametersCreateInfoEXT
+	public unsafe partial struct VkVideoEncodeH265SessionParametersCreateInfoKHR
 	{
 		public VkStructureType sType;
 		public void* pNext;
 		public uint maxStdVPSCount;
 		public uint maxStdSPSCount;
 		public uint maxStdPPSCount;
-		public VkVideoEncodeH265SessionParametersAddInfoEXT* pParametersAddInfo;
+		public VkVideoEncodeH265SessionParametersAddInfoKHR* pParametersAddInfo;
 	}
 
 	[StructLayout(LayoutKind.Sequential)]
-	public unsafe partial struct VkVideoEncodeH265VclFrameInfoEXT
+	public unsafe partial struct VkVideoEncodeH265SessionParametersGetInfoKHR
 	{
 		public VkStructureType sType;
 		public void* pNext;
-		public IntPtr pStdReferenceFinalLists;
+		public VkBool32 writeStdVPS;
+		public VkBool32 writeStdSPS;
+		public VkBool32 writeStdPPS;
+		public uint stdVPSId;
+		public uint stdSPSId;
+		public uint stdPPSId;
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
+	public unsafe partial struct VkVideoEncodeH265SessionParametersFeedbackInfoKHR
+	{
+		public VkStructureType sType;
+		public void* pNext;
+		public VkBool32 hasStdVPSOverrides;
+		public VkBool32 hasStdSPSOverrides;
+		public VkBool32 hasStdPPSOverrides;
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
+	public unsafe partial struct VkVideoEncodeH265PictureInfoKHR
+	{
+		public VkStructureType sType;
+		public void* pNext;
 		public uint naluSliceSegmentEntryCount;
-		public VkVideoEncodeH265NaluSliceSegmentInfoEXT* pNaluSliceSegmentEntries;
+		public VkVideoEncodeH265NaluSliceSegmentInfoKHR* pNaluSliceSegmentEntries;
 		public IntPtr pStdPictureInfo;
 	}
 
 	[StructLayout(LayoutKind.Sequential)]
-	public unsafe partial struct VkVideoEncodeH265NaluSliceSegmentInfoEXT
+	public unsafe partial struct VkVideoEncodeH265NaluSliceSegmentInfoKHR
 	{
 		public VkStructureType sType;
 		public void* pNext;
-		public uint ctbCount;
-		public IntPtr pStdReferenceFinalLists;
+		public int constantQp;
 		public IntPtr pStdSliceSegmentHeader;
 	}
 
 	[StructLayout(LayoutKind.Sequential)]
-	public unsafe partial struct VkVideoEncodeH265RateControlInfoEXT
+	public unsafe partial struct VkVideoEncodeH265RateControlInfoKHR
 	{
 		public VkStructureType sType;
 		public void* pNext;
+		public VkVideoEncodeH265RateControlFlagsKHR flags;
 		public uint gopFrameCount;
 		public uint idrPeriod;
 		public uint consecutiveBFrameCount;
-		public VkVideoEncodeH265RateControlStructureEXT rateControlStructure;
 		public uint subLayerCount;
 	}
 
 	[StructLayout(LayoutKind.Sequential)]
-	public unsafe partial struct VkVideoEncodeH265QpEXT
+	public unsafe partial struct VkVideoEncodeH265QpKHR
 	{
 		public int qpI;
 		public int qpP;
@@ -8065,7 +8475,7 @@ namespace GPUVulkan
 	}
 
 	[StructLayout(LayoutKind.Sequential)]
-	public unsafe partial struct VkVideoEncodeH265FrameSizeEXT
+	public unsafe partial struct VkVideoEncodeH265FrameSizeKHR
 	{
 		public uint frameISize;
 		public uint framePSize;
@@ -8073,23 +8483,31 @@ namespace GPUVulkan
 	}
 
 	[StructLayout(LayoutKind.Sequential)]
-	public unsafe partial struct VkVideoEncodeH265RateControlLayerInfoEXT
+	public unsafe partial struct VkVideoEncodeH265GopRemainingFrameInfoKHR
 	{
 		public VkStructureType sType;
 		public void* pNext;
-		public uint temporalId;
-		public VkBool32 useInitialRcQp;
-		public VkVideoEncodeH265QpEXT initialRcQp;
-		public VkBool32 useMinQp;
-		public VkVideoEncodeH265QpEXT minQp;
-		public VkBool32 useMaxQp;
-		public VkVideoEncodeH265QpEXT maxQp;
-		public VkBool32 useMaxFrameSize;
-		public VkVideoEncodeH265FrameSizeEXT maxFrameSize;
+		public VkBool32 useGopRemainingFrames;
+		public uint gopRemainingI;
+		public uint gopRemainingP;
+		public uint gopRemainingB;
 	}
 
 	[StructLayout(LayoutKind.Sequential)]
-	public unsafe partial struct VkVideoEncodeH265ProfileInfoEXT
+	public unsafe partial struct VkVideoEncodeH265RateControlLayerInfoKHR
+	{
+		public VkStructureType sType;
+		public void* pNext;
+		public VkBool32 useMinQp;
+		public VkVideoEncodeH265QpKHR minQp;
+		public VkBool32 useMaxQp;
+		public VkVideoEncodeH265QpKHR maxQp;
+		public VkBool32 useMaxFrameSize;
+		public VkVideoEncodeH265FrameSizeKHR maxFrameSize;
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
+	public unsafe partial struct VkVideoEncodeH265ProfileInfoKHR
 	{
 		public VkStructureType sType;
 		public void* pNext;
@@ -8097,7 +8515,7 @@ namespace GPUVulkan
 	}
 
 	[StructLayout(LayoutKind.Sequential)]
-	public unsafe partial struct VkVideoEncodeH265DpbSlotInfoEXT
+	public unsafe partial struct VkVideoEncodeH265DpbSlotInfoKHR
 	{
 		public VkStructureType sType;
 		public void* pNext;
@@ -8621,6 +9039,43 @@ namespace GPUVulkan
 	}
 
 	[StructLayout(LayoutKind.Sequential)]
+	public unsafe partial struct VkCudaModuleCreateInfoNV
+	{
+		public VkStructureType sType;
+		public void* pNext;
+		public UIntPtr dataSize;
+		public void* pData;
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
+	public unsafe partial struct VkCudaFunctionCreateInfoNV
+	{
+		public VkStructureType sType;
+		public void* pNext;
+		public VkCudaModuleNV module;
+		public byte* pName;
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
+	public unsafe partial struct VkCudaLaunchInfoNV
+	{
+		public VkStructureType sType;
+		public void* pNext;
+		public VkCudaFunctionNV function;
+		public uint gridDimX;
+		public uint gridDimY;
+		public uint gridDimZ;
+		public uint blockDimX;
+		public uint blockDimY;
+		public uint blockDimZ;
+		public uint sharedMemBytes;
+		public UIntPtr paramCount;
+		public void* pParams;
+		public UIntPtr extraCount;
+		public void* pExtras;
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
 	public unsafe partial struct VkPhysicalDeviceRGBA10X6FormatsFeaturesEXT
 	{
 		public VkStructureType sType;
@@ -8858,6 +9313,24 @@ namespace GPUVulkan
 	}
 
 	[StructLayout(LayoutKind.Sequential)]
+	public unsafe partial struct VkPhysicalDeviceNestedCommandBufferFeaturesEXT
+	{
+		public VkStructureType sType;
+		public void* pNext;
+		public VkBool32 nestedCommandBuffer;
+		public VkBool32 nestedCommandBufferRendering;
+		public VkBool32 nestedCommandBufferSimultaneousUse;
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
+	public unsafe partial struct VkPhysicalDeviceNestedCommandBufferPropertiesEXT
+	{
+		public VkStructureType sType;
+		public void* pNext;
+		public uint maxCommandBufferNestingLevel;
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
 	public unsafe partial struct VkPhysicalDeviceShaderModuleIdentifierFeaturesEXT
 	{
 		public VkStructureType sType;
@@ -8927,7 +9400,7 @@ namespace GPUVulkan
 	}
 
 	[StructLayout(LayoutKind.Sequential)]
-	public unsafe partial struct VkImageSubresource2EXT
+	public unsafe partial struct VkImageSubresource2KHR
 	{
 		public VkStructureType sType;
 		public void* pNext;
@@ -8935,7 +9408,7 @@ namespace GPUVulkan
 	}
 
 	[StructLayout(LayoutKind.Sequential)]
-	public unsafe partial struct VkSubresourceLayout2EXT
+	public unsafe partial struct VkSubresourceLayout2KHR
 	{
 		public VkStructureType sType;
 		public void* pNext;
@@ -9178,6 +9651,14 @@ namespace GPUVulkan
 		public VkStructureType sType;
 		public void* pNext;
 		public VkBool32 shaderEarlyAndLateFragmentTests;
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
+	public unsafe partial struct VkExternalMemoryAcquireUnmodifiedEXT
+	{
+		public VkStructureType sType;
+		public void* pNext;
+		public VkBool32 acquireUnmodifiedMemory;
 	}
 
 	[StructLayout(LayoutKind.Sequential)]
@@ -9573,6 +10054,25 @@ namespace GPUVulkan
 	}
 
 	[StructLayout(LayoutKind.Sequential)]
+	public unsafe partial struct VkDepthBiasInfoEXT
+	{
+		public VkStructureType sType;
+		public void* pNext;
+		public float depthBiasConstantFactor;
+		public float depthBiasClamp;
+		public float depthBiasSlopeFactor;
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
+	public unsafe partial struct VkDepthBiasRepresentationInfoEXT
+	{
+		public VkStructureType sType;
+		public void* pNext;
+		public VkDepthBiasRepresentationEXT depthBiasRepresentation;
+		public VkBool32 depthBiasExact;
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
 	public unsafe partial struct VkDecompressMemoryRegionNV
 	{
 		public ulong srcAddress;
@@ -9598,6 +10098,38 @@ namespace GPUVulkan
 		public VkStructureType sType;
 		public void* pNext;
 		public VkBool32 shaderCoreBuiltins;
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
+	public unsafe partial struct VkFrameBoundaryEXT
+	{
+		public VkStructureType sType;
+		public void* pNext;
+		public VkFrameBoundaryFlagsEXT flags;
+		public ulong frameID;
+		public uint imageCount;
+		public VkImage* pImages;
+		public uint bufferCount;
+		public VkBuffer* pBuffers;
+		public ulong tagName;
+		public UIntPtr tagSize;
+		public void* pTag;
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
+	public unsafe partial struct VkPhysicalDeviceFrameBoundaryFeaturesEXT
+	{
+		public VkStructureType sType;
+		public void* pNext;
+		public VkBool32 frameBoundary;
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
+	public unsafe partial struct VkPhysicalDeviceDynamicRenderingUnusedAttachmentsFeaturesEXT
+	{
+		public VkStructureType sType;
+		public void* pNext;
+		public VkBool32 dynamicRenderingUnusedAttachments;
 	}
 
 	[StructLayout(LayoutKind.Sequential)]
@@ -9685,6 +10217,17 @@ namespace GPUVulkan
 	}
 
 	[StructLayout(LayoutKind.Sequential)]
+	public unsafe partial struct VkPhysicalDeviceDepthBiasControlFeaturesEXT
+	{
+		public VkStructureType sType;
+		public void* pNext;
+		public VkBool32 depthBiasControl;
+		public VkBool32 leastRepresentableValueForceUnormRepresentation;
+		public VkBool32 floatRepresentation;
+		public VkBool32 depthBiasExact;
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
 	public unsafe partial struct VkPhysicalDeviceRayTracingInvocationReorderFeaturesNV
 	{
 		public VkStructureType sType;
@@ -9698,6 +10241,24 @@ namespace GPUVulkan
 		public VkStructureType sType;
 		public void* pNext;
 		public VkRayTracingInvocationReorderModeNV rayTracingInvocationReorderReorderingHint;
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
+	public unsafe partial struct VkPhysicalDeviceExtendedSparseAddressSpaceFeaturesNV
+	{
+		public VkStructureType sType;
+		public void* pNext;
+		public VkBool32 extendedSparseAddressSpace;
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
+	public unsafe partial struct VkPhysicalDeviceExtendedSparseAddressSpacePropertiesNV
+	{
+		public VkStructureType sType;
+		public void* pNext;
+		public ulong extendedSparseAddressSpaceSize;
+		public VkImageUsageFlags extendedSparseImageUsageFlags;
+		public VkBufferUsageFlags extendedSparseBufferUsageFlags;
 	}
 
 	[StructLayout(LayoutKind.Sequential)]
@@ -9733,6 +10294,15 @@ namespace GPUVulkan
 		public VkStructureType sType;
 		public void* pNext;
 		public VkBool32 rayTracingPositionFetch;
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
+	public unsafe partial struct VkDeviceImageSubresourceInfoKHR
+	{
+		public VkStructureType sType;
+		public void* pNext;
+		public VkImageCreateInfo* pCreateInfo;
+		public VkImageSubresource2KHR* pSubresource;
 	}
 
 	[StructLayout(LayoutKind.Sequential)]
@@ -9844,6 +10414,544 @@ namespace GPUVulkan
 		public VkBool32 shaderTileImageCoherentReadAccelerated;
 		public VkBool32 shaderTileImageReadSampleFromPixelRateInvocation;
 		public VkBool32 shaderTileImageReadFromHelperInvocation;
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
+	public unsafe partial struct VkImportScreenBufferInfoQNX
+	{
+		public VkStructureType sType;
+		public void* pNext;
+		public _screen_buffer* buffer;
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
+	public unsafe partial struct VkScreenBufferPropertiesQNX
+	{
+		public VkStructureType sType;
+		public void* pNext;
+		public ulong allocationSize;
+		public uint memoryTypeBits;
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
+	public unsafe partial struct VkScreenBufferFormatPropertiesQNX
+	{
+		public VkStructureType sType;
+		public void* pNext;
+		public VkFormat format;
+		public ulong externalFormat;
+		public ulong screenUsage;
+		public VkFormatFeatureFlags formatFeatures;
+		public VkComponentMapping samplerYcbcrConversionComponents;
+		public VkSamplerYcbcrModelConversion suggestedYcbcrModel;
+		public VkSamplerYcbcrRange suggestedYcbcrRange;
+		public VkChromaLocation suggestedXChromaOffset;
+		public VkChromaLocation suggestedYChromaOffset;
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
+	public unsafe partial struct VkExternalFormatQNX
+	{
+		public VkStructureType sType;
+		public void* pNext;
+		public ulong externalFormat;
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
+	public unsafe partial struct VkPhysicalDeviceExternalMemoryScreenBufferFeaturesQNX
+	{
+		public VkStructureType sType;
+		public void* pNext;
+		public VkBool32 screenBufferImport;
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
+	public unsafe partial struct VkPhysicalDeviceCooperativeMatrixFeaturesKHR
+	{
+		public VkStructureType sType;
+		public void* pNext;
+		public VkBool32 cooperativeMatrix;
+		public VkBool32 cooperativeMatrixRobustBufferAccess;
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
+	public unsafe partial struct VkCooperativeMatrixPropertiesKHR
+	{
+		public VkStructureType sType;
+		public void* pNext;
+		public uint MSize;
+		public uint NSize;
+		public uint KSize;
+		public VkComponentTypeKHR AType;
+		public VkComponentTypeKHR BType;
+		public VkComponentTypeKHR CType;
+		public VkComponentTypeKHR ResultType;
+		public VkBool32 saturatingAccumulation;
+		public VkScopeKHR scope;
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
+	public unsafe partial struct VkPhysicalDeviceCooperativeMatrixPropertiesKHR
+	{
+		public VkStructureType sType;
+		public void* pNext;
+		public VkShaderStageFlags cooperativeMatrixSupportedStages;
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
+	public unsafe partial struct VkPhysicalDeviceShaderEnqueuePropertiesAMDX
+	{
+		public VkStructureType sType;
+		public void* pNext;
+		public uint maxExecutionGraphDepth;
+		public uint maxExecutionGraphShaderOutputNodes;
+		public uint maxExecutionGraphShaderPayloadSize;
+		public uint maxExecutionGraphShaderPayloadCount;
+		public uint executionGraphDispatchAddressAlignment;
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
+	public unsafe partial struct VkPhysicalDeviceShaderEnqueueFeaturesAMDX
+	{
+		public VkStructureType sType;
+		public void* pNext;
+		public VkBool32 shaderEnqueue;
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
+	public unsafe partial struct VkExecutionGraphPipelineCreateInfoAMDX
+	{
+		public VkStructureType sType;
+		public void* pNext;
+		public VkPipelineCreateFlags flags;
+		public uint stageCount;
+		public VkPipelineShaderStageCreateInfo* pStages;
+		public VkPipelineLibraryCreateInfoKHR* pLibraryInfo;
+		public VkPipelineLayout layout;
+		public VkPipeline basePipelineHandle;
+		public int basePipelineIndex;
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
+	public unsafe partial struct VkPipelineShaderStageNodeCreateInfoAMDX
+	{
+		public VkStructureType sType;
+		public void* pNext;
+		public byte* pName;
+		public uint index;
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
+	public unsafe partial struct VkExecutionGraphPipelineScratchSizeAMDX
+	{
+		public VkStructureType sType;
+		public void* pNext;
+		public ulong size;
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
+	public unsafe partial struct VkDispatchGraphInfoAMDX
+	{
+		public uint nodeIndex;
+		public uint payloadCount;
+		public VkDeviceOrHostAddressConstAMDX payloads;
+		public ulong payloadStride;
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
+	public unsafe partial struct VkDispatchGraphCountInfoAMDX
+	{
+		public uint count;
+		public VkDeviceOrHostAddressConstAMDX infos;
+		public ulong stride;
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
+	public unsafe partial struct VkBindMemoryStatusKHR
+	{
+		public VkStructureType sType;
+		public void* pNext;
+		public VkResult* pResult;
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
+	public unsafe partial struct VkBindDescriptorSetsInfoKHR
+	{
+		public VkStructureType sType;
+		public void* pNext;
+		public VkShaderStageFlags stageFlags;
+		public VkPipelineLayout layout;
+		public uint firstSet;
+		public uint descriptorSetCount;
+		public VkDescriptorSet* pDescriptorSets;
+		public uint dynamicOffsetCount;
+		public uint* pDynamicOffsets;
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
+	public unsafe partial struct VkPushConstantsInfoKHR
+	{
+		public VkStructureType sType;
+		public void* pNext;
+		public VkPipelineLayout layout;
+		public VkShaderStageFlags stageFlags;
+		public uint offset;
+		public uint size;
+		public void* pValues;
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
+	public unsafe partial struct VkPushDescriptorSetInfoKHR
+	{
+		public VkStructureType sType;
+		public void* pNext;
+		public VkShaderStageFlags stageFlags;
+		public VkPipelineLayout layout;
+		public uint set;
+		public uint descriptorWriteCount;
+		public VkWriteDescriptorSet* pDescriptorWrites;
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
+	public unsafe partial struct VkPushDescriptorSetWithTemplateInfoKHR
+	{
+		public VkStructureType sType;
+		public void* pNext;
+		public VkDescriptorUpdateTemplate descriptorUpdateTemplate;
+		public VkPipelineLayout layout;
+		public uint set;
+		public void* pData;
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
+	public unsafe partial struct VkSetDescriptorBufferOffsetsInfoEXT
+	{
+		public VkStructureType sType;
+		public void* pNext;
+		public VkShaderStageFlags stageFlags;
+		public VkPipelineLayout layout;
+		public uint firstSet;
+		public uint setCount;
+		public uint* pBufferIndices;
+		public ulong* pOffsets;
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
+	public unsafe partial struct VkBindDescriptorBufferEmbeddedSamplersInfoEXT
+	{
+		public VkStructureType sType;
+		public void* pNext;
+		public VkShaderStageFlags stageFlags;
+		public VkPipelineLayout layout;
+		public uint set;
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
+	public unsafe partial struct VkPhysicalDeviceCubicClampFeaturesQCOM
+	{
+		public VkStructureType sType;
+		public void* pNext;
+		public VkBool32 cubicRangeClamp;
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
+	public unsafe partial struct VkPhysicalDeviceYcbcrDegammaFeaturesQCOM
+	{
+		public VkStructureType sType;
+		public void* pNext;
+		public VkBool32 ycbcrDegamma;
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
+	public unsafe partial struct VkSamplerYcbcrConversionYcbcrDegammaCreateInfoQCOM
+	{
+		public VkStructureType sType;
+		public void* pNext;
+		public VkBool32 enableYDegamma;
+		public VkBool32 enableCbCrDegamma;
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
+	public unsafe partial struct VkPhysicalDeviceCubicWeightsFeaturesQCOM
+	{
+		public VkStructureType sType;
+		public void* pNext;
+		public VkBool32 selectableCubicWeights;
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
+	public unsafe partial struct VkSamplerCubicWeightsCreateInfoQCOM
+	{
+		public VkStructureType sType;
+		public void* pNext;
+		public VkCubicFilterWeightsQCOM cubicWeights;
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
+	public unsafe partial struct VkBlitImageCubicWeightsInfoQCOM
+	{
+		public VkStructureType sType;
+		public void* pNext;
+		public VkCubicFilterWeightsQCOM cubicWeights;
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
+	public unsafe partial struct VkPhysicalDeviceImageProcessing2FeaturesQCOM
+	{
+		public VkStructureType sType;
+		public void* pNext;
+		public VkBool32 textureBlockMatch2;
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
+	public unsafe partial struct VkPhysicalDeviceImageProcessing2PropertiesQCOM
+	{
+		public VkStructureType sType;
+		public void* pNext;
+		public VkExtent2D maxBlockMatchWindow;
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
+	public unsafe partial struct VkSamplerBlockMatchWindowCreateInfoQCOM
+	{
+		public VkStructureType sType;
+		public void* pNext;
+		public VkExtent2D windowExtent;
+		public VkBlockMatchWindowCompareModeQCOM windowCompareMode;
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
+	public unsafe partial struct VkPhysicalDeviceDescriptorPoolOverallocationFeaturesNV
+	{
+		public VkStructureType sType;
+		public void* pNext;
+		public VkBool32 descriptorPoolOverallocation;
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
+	public unsafe partial struct VkPhysicalDeviceLayeredDriverPropertiesMSFT
+	{
+		public VkStructureType sType;
+		public void* pNext;
+		public VkLayeredDriverUnderlyingApiMSFT underlyingAPI;
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
+	public unsafe partial struct VkPhysicalDevicePerStageDescriptorSetFeaturesNV
+	{
+		public VkStructureType sType;
+		public void* pNext;
+		public VkBool32 perStageDescriptorSet;
+		public VkBool32 dynamicPipelineLayout;
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
+	public unsafe partial struct VkPhysicalDeviceExternalFormatResolveFeaturesANDROID
+	{
+		public VkStructureType sType;
+		public void* pNext;
+		public VkBool32 externalFormatResolve;
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
+	public unsafe partial struct VkPhysicalDeviceExternalFormatResolvePropertiesANDROID
+	{
+		public VkStructureType sType;
+		public void* pNext;
+		public VkBool32 nullColorAttachmentWithExternalFormatResolve;
+		public VkChromaLocation externalFormatResolveChromaOffsetX;
+		public VkChromaLocation externalFormatResolveChromaOffsetY;
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
+	public unsafe partial struct VkAndroidHardwareBufferFormatResolvePropertiesANDROID
+	{
+		public VkStructureType sType;
+		public void* pNext;
+		public VkFormat colorAttachmentFormat;
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
+	public unsafe partial struct VkLatencySleepModeInfoNV
+	{
+		public VkStructureType sType;
+		public void* pNext;
+		public VkBool32 lowLatencyMode;
+		public VkBool32 lowLatencyBoost;
+		public uint minimumIntervalUs;
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
+	public unsafe partial struct VkLatencySleepInfoNV
+	{
+		public VkStructureType sType;
+		public void* pNext;
+		public VkSemaphore signalSemaphore;
+		public ulong value;
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
+	public unsafe partial struct VkSetLatencyMarkerInfoNV
+	{
+		public VkStructureType sType;
+		public void* pNext;
+		public ulong presentID;
+		public VkLatencyMarkerNV marker;
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
+	public unsafe partial struct VkGetLatencyMarkerInfoNV
+	{
+		public VkStructureType sType;
+		public void* pNext;
+		public uint timingCount;
+		public VkLatencyTimingsFrameReportNV* pTimings;
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
+	public unsafe partial struct VkLatencyTimingsFrameReportNV
+	{
+		public VkStructureType sType;
+		public void* pNext;
+		public ulong presentID;
+		public ulong inputSampleTimeUs;
+		public ulong simStartTimeUs;
+		public ulong simEndTimeUs;
+		public ulong renderSubmitStartTimeUs;
+		public ulong renderSubmitEndTimeUs;
+		public ulong presentStartTimeUs;
+		public ulong presentEndTimeUs;
+		public ulong driverStartTimeUs;
+		public ulong driverEndTimeUs;
+		public ulong osRenderQueueStartTimeUs;
+		public ulong osRenderQueueEndTimeUs;
+		public ulong gpuRenderStartTimeUs;
+		public ulong gpuRenderEndTimeUs;
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
+	public unsafe partial struct VkOutOfBandQueueTypeInfoNV
+	{
+		public VkStructureType sType;
+		public void* pNext;
+		public VkOutOfBandQueueTypeNV queueType;
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
+	public unsafe partial struct VkLatencySubmissionPresentIdNV
+	{
+		public VkStructureType sType;
+		public void* pNext;
+		public ulong presentID;
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
+	public unsafe partial struct VkSwapchainLatencyCreateInfoNV
+	{
+		public VkStructureType sType;
+		public void* pNext;
+		public VkBool32 latencyModeEnable;
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
+	public unsafe partial struct VkLatencySurfaceCapabilitiesNV
+	{
+		public VkStructureType sType;
+		public void* pNext;
+		public uint presentModeCount;
+		public VkPresentModeKHR* pPresentModes;
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
+	public unsafe partial struct VkPhysicalDeviceCudaKernelLaunchFeaturesNV
+	{
+		public VkStructureType sType;
+		public void* pNext;
+		public VkBool32 cudaKernelLaunchFeatures;
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
+	public unsafe partial struct VkPhysicalDeviceCudaKernelLaunchPropertiesNV
+	{
+		public VkStructureType sType;
+		public void* pNext;
+		public uint computeCapabilityMinor;
+		public uint computeCapabilityMajor;
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
+	public unsafe partial struct VkDeviceQueueShaderCoreControlCreateInfoARM
+	{
+		public VkStructureType sType;
+		public void* pNext;
+		public uint shaderCoreCount;
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
+	public unsafe partial struct VkPhysicalDeviceSchedulingControlsFeaturesARM
+	{
+		public VkStructureType sType;
+		public void* pNext;
+		public VkBool32 schedulingControls;
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
+	public unsafe partial struct VkPhysicalDeviceSchedulingControlsPropertiesARM
+	{
+		public VkStructureType sType;
+		public void* pNext;
+		public ulong schedulingControlsFlags;
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
+	public unsafe partial struct VkPhysicalDeviceRelaxedLineRasterizationFeaturesIMG
+	{
+		public VkStructureType sType;
+		public void* pNext;
+		public VkBool32 relaxedLineRasterization;
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
+	public unsafe partial struct VkPhysicalDeviceRenderPassStripedFeaturesARM
+	{
+		public VkStructureType sType;
+		public void* pNext;
+		public VkBool32 renderPassStriped;
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
+	public unsafe partial struct VkPhysicalDeviceRenderPassStripedPropertiesARM
+	{
+		public VkStructureType sType;
+		public void* pNext;
+		public VkExtent2D renderPassStripeGranularity;
+		public uint maxRenderPassStripes;
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
+	public unsafe partial struct VkRenderPassStripeInfoARM
+	{
+		public VkStructureType sType;
+		public void* pNext;
+		public VkRect2D stripeArea;
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
+	public unsafe partial struct VkRenderPassStripeBeginInfoARM
+	{
+		public VkStructureType sType;
+		public void* pNext;
+		public uint stripeInfoCount;
+		public VkRenderPassStripeInfoARM* pStripeInfos;
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
+	public unsafe partial struct VkRenderPassStripeSubmitInfoARM
+	{
+		public VkStructureType sType;
+		public void* pNext;
+		public uint stripeSemaphoreInfoCount;
+		public VkSemaphoreSubmitInfo* pStripeSemaphoreInfos;
 	}
 
 }

@@ -88,6 +88,15 @@ namespace GPUVulkan
 	}
 
 	[StructLayout(LayoutKind.Explicit)]
+	public unsafe partial struct VkDeviceOrHostAddressConstAMDX
+	{
+		[FieldOffset(0)]
+		public ulong deviceAddress;
+		[FieldOffset(0)]
+		public void* hostAddress;
+	}
+
+	[StructLayout(LayoutKind.Explicit)]
 	public unsafe partial struct VkAccelerationStructureGeometryDataKHR
 	{
 		[FieldOffset(0)]

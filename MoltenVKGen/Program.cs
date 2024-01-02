@@ -303,8 +303,20 @@ class Program
             file.WriteLine("\t{");
             
             file.WriteLine("");
-            file.WriteLine("");
-            file.WriteLine("\t\tconst string libraryName = \"libvulkan.so\";");
+            file.WriteLine("#if WINDOWS");
+            file.WriteLine("\t\tconst string  libraryName = \"vulkan-1.dll\";");
+            file.WriteLine("#endif");
+            file.WriteLine("#if ANDROID");
+            file.WriteLine("\t\tconst string  libraryName = \"libvulkan.so\";");
+            file.WriteLine("#endif");
+            file.WriteLine("#if IOS || MACCATALYST");
+            file.WriteLine("\t\tconst string  libraryName = \"__Internal\";");
+            file.WriteLine("#endif");
+            file.WriteLine("#if IOS || MACCATALYST || WINDOWS || ANDROID");
+            file.WriteLine("#else");
+            file.WriteLine("\t\t//linux");
+            file.WriteLine("\t\tconst string  libraryName = \"libvulkan.so.1\";");
+            file.WriteLine("#endif");
             file.WriteLine("");
             file.WriteLine("");
             file.WriteLine("");
