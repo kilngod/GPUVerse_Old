@@ -37,7 +37,7 @@ namespace GPUVulkan
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Rect2D"/> structure.
+        /// Initializes a new instance of the <see cref="VkRect2D"/> structure.
         /// </summary>
         /// <param name="x">The X component of the offset.</param>
         /// <param name="y">The Y component of the offset.</param>
@@ -50,7 +50,7 @@ namespace GPUVulkan
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Rect2D"/> structure.
+        /// Initializes a new instance of the <see cref="VkRect2D"/> structure.
         /// </summary>
         /// <param name="x">The X component of the offset.</param>
         /// <param name="y">The Y component of the offset.</param>
@@ -63,7 +63,7 @@ namespace GPUVulkan
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Rect2D"/> structure.
+        /// Initializes a new instance of the <see cref="VkRect2D"/> structure.
         /// </summary>
         /// <param name="width">The width component of the extent.</param>
         /// <param name="height">The height component of the extent.</param>

@@ -9,7 +9,7 @@
 // Source License. See LICENSE.txt for details.
 // ---------------------------------------------------------------------------------------
 
-using GPUGraphicsMaui.GPUViews;
+using GPUMauiLib.GPUViews;
 using Microsoft.Maui.Graphics;
 
 namespace GPUMauiApp.Pages;

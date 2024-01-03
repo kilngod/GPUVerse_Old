@@ -6,6 +6,7 @@ using System.Runtime.InteropServices;
 
 namespace GPUVulkan
 {
+    /*
     public abstract class NativeLibrary : IDisposable
     {
         private readonly string libraryName;
@@ -133,4 +134,5 @@ namespace GPUVulkan
             }
         }
     }
+    */
 }

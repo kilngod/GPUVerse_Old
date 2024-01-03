@@ -7,6 +7,8 @@ using System.Runtime.InteropServices;
 
 namespace GPUVulkan
 {
+    
+    /*
     public static unsafe partial class VulkanNative
     {
         private const CallingConvention CallConv = CallingConvention.StdCall;
@@ -49,32 +51,11 @@ namespace GPUVulkan
             {
                 return "libMoltenVK.dylib";
             }
-            /*
-            else if (RuntimeInformation.RuntimeIdentifier.ToLower().IndexOf("ios") >= 0)
-            {
-                string appDirectory = AppDomain.CurrentDomain.BaseDirectory;
-                string dropPoint = "GPUMauiApp.app";
-               // appDirectory = appDirectory.Substring(0, appDirectory.IndexOf(dropPoint) - dropPoint.Length);
-                string dylibPath = System.IO.Path.Combine(appDirectory, "libMoltenVK.dylib");
-                //return dylibPath;
-                return "libMoltenVK.dylib";
-            }
-            else if (RuntimeInformation.RuntimeIdentifier.ToLower().IndexOf("tvos") >= 0)
-            {
-                return "libMoltenVK.dylib";
-            }
-            else if (RuntimeInformation.RuntimeIdentifier.ToLower().IndexOf("maccatalyst") >=0)
-            {
-                string appDirectory = AppDomain.CurrentDomain.BaseDirectory;
-                string dropPoint = "maccatalyst-x64/";
-                appDirectory = appDirectory.Substring(0, appDirectory.IndexOf(dropPoint)+ dropPoint.Length);
-                string dylibPath = System.IO.Path.Combine(appDirectory, "libMoltenVK.dylib");
-                return dylibPath;
-                // relative path does not work :(
+       // relative path does not work :(
                 //  return "./libMoltenVK.dylib";
 
-            }*/
+            }
             throw new Exception("Application Type Unknown");
         }
-    }
+    }*/
 }
