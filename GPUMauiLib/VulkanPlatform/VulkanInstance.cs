@@ -118,7 +118,6 @@ VK_MVK_moltenvk
             }
             catch (Exception ex)
             {
-                
                 throw new NotSupportedException("Failed to find Vulkan library. (" + ex.Message + ")");
             }
 

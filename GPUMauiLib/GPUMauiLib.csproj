@@ -31,10 +31,6 @@
         <PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)"/>
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="VulkanGenerated\" />
-    </ItemGroup>
-
 
 
     <!-- Android -->
@@ -61,6 +57,7 @@
         <Compile Remove="**\**\*.iOS.cs" />
         <None Include="**\**\*.iOS.cs" Exclude="$(DefaultItemExcludes);$(DefaultExcludesInProjectFolder)" />
         <Compile Remove="**\iOS\**\*.cs" />
+        
     </ItemGroup>
 
     <!-- Mac Catalyst -->
@@ -68,9 +65,8 @@
         <Compile Remove="**\**\*.MacCatalyst.cs" />
         <None Include="**\**\*.MacCatalyst.cs" Exclude="$(DefaultItemExcludes);$(DefaultExcludesInProjectFolder)" />
         <Compile Remove="**\MacCatalyst\**\*.cs" />
-
     </ItemGroup>
-
+    
 
     <!-- Windows -->
     <ItemGroup Condition="$(TargetFramework.Contains('-windows')) != true">
@@ -88,6 +84,24 @@
         <None Include="**\Net\**\*.cs" Exclude="$(DefaultItemExcludes);$(DefaultExcludesInProjectFolder)" />
     </ItemGroup>
 
+
+    <Target Name="CopyToSpecialFolder" AfterTargets="Build">
+        <ItemGroup>
+            <SpecialFiles Include="@(None)" Condition="'%(None.CopyToSpecialFolder)' == 'True'" />
+        </ItemGroup>
+        <Copy SourceFiles="@(SpecialFiles)" DestinationFolder="Framework" />
+    </Target>
+    
+    <ItemGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">
+        
+        <None Include="Platforms\MacCatalyst\Framework\libMoltenVK.dylib"
+              CopyToOutputDirectory="Always"
+              Visible="false">
+            <CopyToSpecialFolder>True</CopyToSpecialFolder>
+        </None>
+    </ItemGroup>
+    
+  
 
 
 </Project>

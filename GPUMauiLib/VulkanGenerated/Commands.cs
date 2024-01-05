@@ -14,7 +14,7 @@ namespace GPUVulkan;
 		const string  libraryName = "libvulkan.so";
 #endif
 #if IOS || MACCATALYST
-		const string  libraryName = "__Internal";
+		const string  libraryName = "libMoltenVK.dylib";
 #endif
 #if IOS || MACCATALYST || WINDOWS || ANDROID
 #else
