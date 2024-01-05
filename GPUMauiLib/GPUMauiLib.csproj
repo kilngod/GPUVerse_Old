@@ -94,7 +94,7 @@
         <Copy SourceFiles="@(SpecialFiles)" DestinationFolder="$(OutputPath)" />
     </Target>
 
-<!---->
+<!--
     <ItemGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">
         <None Include="Platforms\iOS\Framework\libMoltenVK.dylib"
               Link="libMoltenVK.dylib"
@@ -110,7 +110,7 @@
         </None>
     </ItemGroup>
 
-
+-->
 
     <ItemGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">
         <None Include="Platforms\MacCatalyst\Framework\libMoltenVK.dylib"
