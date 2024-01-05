@@ -42,6 +42,8 @@
         <Compile Remove="**\**\*.Android.cs" />
         <None Include="**\**\*.Android.cs" Exclude="$(DefaultItemExcludes);$(DefaultExcludesInProjectFolder)" />
         <Compile Remove="**\Android\**\*.cs" />
+        <None Remove="Platforms\iOS\Framework\libMoltenVK.dylib" />
+        <None Remove="Platforms\MacCatalyst\Framework\libMoltenVK.dylib" />
     </ItemGroup>
 
     <!-- Both iOS and Mac Catalyst -->
@@ -89,18 +91,42 @@
         <ItemGroup>
             <SpecialFiles Include="@(None)" Condition="'%(None.CopyToSpecialFolder)' == 'True'" />
         </ItemGroup>
-        <Copy SourceFiles="@(SpecialFiles)" DestinationFolder="Framework" />
+        <Copy SourceFiles="@(SpecialFiles)" DestinationFolder="$(OutputPath)" />
     </Target>
-    
-    <ItemGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">
-        
-        <None Include="Platforms\MacCatalyst\Framework\libMoltenVK.dylib"
-              CopyToOutputDirectory="Always">
+
+<!---->
+    <ItemGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">
+        <None Include="Platforms\iOS\Framework\libMoltenVK.dylib"
+              Link="libMoltenVK.dylib"
+              CopyToOutputDirectory="PreserveNewest"
+              Visible="false">
+            <CopyToSpecialFolder>True</CopyToSpecialFolder>
+        </None>
+        <None Include="Platforms\iOS\Framework\MoltenVK_icd.json"
+              Link="MoltenVK_icd.json"
+              CopyToOutputDirectory="PreserveNewest"
+              Visible="false">
             <CopyToSpecialFolder>True</CopyToSpecialFolder>
         </None>
     </ItemGroup>
-    
-  
+
+
+
+    <ItemGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">
+        <None Include="Platforms\MacCatalyst\Framework\libMoltenVK.dylib"
+              Link="libMoltenVK.dylib"
+              CopyToOutputDirectory="PreserveNewest"
+              Visible="false">
+            <CopyToSpecialFolder>True</CopyToSpecialFolder>
+        </None>
+        <None Include="Platforms\MacCatalyst\Framework\MoltenVK_icd.json"
+              Link="MoltenVK_icd.json"
+              CopyToOutputDirectory="PreserveNewest"
+              Visible="false">
+            <CopyToSpecialFolder>True</CopyToSpecialFolder>
+        </None>
+    </ItemGroup>
+
 
 
 </Project>
