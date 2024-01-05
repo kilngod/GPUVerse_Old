@@ -95,8 +95,7 @@
     <ItemGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">
         
         <None Include="Platforms\MacCatalyst\Framework\libMoltenVK.dylib"
-              CopyToOutputDirectory="Always"
-              Visible="false">
+              CopyToOutputDirectory="Always">
             <CopyToSpecialFolder>True</CopyToSpecialFolder>
         </None>
     </ItemGroup>

@@ -7,7 +7,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GPUMauiApp", "GPUMauiApp\GP
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GPUMauiLib", "GPUMauiLib\GPUMauiLib.csproj", "{BDB931EB-6D28-4DFA-B097-BB23002BF2D2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoltenVKGen", "MoltenVKGen\MoltenVKGen.csproj", "{105B3CE8-12A1-4966-91B9-DDBE9791300D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MoltenVKGen", "MoltenVKGen\MoltenVKGen.csproj", "{105B3CE8-12A1-4966-91B9-DDBE9791300D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{4D72A63F-6834-4166-B5F0-B38CFE3D452A}"
+	ProjectSection(SolutionItems) = preProject
+		DirectoryBuild.Props = DirectoryBuild.Props
+		DirectoryBuild.Targets = DirectoryBuild.Targets
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

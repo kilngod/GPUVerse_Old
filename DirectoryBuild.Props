@@ -1,0 +1,30 @@
+<Project>
+  <!-- Library Project Configuration -->
+  <PropertyGroup>
+    <LibraryTargetFrameworks>net8.0</LibraryTargetFrameworks>
+    <LibraryLatestTargetFramework>$(LibraryTargetFrameworks)</LibraryLatestTargetFramework>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(GITHUB_ACTIONS)' == 'true'">
+    <LibraryTargetFrameworks>$(LibraryTargetFrameworks)</LibraryTargetFrameworks>
+    <CheckEolTargetFramework>false</CheckEolTargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <LibraryVersionPrefix>1.0.0-beta1</LibraryVersionPrefix>
+    <LibraryAssemblyVersion>1.0.0.0</LibraryAssemblyVersion>
+    <LibraryFileVersion>1.0.0.0</LibraryFileVersion>
+    <LibraryPackageValidationBaselineVersion>0.5.0</LibraryPackageValidationBaselineVersion>
+  </PropertyGroup>
+
+  <!-- Unit Test Project Configuration -->
+  <PropertyGroup>
+    <LibraryUnitTestTargetFrameworks>net8.0</LibraryUnitTestTargetFrameworks>
+    <LibraryLatestUnitTestTargetFramework>$(LibraryUnitTestTargetFrameworks)</LibraryLatestUnitTestTargetFramework>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(GITHUB_ACTIONS)' == 'true'">
+    <LibraryUnitTestTargetFrameworks>$(LibraryUnitTestTargetFrameworks)</LibraryUnitTestTargetFrameworks>
+    <CheckEolTargetFramework>false</CheckEolTargetFramework>
+  </PropertyGroup>
+
+  
+</Project>
