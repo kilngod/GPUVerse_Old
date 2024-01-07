@@ -16,6 +16,8 @@
         <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</SupportedOSPlatformVersion>
         <TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
         <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
+        <SignAssembly>true</SignAssembly>
+        <AssemblyOriginatorKeyFile>kilngodwhatever.snk</AssemblyOriginatorKeyFile>
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
@@ -95,6 +97,8 @@
     </Target>
 
 <!--
+
+-->
     <ItemGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">
         <None Include="Platforms\iOS\Framework\libMoltenVK.dylib"
               Link="libMoltenVK.dylib"
@@ -110,7 +114,6 @@
         </None>
     </ItemGroup>
 
--->
 
     <ItemGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">
         <None Include="Platforms\MacCatalyst\Framework\libMoltenVK.dylib"

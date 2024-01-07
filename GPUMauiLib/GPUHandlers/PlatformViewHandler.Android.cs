@@ -15,6 +15,8 @@ using GPUMauiLib.GPUDevices;
 using Microsoft.Maui.Handlers;
 using VulkanPlatform;
 
+#nullable disable
+
 namespace GPUMauiLib.GPUHandlers
 {
     public partial class PlatformViewHandler : ViewHandler<GPUView, PlatformGPUView>
