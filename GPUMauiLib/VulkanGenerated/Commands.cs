@@ -14,7 +14,7 @@ namespace GPUVulkan;
 		const string  libraryName = "libvulkan.so";
 #endif
 #if IOS || MACCATALYST
-		const string  libraryName = "libMoltenVK.dylib";
+		const string  libraryName = "__Internal";
 #endif
 #if IOS || MACCATALYST || WINDOWS || ANDROID
 #else
@@ -117,7 +117,7 @@ namespace GPUVulkan;
 
 
 		[DllImport (libraryName)]
-		public static extern VkResult vkMapMemory(VkDevice device, VkDeviceMemory memory, ulong offset, ulong size, uint flags, void** ppData);
+		public static extern VkResult vkMapMemory(VkDevice device, VkDeviceMemory memory, ulong offset, ulong size, VkMemoryMapFlags flags, void** ppData);
 
 
 		[DllImport (libraryName)]
@@ -193,26 +193,6 @@ namespace GPUVulkan;
 
 
 		[DllImport (libraryName)]
-		public static extern VkResult vkCreateEvent(VkDevice device, VkEventCreateInfo* pCreateInfo, VkAllocationCallbacks* pAllocator, VkEvent* pEvent);
-
-
-		[DllImport (libraryName)]
-		public static extern void vkDestroyEvent(VkDevice device, VkEvent vkEvent, VkAllocationCallbacks* pAllocator);
-
-
-		[DllImport (libraryName)]
-		public static extern VkResult vkGetEventStatus(VkDevice device, VkEvent vkEvent);
-
-
-		[DllImport (libraryName)]
-		public static extern VkResult vkSetEvent(VkDevice device, VkEvent vkEvent);
-
-
-		[DllImport (libraryName)]
-		public static extern VkResult vkResetEvent(VkDevice device, VkEvent vkEvent);
-
-
-		[DllImport (libraryName)]
 		public static extern VkResult vkCreateQueryPool(VkDevice device, VkQueryPoolCreateInfo* pCreateInfo, VkAllocationCallbacks* pAllocator, VkQueryPool* pQueryPool);
 
 
@@ -233,14 +213,6 @@ namespace GPUVulkan;
 
 
 		[DllImport (libraryName)]
-		public static extern VkResult vkCreateBufferView(VkDevice device, VkBufferViewCreateInfo* pCreateInfo, VkAllocationCallbacks* pAllocator, VkBufferView* pView);
-
-
-		[DllImport (libraryName)]
-		public static extern void vkDestroyBufferView(VkDevice device, VkBufferView bufferView, VkAllocationCallbacks* pAllocator);
-
-
-		[DllImport (libraryName)]
 		public static extern VkResult vkCreateImage(VkDevice device, VkImageCreateInfo* pCreateInfo, VkAllocationCallbacks* pAllocator, VkImage* pImage);
 
 
@@ -258,6 +230,118 @@ namespace GPUVulkan;
 
 		[DllImport (libraryName)]
 		public static extern void vkDestroyImageView(VkDevice device, VkImageView imageView, VkAllocationCallbacks* pAllocator);
+
+
+		[DllImport (libraryName)]
+		public static extern VkResult vkCreateCommandPool(VkDevice device, VkCommandPoolCreateInfo* pCreateInfo, VkAllocationCallbacks* pAllocator, VkCommandPool* pCommandPool);
+
+
+		[DllImport (libraryName)]
+		public static extern void vkDestroyCommandPool(VkDevice device, VkCommandPool commandPool, VkAllocationCallbacks* pAllocator);
+
+
+		[DllImport (libraryName)]
+		public static extern VkResult vkResetCommandPool(VkDevice device, VkCommandPool commandPool, VkCommandPoolResetFlags flags);
+
+
+		[DllImport (libraryName)]
+		public static extern VkResult vkAllocateCommandBuffers(VkDevice device, VkCommandBufferAllocateInfo* pAllocateInfo, VkCommandBuffer* pCommandBuffers);
+
+
+		[DllImport (libraryName)]
+		public static extern void vkFreeCommandBuffers(VkDevice device, VkCommandPool commandPool, uint commandBufferCount, VkCommandBuffer* pCommandBuffers);
+
+
+		[DllImport (libraryName)]
+		public static extern VkResult vkBeginCommandBuffer(VkCommandBuffer commandBuffer, VkCommandBufferBeginInfo* pBeginInfo);
+
+
+		[DllImport (libraryName)]
+		public static extern VkResult vkEndCommandBuffer(VkCommandBuffer commandBuffer);
+
+
+		[DllImport (libraryName)]
+		public static extern VkResult vkResetCommandBuffer(VkCommandBuffer commandBuffer, VkCommandBufferResetFlags flags);
+
+
+		[DllImport (libraryName)]
+		public static extern void vkCmdCopyBuffer(VkCommandBuffer commandBuffer, VkBuffer srcBuffer, VkBuffer dstBuffer, uint regionCount, VkBufferCopy* pRegions);
+
+
+		[DllImport (libraryName)]
+		public static extern void vkCmdCopyImage(VkCommandBuffer commandBuffer, VkImage srcImage, VkImageLayout srcImageLayout, VkImage dstImage, VkImageLayout dstImageLayout, uint regionCount, VkImageCopy* pRegions);
+
+
+		[DllImport (libraryName)]
+		public static extern void vkCmdCopyBufferToImage(VkCommandBuffer commandBuffer, VkBuffer srcBuffer, VkImage dstImage, VkImageLayout dstImageLayout, uint regionCount, VkBufferImageCopy* pRegions);
+
+
+		[DllImport (libraryName)]
+		public static extern void vkCmdCopyImageToBuffer(VkCommandBuffer commandBuffer, VkImage srcImage, VkImageLayout srcImageLayout, VkBuffer dstBuffer, uint regionCount, VkBufferImageCopy* pRegions);
+
+
+		[DllImport (libraryName)]
+		public static extern void vkCmdUpdateBuffer(VkCommandBuffer commandBuffer, VkBuffer dstBuffer, ulong dstOffset, ulong dataSize, void* pData);
+
+
+		[DllImport (libraryName)]
+		public static extern void vkCmdFillBuffer(VkCommandBuffer commandBuffer, VkBuffer dstBuffer, ulong dstOffset, ulong size, uint data);
+
+
+		[DllImport (libraryName)]
+		public static extern void vkCmdPipelineBarrier(VkCommandBuffer commandBuffer, VkPipelineStageFlags srcStageMask, VkPipelineStageFlags dstStageMask, VkDependencyFlags dependencyFlags, uint memoryBarrierCount, VkMemoryBarrier* pMemoryBarriers, uint bufferMemoryBarrierCount, VkBufferMemoryBarrier* pBufferMemoryBarriers, uint imageMemoryBarrierCount, VkImageMemoryBarrier* pImageMemoryBarriers);
+
+
+		[DllImport (libraryName)]
+		public static extern void vkCmdBeginQuery(VkCommandBuffer commandBuffer, VkQueryPool queryPool, uint query, VkQueryControlFlags flags);
+
+
+		[DllImport (libraryName)]
+		public static extern void vkCmdEndQuery(VkCommandBuffer commandBuffer, VkQueryPool queryPool, uint query);
+
+
+		[DllImport (libraryName)]
+		public static extern void vkCmdResetQueryPool(VkCommandBuffer commandBuffer, VkQueryPool queryPool, uint firstQuery, uint queryCount);
+
+
+		[DllImport (libraryName)]
+		public static extern void vkCmdWriteTimestamp(VkCommandBuffer commandBuffer, VkPipelineStageFlags pipelineStage, VkQueryPool queryPool, uint query);
+
+
+		[DllImport (libraryName)]
+		public static extern void vkCmdCopyQueryPoolResults(VkCommandBuffer commandBuffer, VkQueryPool queryPool, uint firstQuery, uint queryCount, VkBuffer dstBuffer, ulong dstOffset, ulong stride, VkQueryResultFlags flags);
+
+
+		[DllImport (libraryName)]
+		public static extern void vkCmdExecuteCommands(VkCommandBuffer commandBuffer, uint commandBufferCount, VkCommandBuffer* pCommandBuffers);
+
+
+		[DllImport (libraryName)]
+		public static extern VkResult vkCreateEvent(VkDevice device, VkEventCreateInfo* pCreateInfo, VkAllocationCallbacks* pAllocator, VkEvent* pEvent);
+
+
+		[DllImport (libraryName)]
+		public static extern void vkDestroyEvent(VkDevice device, VkEvent vkEvent, VkAllocationCallbacks* pAllocator);
+
+
+		[DllImport (libraryName)]
+		public static extern VkResult vkGetEventStatus(VkDevice device, VkEvent vkEvent);
+
+
+		[DllImport (libraryName)]
+		public static extern VkResult vkSetEvent(VkDevice device, VkEvent vkEvent);
+
+
+		[DllImport (libraryName)]
+		public static extern VkResult vkResetEvent(VkDevice device, VkEvent vkEvent);
+
+
+		[DllImport (libraryName)]
+		public static extern VkResult vkCreateBufferView(VkDevice device, VkBufferViewCreateInfo* pCreateInfo, VkAllocationCallbacks* pAllocator, VkBufferView* pView);
+
+
+		[DllImport (libraryName)]
+		public static extern void vkDestroyBufferView(VkDevice device, VkBufferView bufferView, VkAllocationCallbacks* pAllocator);
 
 
 		[DllImport (libraryName)]
@@ -282,10 +366,6 @@ namespace GPUVulkan;
 
 		[DllImport (libraryName)]
 		public static extern VkResult vkMergePipelineCaches(VkDevice device, VkPipelineCache dstCache, uint srcCacheCount, VkPipelineCache* pSrcCaches);
-
-
-		[DllImport (libraryName)]
-		public static extern VkResult vkCreateGraphicsPipelines(VkDevice device, VkPipelineCache pipelineCache, uint createInfoCount, VkGraphicsPipelineCreateInfo* pCreateInfos, VkAllocationCallbacks* pAllocator, VkPipeline* pPipelines);
 
 
 		[DllImport (libraryName)]
@@ -345,6 +425,46 @@ namespace GPUVulkan;
 
 
 		[DllImport (libraryName)]
+		public static extern void vkCmdBindPipeline(VkCommandBuffer commandBuffer, VkPipelineBindPoint pipelineBindPoint, VkPipeline pipeline);
+
+
+		[DllImport (libraryName)]
+		public static extern void vkCmdBindDescriptorSets(VkCommandBuffer commandBuffer, VkPipelineBindPoint pipelineBindPoint, VkPipelineLayout layout, uint firstSet, uint descriptorSetCount, VkDescriptorSet* pDescriptorSets, uint dynamicOffsetCount, uint* pDynamicOffsets);
+
+
+		[DllImport (libraryName)]
+		public static extern void vkCmdClearColorImage(VkCommandBuffer commandBuffer, VkImage image, VkImageLayout imageLayout, VkClearColorValue* pColor, uint rangeCount, VkImageSubresourceRange* pRanges);
+
+
+		[DllImport (libraryName)]
+		public static extern void vkCmdDispatch(VkCommandBuffer commandBuffer, uint groupCountX, uint groupCountY, uint groupCountZ);
+
+
+		[DllImport (libraryName)]
+		public static extern void vkCmdDispatchIndirect(VkCommandBuffer commandBuffer, VkBuffer buffer, ulong offset);
+
+
+		[DllImport (libraryName)]
+		public static extern void vkCmdSetEvent(VkCommandBuffer commandBuffer, VkEvent vkEvent, VkPipelineStageFlags stageMask);
+
+
+		[DllImport (libraryName)]
+		public static extern void vkCmdResetEvent(VkCommandBuffer commandBuffer, VkEvent vkEvent, VkPipelineStageFlags stageMask);
+
+
+		[DllImport (libraryName)]
+		public static extern void vkCmdWaitEvents(VkCommandBuffer commandBuffer, uint eventCount, VkEvent* pEvents, VkPipelineStageFlags srcStageMask, VkPipelineStageFlags dstStageMask, uint memoryBarrierCount, VkMemoryBarrier* pMemoryBarriers, uint bufferMemoryBarrierCount, VkBufferMemoryBarrier* pBufferMemoryBarriers, uint imageMemoryBarrierCount, VkImageMemoryBarrier* pImageMemoryBarriers);
+
+
+		[DllImport (libraryName)]
+		public static extern void vkCmdPushConstants(VkCommandBuffer commandBuffer, VkPipelineLayout layout, VkShaderStageFlags stageFlags, uint offset, uint size, void* pValues);
+
+
+		[DllImport (libraryName)]
+		public static extern VkResult vkCreateGraphicsPipelines(VkDevice device, VkPipelineCache pipelineCache, uint createInfoCount, VkGraphicsPipelineCreateInfo* pCreateInfos, VkAllocationCallbacks* pAllocator, VkPipeline* pPipelines);
+
+
+		[DllImport (libraryName)]
 		public static extern VkResult vkCreateFramebuffer(VkDevice device, VkFramebufferCreateInfo* pCreateInfo, VkAllocationCallbacks* pAllocator, VkFramebuffer* pFramebuffer);
 
 
@@ -362,42 +482,6 @@ namespace GPUVulkan;
 
 		[DllImport (libraryName)]
 		public static extern void vkGetRenderAreaGranularity(VkDevice device, VkRenderPass renderPass, VkExtent2D* pGranularity);
-
-
-		[DllImport (libraryName)]
-		public static extern VkResult vkCreateCommandPool(VkDevice device, VkCommandPoolCreateInfo* pCreateInfo, VkAllocationCallbacks* pAllocator, VkCommandPool* pCommandPool);
-
-
-		[DllImport (libraryName)]
-		public static extern void vkDestroyCommandPool(VkDevice device, VkCommandPool commandPool, VkAllocationCallbacks* pAllocator);
-
-
-		[DllImport (libraryName)]
-		public static extern VkResult vkResetCommandPool(VkDevice device, VkCommandPool commandPool, VkCommandPoolResetFlags flags);
-
-
-		[DllImport (libraryName)]
-		public static extern VkResult vkAllocateCommandBuffers(VkDevice device, VkCommandBufferAllocateInfo* pAllocateInfo, VkCommandBuffer* pCommandBuffers);
-
-
-		[DllImport (libraryName)]
-		public static extern void vkFreeCommandBuffers(VkDevice device, VkCommandPool commandPool, uint commandBufferCount, VkCommandBuffer* pCommandBuffers);
-
-
-		[DllImport (libraryName)]
-		public static extern VkResult vkBeginCommandBuffer(VkCommandBuffer commandBuffer, VkCommandBufferBeginInfo* pBeginInfo);
-
-
-		[DllImport (libraryName)]
-		public static extern VkResult vkEndCommandBuffer(VkCommandBuffer commandBuffer);
-
-
-		[DllImport (libraryName)]
-		public static extern VkResult vkResetCommandBuffer(VkCommandBuffer commandBuffer, VkCommandBufferResetFlags flags);
-
-
-		[DllImport (libraryName)]
-		public static extern void vkCmdBindPipeline(VkCommandBuffer commandBuffer, VkPipelineBindPoint pipelineBindPoint, VkPipeline pipeline);
 
 
 		[DllImport (libraryName)]
@@ -437,10 +521,6 @@ namespace GPUVulkan;
 
 
 		[DllImport (libraryName)]
-		public static extern void vkCmdBindDescriptorSets(VkCommandBuffer commandBuffer, VkPipelineBindPoint pipelineBindPoint, VkPipelineLayout layout, uint firstSet, uint descriptorSetCount, VkDescriptorSet* pDescriptorSets, uint dynamicOffsetCount, uint* pDynamicOffsets);
-
-
-		[DllImport (libraryName)]
 		public static extern void vkCmdBindIndexBuffer(VkCommandBuffer commandBuffer, VkBuffer buffer, ulong offset, VkIndexType indexType);
 
 
@@ -465,43 +545,7 @@ namespace GPUVulkan;
 
 
 		[DllImport (libraryName)]
-		public static extern void vkCmdDispatch(VkCommandBuffer commandBuffer, uint groupCountX, uint groupCountY, uint groupCountZ);
-
-
-		[DllImport (libraryName)]
-		public static extern void vkCmdDispatchIndirect(VkCommandBuffer commandBuffer, VkBuffer buffer, ulong offset);
-
-
-		[DllImport (libraryName)]
-		public static extern void vkCmdCopyBuffer(VkCommandBuffer commandBuffer, VkBuffer srcBuffer, VkBuffer dstBuffer, uint regionCount, VkBufferCopy* pRegions);
-
-
-		[DllImport (libraryName)]
-		public static extern void vkCmdCopyImage(VkCommandBuffer commandBuffer, VkImage srcImage, VkImageLayout srcImageLayout, VkImage dstImage, VkImageLayout dstImageLayout, uint regionCount, VkImageCopy* pRegions);
-
-
-		[DllImport (libraryName)]
 		public static extern void vkCmdBlitImage(VkCommandBuffer commandBuffer, VkImage srcImage, VkImageLayout srcImageLayout, VkImage dstImage, VkImageLayout dstImageLayout, uint regionCount, VkImageBlit* pRegions, VkFilter filter);
-
-
-		[DllImport (libraryName)]
-		public static extern void vkCmdCopyBufferToImage(VkCommandBuffer commandBuffer, VkBuffer srcBuffer, VkImage dstImage, VkImageLayout dstImageLayout, uint regionCount, VkBufferImageCopy* pRegions);
-
-
-		[DllImport (libraryName)]
-		public static extern void vkCmdCopyImageToBuffer(VkCommandBuffer commandBuffer, VkImage srcImage, VkImageLayout srcImageLayout, VkBuffer dstBuffer, uint regionCount, VkBufferImageCopy* pRegions);
-
-
-		[DllImport (libraryName)]
-		public static extern void vkCmdUpdateBuffer(VkCommandBuffer commandBuffer, VkBuffer dstBuffer, ulong dstOffset, ulong dataSize, void* pData);
-
-
-		[DllImport (libraryName)]
-		public static extern void vkCmdFillBuffer(VkCommandBuffer commandBuffer, VkBuffer dstBuffer, ulong dstOffset, ulong size, uint data);
-
-
-		[DllImport (libraryName)]
-		public static extern void vkCmdClearColorImage(VkCommandBuffer commandBuffer, VkImage image, VkImageLayout imageLayout, VkClearColorValue* pColor, uint rangeCount, VkImageSubresourceRange* pRanges);
 
 
 		[DllImport (libraryName)]
@@ -517,46 +561,6 @@ namespace GPUVulkan;
 
 
 		[DllImport (libraryName)]
-		public static extern void vkCmdSetEvent(VkCommandBuffer commandBuffer, VkEvent vkEvent, VkPipelineStageFlags stageMask);
-
-
-		[DllImport (libraryName)]
-		public static extern void vkCmdResetEvent(VkCommandBuffer commandBuffer, VkEvent vkEvent, VkPipelineStageFlags stageMask);
-
-
-		[DllImport (libraryName)]
-		public static extern void vkCmdWaitEvents(VkCommandBuffer commandBuffer, uint eventCount, VkEvent* pEvents, VkPipelineStageFlags srcStageMask, VkPipelineStageFlags dstStageMask, uint memoryBarrierCount, VkMemoryBarrier* pMemoryBarriers, uint bufferMemoryBarrierCount, VkBufferMemoryBarrier* pBufferMemoryBarriers, uint imageMemoryBarrierCount, VkImageMemoryBarrier* pImageMemoryBarriers);
-
-
-		[DllImport (libraryName)]
-		public static extern void vkCmdPipelineBarrier(VkCommandBuffer commandBuffer, VkPipelineStageFlags srcStageMask, VkPipelineStageFlags dstStageMask, VkDependencyFlags dependencyFlags, uint memoryBarrierCount, VkMemoryBarrier* pMemoryBarriers, uint bufferMemoryBarrierCount, VkBufferMemoryBarrier* pBufferMemoryBarriers, uint imageMemoryBarrierCount, VkImageMemoryBarrier* pImageMemoryBarriers);
-
-
-		[DllImport (libraryName)]
-		public static extern void vkCmdBeginQuery(VkCommandBuffer commandBuffer, VkQueryPool queryPool, uint query, VkQueryControlFlags flags);
-
-
-		[DllImport (libraryName)]
-		public static extern void vkCmdEndQuery(VkCommandBuffer commandBuffer, VkQueryPool queryPool, uint query);
-
-
-		[DllImport (libraryName)]
-		public static extern void vkCmdResetQueryPool(VkCommandBuffer commandBuffer, VkQueryPool queryPool, uint firstQuery, uint queryCount);
-
-
-		[DllImport (libraryName)]
-		public static extern void vkCmdWriteTimestamp(VkCommandBuffer commandBuffer, VkPipelineStageFlags pipelineStage, VkQueryPool queryPool, uint query);
-
-
-		[DllImport (libraryName)]
-		public static extern void vkCmdCopyQueryPoolResults(VkCommandBuffer commandBuffer, VkQueryPool queryPool, uint firstQuery, uint queryCount, VkBuffer dstBuffer, ulong dstOffset, ulong stride, VkQueryResultFlags flags);
-
-
-		[DllImport (libraryName)]
-		public static extern void vkCmdPushConstants(VkCommandBuffer commandBuffer, VkPipelineLayout layout, VkShaderStageFlags stageFlags, uint offset, uint size, void* pValues);
-
-
-		[DllImport (libraryName)]
 		public static extern void vkCmdBeginRenderPass(VkCommandBuffer commandBuffer, VkRenderPassBeginInfo* pRenderPassBegin, VkSubpassContents contents);
 
 
@@ -566,10 +570,6 @@ namespace GPUVulkan;
 
 		[DllImport (libraryName)]
 		public static extern void vkCmdEndRenderPass(VkCommandBuffer commandBuffer);
-
-
-		[DllImport (libraryName)]
-		public static extern void vkCmdExecuteCommands(VkCommandBuffer commandBuffer, uint commandBufferCount, VkCommandBuffer* pCommandBuffers);
 
 
 		[DllImport (libraryName)]
@@ -590,10 +590,6 @@ namespace GPUVulkan;
 
 		[DllImport (libraryName)]
 		public static extern void vkCmdSetDeviceMask(VkCommandBuffer commandBuffer, uint deviceMask);
-
-
-		[DllImport (libraryName)]
-		public static extern void vkCmdDispatchBase(VkCommandBuffer commandBuffer, uint baseGroupX, uint baseGroupY, uint baseGroupZ, uint groupCountX, uint groupCountY, uint groupCountZ);
 
 
 		[DllImport (libraryName)]
@@ -649,11 +645,19 @@ namespace GPUVulkan;
 
 
 		[DllImport (libraryName)]
-		public static extern VkResult vkCreateSamplerYcbcrConversion(VkDevice device, VkSamplerYcbcrConversionCreateInfo* pCreateInfo, VkAllocationCallbacks* pAllocator, VkSamplerYcbcrConversion* pYcbcrConversion);
+		public static extern void vkGetPhysicalDeviceExternalBufferProperties(VkPhysicalDevice physicalDevice, VkPhysicalDeviceExternalBufferInfo* pExternalBufferInfo, VkExternalBufferProperties* pExternalBufferProperties);
 
 
 		[DllImport (libraryName)]
-		public static extern void vkDestroySamplerYcbcrConversion(VkDevice device, VkSamplerYcbcrConversion ycbcrConversion, VkAllocationCallbacks* pAllocator);
+		public static extern void vkGetPhysicalDeviceExternalFenceProperties(VkPhysicalDevice physicalDevice, VkPhysicalDeviceExternalFenceInfo* pExternalFenceInfo, VkExternalFenceProperties* pExternalFenceProperties);
+
+
+		[DllImport (libraryName)]
+		public static extern void vkGetPhysicalDeviceExternalSemaphoreProperties(VkPhysicalDevice physicalDevice, VkPhysicalDeviceExternalSemaphoreInfo* pExternalSemaphoreInfo, VkExternalSemaphoreProperties* pExternalSemaphoreProperties);
+
+
+		[DllImport (libraryName)]
+		public static extern void vkCmdDispatchBase(VkCommandBuffer commandBuffer, uint baseGroupX, uint baseGroupY, uint baseGroupZ, uint groupCountX, uint groupCountY, uint groupCountZ);
 
 
 		[DllImport (libraryName)]
@@ -669,43 +673,15 @@ namespace GPUVulkan;
 
 
 		[DllImport (libraryName)]
-		public static extern void vkGetPhysicalDeviceExternalBufferProperties(VkPhysicalDevice physicalDevice, VkPhysicalDeviceExternalBufferInfo* pExternalBufferInfo, VkExternalBufferProperties* pExternalBufferProperties);
-
-
-		[DllImport (libraryName)]
-		public static extern void vkGetPhysicalDeviceExternalFenceProperties(VkPhysicalDevice physicalDevice, VkPhysicalDeviceExternalFenceInfo* pExternalFenceInfo, VkExternalFenceProperties* pExternalFenceProperties);
-
-
-		[DllImport (libraryName)]
-		public static extern void vkGetPhysicalDeviceExternalSemaphoreProperties(VkPhysicalDevice physicalDevice, VkPhysicalDeviceExternalSemaphoreInfo* pExternalSemaphoreInfo, VkExternalSemaphoreProperties* pExternalSemaphoreProperties);
-
-
-		[DllImport (libraryName)]
 		public static extern void vkGetDescriptorSetLayoutSupport(VkDevice device, VkDescriptorSetLayoutCreateInfo* pCreateInfo, VkDescriptorSetLayoutSupport* pSupport);
 
 
 		[DllImport (libraryName)]
-		public static extern void vkCmdDrawIndirectCount(VkCommandBuffer commandBuffer, VkBuffer buffer, ulong offset, VkBuffer countBuffer, ulong countBufferOffset, uint maxDrawCount, uint stride);
+		public static extern VkResult vkCreateSamplerYcbcrConversion(VkDevice device, VkSamplerYcbcrConversionCreateInfo* pCreateInfo, VkAllocationCallbacks* pAllocator, VkSamplerYcbcrConversion* pYcbcrConversion);
 
 
 		[DllImport (libraryName)]
-		public static extern void vkCmdDrawIndexedIndirectCount(VkCommandBuffer commandBuffer, VkBuffer buffer, ulong offset, VkBuffer countBuffer, ulong countBufferOffset, uint maxDrawCount, uint stride);
-
-
-		[DllImport (libraryName)]
-		public static extern VkResult vkCreateRenderPass2(VkDevice device, VkRenderPassCreateInfo2* pCreateInfo, VkAllocationCallbacks* pAllocator, VkRenderPass* pRenderPass);
-
-
-		[DllImport (libraryName)]
-		public static extern void vkCmdBeginRenderPass2(VkCommandBuffer commandBuffer, VkRenderPassBeginInfo* pRenderPassBegin, VkSubpassBeginInfo* pSubpassBeginInfo);
-
-
-		[DllImport (libraryName)]
-		public static extern void vkCmdNextSubpass2(VkCommandBuffer commandBuffer, VkSubpassBeginInfo* pSubpassBeginInfo, VkSubpassEndInfo* pSubpassEndInfo);
-
-
-		[DllImport (libraryName)]
-		public static extern void vkCmdEndRenderPass2(VkCommandBuffer commandBuffer, VkSubpassEndInfo* pSubpassEndInfo);
+		public static extern void vkDestroySamplerYcbcrConversion(VkDevice device, VkSamplerYcbcrConversion ycbcrConversion, VkAllocationCallbacks* pAllocator);
 
 
 		[DllImport (libraryName)]
@@ -737,6 +713,30 @@ namespace GPUVulkan;
 
 
 		[DllImport (libraryName)]
+		public static extern void vkCmdDrawIndirectCount(VkCommandBuffer commandBuffer, VkBuffer buffer, ulong offset, VkBuffer countBuffer, ulong countBufferOffset, uint maxDrawCount, uint stride);
+
+
+		[DllImport (libraryName)]
+		public static extern void vkCmdDrawIndexedIndirectCount(VkCommandBuffer commandBuffer, VkBuffer buffer, ulong offset, VkBuffer countBuffer, ulong countBufferOffset, uint maxDrawCount, uint stride);
+
+
+		[DllImport (libraryName)]
+		public static extern VkResult vkCreateRenderPass2(VkDevice device, VkRenderPassCreateInfo2* pCreateInfo, VkAllocationCallbacks* pAllocator, VkRenderPass* pRenderPass);
+
+
+		[DllImport (libraryName)]
+		public static extern void vkCmdBeginRenderPass2(VkCommandBuffer commandBuffer, VkRenderPassBeginInfo* pRenderPassBegin, VkSubpassBeginInfo* pSubpassBeginInfo);
+
+
+		[DllImport (libraryName)]
+		public static extern void vkCmdNextSubpass2(VkCommandBuffer commandBuffer, VkSubpassBeginInfo* pSubpassBeginInfo, VkSubpassEndInfo* pSubpassEndInfo);
+
+
+		[DllImport (libraryName)]
+		public static extern void vkCmdEndRenderPass2(VkCommandBuffer commandBuffer, VkSubpassEndInfo* pSubpassEndInfo);
+
+
+		[DllImport (libraryName)]
 		public static extern VkResult vkGetPhysicalDeviceToolProperties(VkPhysicalDevice physicalDevice, uint* pToolCount, VkPhysicalDeviceToolProperties* pToolProperties);
 
 
@@ -754,18 +754,6 @@ namespace GPUVulkan;
 
 		[DllImport (libraryName)]
 		public static extern void vkGetPrivateData(VkDevice device, VkObjectType objectType, ulong objectHandle, VkPrivateDataSlot privateDataSlot, ulong* pData);
-
-
-		[DllImport (libraryName)]
-		public static extern void vkCmdSetEvent2(VkCommandBuffer commandBuffer, VkEvent vkEvent, VkDependencyInfo* pDependencyInfo);
-
-
-		[DllImport (libraryName)]
-		public static extern void vkCmdResetEvent2(VkCommandBuffer commandBuffer, VkEvent vkEvent, ulong stageMask);
-
-
-		[DllImport (libraryName)]
-		public static extern void vkCmdWaitEvents2(VkCommandBuffer commandBuffer, uint eventCount, VkEvent* pEvents, VkDependencyInfo* pDependencyInfos);
 
 
 		[DllImport (libraryName)]
@@ -794,6 +782,30 @@ namespace GPUVulkan;
 
 		[DllImport (libraryName)]
 		public static extern void vkCmdCopyImageToBuffer2(VkCommandBuffer commandBuffer, VkCopyImageToBufferInfo2* pCopyImageToBufferInfo);
+
+
+		[DllImport (libraryName)]
+		public static extern void vkGetDeviceBufferMemoryRequirements(VkDevice device, VkDeviceBufferMemoryRequirements* pInfo, VkMemoryRequirements2* pMemoryRequirements);
+
+
+		[DllImport (libraryName)]
+		public static extern void vkGetDeviceImageMemoryRequirements(VkDevice device, VkDeviceImageMemoryRequirements* pInfo, VkMemoryRequirements2* pMemoryRequirements);
+
+
+		[DllImport (libraryName)]
+		public static extern void vkGetDeviceImageSparseMemoryRequirements(VkDevice device, VkDeviceImageMemoryRequirements* pInfo, uint* pSparseMemoryRequirementCount, VkSparseImageMemoryRequirements2* pSparseMemoryRequirements);
+
+
+		[DllImport (libraryName)]
+		public static extern void vkCmdSetEvent2(VkCommandBuffer commandBuffer, VkEvent vkEvent, VkDependencyInfo* pDependencyInfo);
+
+
+		[DllImport (libraryName)]
+		public static extern void vkCmdResetEvent2(VkCommandBuffer commandBuffer, VkEvent vkEvent, ulong stageMask);
+
+
+		[DllImport (libraryName)]
+		public static extern void vkCmdWaitEvents2(VkCommandBuffer commandBuffer, uint eventCount, VkEvent* pEvents, VkDependencyInfo* pDependencyInfos);
 
 
 		[DllImport (libraryName)]
@@ -873,15 +885,79 @@ namespace GPUVulkan;
 
 
 		[DllImport (libraryName)]
-		public static extern void vkGetDeviceBufferMemoryRequirements(VkDevice device, VkDeviceBufferMemoryRequirements* pInfo, VkMemoryRequirements2* pMemoryRequirements);
+		public static extern VkResult vkMapMemory2(VkDevice device, VkMemoryMapInfo* pMemoryMapInfo, void** ppData);
 
 
 		[DllImport (libraryName)]
-		public static extern void vkGetDeviceImageMemoryRequirements(VkDevice device, VkDeviceImageMemoryRequirements* pInfo, VkMemoryRequirements2* pMemoryRequirements);
+		public static extern VkResult vkUnmapMemory2(VkDevice device, VkMemoryUnmapInfo* pMemoryUnmapInfo);
 
 
 		[DllImport (libraryName)]
-		public static extern void vkGetDeviceImageSparseMemoryRequirements(VkDevice device, VkDeviceImageMemoryRequirements* pInfo, uint* pSparseMemoryRequirementCount, VkSparseImageMemoryRequirements2* pSparseMemoryRequirements);
+		public static extern void vkGetDeviceImageSubresourceLayout(VkDevice device, VkDeviceImageSubresourceInfo* pInfo, VkSubresourceLayout2* pLayout);
+
+
+		[DllImport (libraryName)]
+		public static extern void vkGetImageSubresourceLayout2(VkDevice device, VkImage image, VkImageSubresource2* pSubresource, VkSubresourceLayout2* pLayout);
+
+
+		[DllImport (libraryName)]
+		public static extern VkResult vkCopyMemoryToImage(VkDevice device, VkCopyMemoryToImageInfo* pCopyMemoryToImageInfo);
+
+
+		[DllImport (libraryName)]
+		public static extern VkResult vkCopyImageToMemory(VkDevice device, VkCopyImageToMemoryInfo* pCopyImageToMemoryInfo);
+
+
+		[DllImport (libraryName)]
+		public static extern VkResult vkCopyImageToImage(VkDevice device, VkCopyImageToImageInfo* pCopyImageToImageInfo);
+
+
+		[DllImport (libraryName)]
+		public static extern VkResult vkTransitionImageLayout(VkDevice device, uint transitionCount, VkHostImageLayoutTransitionInfo* pTransitions);
+
+
+		[DllImport (libraryName)]
+		public static extern void vkCmdPushDescriptorSet(VkCommandBuffer commandBuffer, VkPipelineBindPoint pipelineBindPoint, VkPipelineLayout layout, uint set, uint descriptorWriteCount, VkWriteDescriptorSet* pDescriptorWrites);
+
+
+		[DllImport (libraryName)]
+		public static extern void vkCmdPushDescriptorSetWithTemplate(VkCommandBuffer commandBuffer, VkDescriptorUpdateTemplate descriptorUpdateTemplate, VkPipelineLayout layout, uint set, void* pData);
+
+
+		[DllImport (libraryName)]
+		public static extern void vkCmdBindDescriptorSets2(VkCommandBuffer commandBuffer, VkBindDescriptorSetsInfo* pBindDescriptorSetsInfo);
+
+
+		[DllImport (libraryName)]
+		public static extern void vkCmdPushConstants2(VkCommandBuffer commandBuffer, VkPushConstantsInfo* pPushConstantsInfo);
+
+
+		[DllImport (libraryName)]
+		public static extern void vkCmdPushDescriptorSet2(VkCommandBuffer commandBuffer, VkPushDescriptorSetInfo* pPushDescriptorSetInfo);
+
+
+		[DllImport (libraryName)]
+		public static extern void vkCmdPushDescriptorSetWithTemplate2(VkCommandBuffer commandBuffer, VkPushDescriptorSetWithTemplateInfo* pPushDescriptorSetWithTemplateInfo);
+
+
+		[DllImport (libraryName)]
+		public static extern void vkCmdSetLineStipple(VkCommandBuffer commandBuffer, uint lineStippleFactor, ushort lineStipplePattern);
+
+
+		[DllImport (libraryName)]
+		public static extern void vkCmdBindIndexBuffer2(VkCommandBuffer commandBuffer, VkBuffer buffer, ulong offset, ulong size, VkIndexType indexType);
+
+
+		[DllImport (libraryName)]
+		public static extern void vkGetRenderingAreaGranularity(VkDevice device, VkRenderingAreaInfo* pRenderingAreaInfo, VkExtent2D* pGranularity);
+
+
+		[DllImport (libraryName)]
+		public static extern void vkCmdSetRenderingAttachmentLocations(VkCommandBuffer commandBuffer, VkRenderingAttachmentLocationInfo* pLocationInfo);
+
+
+		[DllImport (libraryName)]
+		public static extern void vkCmdSetRenderingInputAttachmentIndices(VkCommandBuffer commandBuffer, VkRenderingInputAttachmentIndexInfo* pInputAttachmentIndexInfo);
 
 
 		[DllImport (libraryName)]
@@ -930,6 +1006,22 @@ namespace GPUVulkan;
 
 		[DllImport (libraryName)]
 		public static extern VkResult vkQueuePresentKHR(VkQueue queue, VkPresentInfoKHR* pPresentInfo);
+
+
+		[DllImport (libraryName)]
+		public static extern VkResult vkGetDeviceGroupPresentCapabilitiesKHR(VkDevice device, VkDeviceGroupPresentCapabilitiesKHR* pDeviceGroupPresentCapabilities);
+
+
+		[DllImport (libraryName)]
+		public static extern VkResult vkGetDeviceGroupSurfacePresentModesKHR(VkDevice device, VkSurfaceKHR surface, VkDeviceGroupPresentModeFlagsKHR* pModes);
+
+
+		[DllImport (libraryName)]
+		public static extern VkResult vkGetPhysicalDevicePresentRectanglesKHR(VkPhysicalDevice physicalDevice, VkSurfaceKHR surface, uint* pRectCount, VkRect2D* pRects);
+
+
+		[DllImport (libraryName)]
+		public static extern VkResult vkAcquireNextImage2KHR(VkDevice device, VkAcquireNextImageInfoKHR* pAcquireInfo, uint* pImageIndex);
 
 
 		[DllImport (libraryName)]
@@ -1133,7 +1225,15 @@ namespace GPUVulkan;
 
 
 		[DllImport (libraryName)]
+		public static extern ulong vkGetImageViewHandle64NVX(VkDevice device, VkImageViewHandleInfoNVX* pInfo);
+
+
+		[DllImport (libraryName)]
 		public static extern VkResult vkGetImageViewAddressNVX(VkDevice device, VkImageView imageView, VkImageViewAddressPropertiesNVX* pProperties);
+
+
+		[DllImport (libraryName)]
+		public static extern ulong vkGetDeviceCombinedImageSamplerIndexNVX(VkDevice device, ulong imageViewIndex, ulong samplerIndex);
 
 
 		[DllImport (libraryName)]
@@ -1186,10 +1286,6 @@ namespace GPUVulkan;
 
 		[DllImport (libraryName)]
 		public static extern VkResult vkGetSemaphoreFdKHR(VkDevice device, VkSemaphoreGetFdInfoKHR* pGetFdInfo, int* pFd);
-
-
-		[DllImport (libraryName)]
-		public static extern void vkCmdPushDescriptorSetKHR(VkCommandBuffer commandBuffer, VkPipelineBindPoint pipelineBindPoint, VkPipelineLayout layout, uint set, uint descriptorWriteCount, VkWriteDescriptorSet* pDescriptorWrites);
 
 
 		[DllImport (libraryName)]
@@ -1381,6 +1477,54 @@ namespace GPUVulkan;
 
 
 		[DllImport (libraryName)]
+		public static extern VkResult vkCreateGpaSessionAMD(VkDevice device, VkGpaSessionCreateInfoAMD* pCreateInfo, VkAllocationCallbacks* pAllocator, VkGpaSessionAMD* pGpaSession);
+
+
+		[DllImport (libraryName)]
+		public static extern void vkDestroyGpaSessionAMD(VkDevice device, VkGpaSessionAMD gpaSession, VkAllocationCallbacks* pAllocator);
+
+
+		[DllImport (libraryName)]
+		public static extern VkResult vkSetGpaDeviceClockModeAMD(VkDevice device, VkGpaDeviceClockModeInfoAMD* pInfo);
+
+
+		[DllImport (libraryName)]
+		public static extern VkResult vkGetGpaDeviceClockInfoAMD(VkDevice device, VkGpaDeviceGetClockInfoAMD* pInfo);
+
+
+		[DllImport (libraryName)]
+		public static extern VkResult vkCmdBeginGpaSessionAMD(VkCommandBuffer commandBuffer, VkGpaSessionAMD gpaSession);
+
+
+		[DllImport (libraryName)]
+		public static extern VkResult vkCmdEndGpaSessionAMD(VkCommandBuffer commandBuffer, VkGpaSessionAMD gpaSession);
+
+
+		[DllImport (libraryName)]
+		public static extern VkResult vkCmdBeginGpaSampleAMD(VkCommandBuffer commandBuffer, VkGpaSessionAMD gpaSession, VkGpaSampleBeginInfoAMD* pGpaSampleBeginInfo, uint* pSampleID);
+
+
+		[DllImport (libraryName)]
+		public static extern void vkCmdEndGpaSampleAMD(VkCommandBuffer commandBuffer, VkGpaSessionAMD gpaSession, uint sampleID);
+
+
+		[DllImport (libraryName)]
+		public static extern VkResult vkGetGpaSessionStatusAMD(VkDevice device, VkGpaSessionAMD gpaSession);
+
+
+		[DllImport (libraryName)]
+		public static extern VkResult vkGetGpaSessionResultsAMD(VkDevice device, VkGpaSessionAMD gpaSession, uint sampleID, UIntPtr* pSizeInBytes, void* pData);
+
+
+		[DllImport (libraryName)]
+		public static extern VkResult vkResetGpaSessionAMD(VkDevice device, VkGpaSessionAMD gpaSession);
+
+
+		[DllImport (libraryName)]
+		public static extern void vkCmdCopyGpaSessionResultsAMD(VkCommandBuffer commandBuffer, VkGpaSessionAMD gpaSession);
+
+
+		[DllImport (libraryName)]
 		public static extern VkResult vkCreateExecutionGraphPipelinesAMDX(VkDevice device, VkPipelineCache pipelineCache, uint createInfoCount, VkExecutionGraphPipelineCreateInfoAMDX* pCreateInfos, VkAllocationCallbacks* pAllocator, VkPipeline* pPipelines);
 
 
@@ -1393,19 +1537,59 @@ namespace GPUVulkan;
 
 
 		[DllImport (libraryName)]
-		public static extern void vkCmdInitializeGraphScratchMemoryAMDX(VkCommandBuffer commandBuffer, ulong scratch);
+		public static extern void vkCmdInitializeGraphScratchMemoryAMDX(VkCommandBuffer commandBuffer, VkPipeline executionGraph, ulong scratch, ulong scratchSize);
 
 
 		[DllImport (libraryName)]
-		public static extern void vkCmdDispatchGraphAMDX(VkCommandBuffer commandBuffer, ulong scratch, VkDispatchGraphCountInfoAMDX* pCountInfo);
+		public static extern void vkCmdDispatchGraphAMDX(VkCommandBuffer commandBuffer, ulong scratch, ulong scratchSize, VkDispatchGraphCountInfoAMDX* pCountInfo);
 
 
 		[DllImport (libraryName)]
-		public static extern void vkCmdDispatchGraphIndirectAMDX(VkCommandBuffer commandBuffer, ulong scratch, VkDispatchGraphCountInfoAMDX* pCountInfo);
+		public static extern void vkCmdDispatchGraphIndirectAMDX(VkCommandBuffer commandBuffer, ulong scratch, ulong scratchSize, VkDispatchGraphCountInfoAMDX* pCountInfo);
 
 
 		[DllImport (libraryName)]
-		public static extern void vkCmdDispatchGraphIndirectCountAMDX(VkCommandBuffer commandBuffer, ulong scratch, ulong countInfo);
+		public static extern void vkCmdDispatchGraphIndirectCountAMDX(VkCommandBuffer commandBuffer, ulong scratch, ulong scratchSize, ulong countInfo);
+
+
+		[DllImport (libraryName)]
+		public static extern VkResult vkWriteSamplerDescriptorsEXT(VkDevice device, uint samplerCount, VkSamplerCreateInfo* pSamplers, VkHostAddressRangeEXT* pDescriptors);
+
+
+		[DllImport (libraryName)]
+		public static extern VkResult vkWriteResourceDescriptorsEXT(VkDevice device, uint resourceCount, VkResourceDescriptorInfoEXT* pResources, VkHostAddressRangeEXT* pDescriptors);
+
+
+		[DllImport (libraryName)]
+		public static extern void vkCmdBindSamplerHeapEXT(VkCommandBuffer commandBuffer, VkBindHeapInfoEXT* pBindInfo);
+
+
+		[DllImport (libraryName)]
+		public static extern void vkCmdBindResourceHeapEXT(VkCommandBuffer commandBuffer, VkBindHeapInfoEXT* pBindInfo);
+
+
+		[DllImport (libraryName)]
+		public static extern void vkCmdPushDataEXT(VkCommandBuffer commandBuffer, VkPushDataInfoEXT* pPushDataInfo);
+
+
+		[DllImport (libraryName)]
+		public static extern VkResult vkGetImageOpaqueCaptureDataEXT(VkDevice device, uint imageCount, VkImage* pImages, VkHostAddressRangeEXT* pDatas);
+
+
+		[DllImport (libraryName)]
+		public static extern ulong vkGetPhysicalDeviceDescriptorSizeEXT(VkPhysicalDevice physicalDevice, VkDescriptorType descriptorType);
+
+
+		[DllImport (libraryName)]
+		public static extern VkResult vkRegisterCustomBorderColorEXT(VkDevice device, VkSamplerCustomBorderColorCreateInfoEXT* pBorderColor, VkBool32 requestIndex, uint* pIndex);
+
+
+		[DllImport (libraryName)]
+		public static extern void vkUnregisterCustomBorderColorEXT(VkDevice device, uint index);
+
+
+		[DllImport (libraryName)]
+		public static extern VkResult vkGetTensorOpaqueCaptureDataARM(VkDevice device, uint tensorCount, VkTensorARM* pTensors, VkHostAddressRangeEXT* pDatas);
 
 
 		[DllImport (libraryName)]
@@ -1593,6 +1777,10 @@ namespace GPUVulkan;
 
 
 		[DllImport (libraryName)]
+		public static extern void vkCmdWriteBufferMarker2AMD(VkCommandBuffer commandBuffer, ulong stage, VkBuffer dstBuffer, ulong dstOffset, uint marker);
+
+
+		[DllImport (libraryName)]
 		public static extern VkResult vkGetPhysicalDeviceCalibrateableTimeDomainsKHR(VkPhysicalDevice physicalDevice, uint* pTimeDomainCount, VkTimeDomainKHR* pTimeDomains);
 
 
@@ -1626,6 +1814,26 @@ namespace GPUVulkan;
 
 		[DllImport (libraryName)]
 		public static extern void vkGetQueueCheckpointDataNV(VkQueue queue, uint* pCheckpointDataCount, VkCheckpointDataNV* pCheckpointData);
+
+
+		[DllImport (libraryName)]
+		public static extern void vkGetQueueCheckpointData2NV(VkQueue queue, uint* pCheckpointDataCount, VkCheckpointData2NV* pCheckpointData);
+
+
+		[DllImport (libraryName)]
+		public static extern VkResult vkSetSwapchainPresentTimingQueueSizeEXT(VkDevice device, VkSwapchainKHR swapchain, uint size);
+
+
+		[DllImport (libraryName)]
+		public static extern VkResult vkGetSwapchainTimingPropertiesEXT(VkDevice device, VkSwapchainKHR swapchain, VkSwapchainTimingPropertiesEXT* pSwapchainTimingProperties, ulong* pSwapchainTimingPropertiesCounter);
+
+
+		[DllImport (libraryName)]
+		public static extern VkResult vkGetSwapchainTimeDomainPropertiesEXT(VkDevice device, VkSwapchainKHR swapchain, VkSwapchainTimeDomainPropertiesEXT* pSwapchainTimeDomainProperties, ulong* pTimeDomainsCounter);
+
+
+		[DllImport (libraryName)]
+		public static extern VkResult vkGetPastPresentationTimingEXT(VkDevice device, VkPastPresentationTimingInfoEXT* pPastPresentationTimingInfo, VkPastPresentationTimingPropertiesEXT* pPastPresentationTimingProperties);
 
 
 		[DllImport (libraryName)]
@@ -1709,11 +1917,11 @@ namespace GPUVulkan;
 
 
 		[DllImport (libraryName)]
-		public static extern VkResult vkCreateHeadlessSurfaceEXT(VkInstance instance, VkHeadlessSurfaceCreateInfoEXT* pCreateInfo, VkAllocationCallbacks* pAllocator, VkSurfaceKHR* pSurface);
+		public static extern VkResult vkGetDeviceGroupSurfacePresentModes2EXT(VkDevice device, VkPhysicalDeviceSurfaceInfo2KHR* pSurfaceInfo, VkDeviceGroupPresentModeFlagsKHR* pModes);
 
 
 		[DllImport (libraryName)]
-		public static extern void vkCmdSetLineStippleEXT(VkCommandBuffer commandBuffer, uint lineStippleFactor, ushort lineStipplePattern);
+		public static extern VkResult vkCreateHeadlessSurfaceEXT(VkInstance instance, VkHeadlessSurfaceCreateInfoEXT* pCreateInfo, VkAllocationCallbacks* pAllocator, VkSurfaceKHR* pSurface);
 
 
 		[DllImport (libraryName)]
@@ -1749,35 +1957,7 @@ namespace GPUVulkan;
 
 
 		[DllImport (libraryName)]
-		public static extern VkResult vkCopyMemoryToImageEXT(VkDevice device, VkCopyMemoryToImageInfoEXT* pCopyMemoryToImageInfo);
-
-
-		[DllImport (libraryName)]
-		public static extern VkResult vkCopyImageToMemoryEXT(VkDevice device, VkCopyImageToMemoryInfoEXT* pCopyImageToMemoryInfo);
-
-
-		[DllImport (libraryName)]
-		public static extern VkResult vkCopyImageToImageEXT(VkDevice device, VkCopyImageToImageInfoEXT* pCopyImageToImageInfo);
-
-
-		[DllImport (libraryName)]
-		public static extern VkResult vkTransitionImageLayoutEXT(VkDevice device, uint transitionCount, VkHostImageLayoutTransitionInfoEXT* pTransitions);
-
-
-		[DllImport (libraryName)]
-		public static extern void vkGetImageSubresourceLayout2KHR(VkDevice device, VkImage image, VkImageSubresource2KHR* pSubresource, VkSubresourceLayout2KHR* pLayout);
-
-
-		[DllImport (libraryName)]
-		public static extern VkResult vkMapMemory2KHR(VkDevice device, VkMemoryMapInfoKHR* pMemoryMapInfo, void** ppData);
-
-
-		[DllImport (libraryName)]
-		public static extern VkResult vkUnmapMemory2KHR(VkDevice device, VkMemoryUnmapInfoKHR* pMemoryUnmapInfo);
-
-
-		[DllImport (libraryName)]
-		public static extern VkResult vkReleaseSwapchainImagesEXT(VkDevice device, VkReleaseSwapchainImagesInfoEXT* pReleaseInfo);
+		public static extern VkResult vkReleaseSwapchainImagesKHR(VkDevice device, VkReleaseSwapchainImagesInfoKHR* pReleaseInfo);
 
 
 		[DllImport (libraryName)]
@@ -1829,6 +2009,10 @@ namespace GPUVulkan;
 
 
 		[DllImport (libraryName)]
+		public static extern VkResult vkQueueSetPerfHintQCOM(VkQueue queue, VkPerfHintInfoQCOM* pPerfHintInfo);
+
+
+		[DllImport (libraryName)]
 		public static extern VkResult vkCreateCudaModuleNV(VkDevice device, VkCudaModuleCreateInfoNV* pCreateInfo, VkAllocationCallbacks* pAllocator, VkCudaModuleNV* pModule);
 
 
@@ -1858,6 +2042,18 @@ namespace GPUVulkan;
 
 		[DllImport (libraryName)]
 		public static extern VkResult vkGetPhysicalDeviceRefreshableObjectTypesKHR(VkPhysicalDevice physicalDevice, uint* pRefreshableObjectTypeCount, VkObjectType* pRefreshableObjectTypes);
+
+
+		[DllImport (libraryName)]
+		public static extern void vkCmdDispatchTileQCOM(VkCommandBuffer commandBuffer, VkDispatchTileInfoQCOM* pDispatchTileInfo);
+
+
+		[DllImport (libraryName)]
+		public static extern void vkCmdBeginPerTileExecutionQCOM(VkCommandBuffer commandBuffer, VkPerTileBeginInfoQCOM* pPerTileBeginInfo);
+
+
+		[DllImport (libraryName)]
+		public static extern void vkCmdEndPerTileExecutionQCOM(VkCommandBuffer commandBuffer, VkPerTileEndInfoQCOM* pPerTileEndInfo);
 
 
 		[DllImport (libraryName)]
@@ -1902,6 +2098,98 @@ namespace GPUVulkan;
 
 		[DllImport (libraryName)]
 		public static extern VkResult vkGetSamplerOpaqueCaptureDescriptorDataEXT(VkDevice device, VkSamplerCaptureDescriptorDataInfoEXT* pInfo, void* pData);
+
+
+		[DllImport (libraryName)]
+		public static extern VkResult vkGetAccelerationStructureOpaqueCaptureDescriptorDataEXT(VkDevice device, VkAccelerationStructureCaptureDescriptorDataInfoEXT* pInfo, void* pData);
+
+
+		[DllImport (libraryName)]
+		public static extern void vkCmdBindIndexBuffer3KHR(VkCommandBuffer commandBuffer, VkBindIndexBuffer3InfoKHR* pInfo);
+
+
+		[DllImport (libraryName)]
+		public static extern void vkCmdBindVertexBuffers3KHR(VkCommandBuffer commandBuffer, uint firstBinding, uint bindingCount, VkBindVertexBuffer3InfoKHR* pBindingInfos);
+
+
+		[DllImport (libraryName)]
+		public static extern void vkCmdDrawIndirect2KHR(VkCommandBuffer commandBuffer, VkDrawIndirect2InfoKHR* pInfo);
+
+
+		[DllImport (libraryName)]
+		public static extern void vkCmdDrawIndexedIndirect2KHR(VkCommandBuffer commandBuffer, VkDrawIndirect2InfoKHR* pInfo);
+
+
+		[DllImport (libraryName)]
+		public static extern void vkCmdDispatchIndirect2KHR(VkCommandBuffer commandBuffer, VkDispatchIndirect2InfoKHR* pInfo);
+
+
+		[DllImport (libraryName)]
+		public static extern void vkCmdCopyMemoryKHR(VkCommandBuffer commandBuffer, VkCopyDeviceMemoryInfoKHR* pCopyMemoryInfo);
+
+
+		[DllImport (libraryName)]
+		public static extern void vkCmdCopyMemoryToImageKHR(VkCommandBuffer commandBuffer, VkCopyDeviceMemoryImageInfoKHR* pCopyMemoryInfo);
+
+
+		[DllImport (libraryName)]
+		public static extern void vkCmdCopyImageToMemoryKHR(VkCommandBuffer commandBuffer, VkCopyDeviceMemoryImageInfoKHR* pCopyMemoryInfo);
+
+
+		[DllImport (libraryName)]
+		public static extern void vkCmdUpdateMemoryKHR(VkCommandBuffer commandBuffer, VkDeviceAddressRangeKHR* pDstRange, VkAddressCommandFlagsKHR dstFlags, ulong dataSize, void* pData);
+
+
+		[DllImport (libraryName)]
+		public static extern void vkCmdFillMemoryKHR(VkCommandBuffer commandBuffer, VkDeviceAddressRangeKHR* pDstRange, VkAddressCommandFlagsKHR dstFlags, uint data);
+
+
+		[DllImport (libraryName)]
+		public static extern void vkCmdCopyQueryPoolResultsToMemoryKHR(VkCommandBuffer commandBuffer, VkQueryPool queryPool, uint firstQuery, uint queryCount, VkStridedDeviceAddressRangeKHR* pDstRange, VkAddressCommandFlagsKHR dstFlags, VkQueryResultFlags queryResultFlags);
+
+
+		[DllImport (libraryName)]
+		public static extern void vkCmdDrawIndirectCount2KHR(VkCommandBuffer commandBuffer, VkDrawIndirectCount2InfoKHR* pInfo);
+
+
+		[DllImport (libraryName)]
+		public static extern void vkCmdDrawIndexedIndirectCount2KHR(VkCommandBuffer commandBuffer, VkDrawIndirectCount2InfoKHR* pInfo);
+
+
+		[DllImport (libraryName)]
+		public static extern void vkCmdBeginConditionalRendering2EXT(VkCommandBuffer commandBuffer, VkConditionalRenderingBeginInfo2EXT* pConditionalRenderingBegin);
+
+
+		[DllImport (libraryName)]
+		public static extern void vkCmdBindTransformFeedbackBuffers2EXT(VkCommandBuffer commandBuffer, uint firstBinding, uint bindingCount, VkBindTransformFeedbackBuffer2InfoEXT* pBindingInfos);
+
+
+		[DllImport (libraryName)]
+		public static extern void vkCmdBeginTransformFeedback2EXT(VkCommandBuffer commandBuffer, uint firstCounterRange, uint counterRangeCount, VkBindTransformFeedbackBuffer2InfoEXT* pCounterInfos);
+
+
+		[DllImport (libraryName)]
+		public static extern void vkCmdEndTransformFeedback2EXT(VkCommandBuffer commandBuffer, uint firstCounterRange, uint counterRangeCount, VkBindTransformFeedbackBuffer2InfoEXT* pCounterInfos);
+
+
+		[DllImport (libraryName)]
+		public static extern void vkCmdDrawIndirectByteCount2EXT(VkCommandBuffer commandBuffer, uint instanceCount, uint firstInstance, VkBindTransformFeedbackBuffer2InfoEXT* pCounterInfo, uint counterOffset, uint vertexStride);
+
+
+		[DllImport (libraryName)]
+		public static extern void vkCmdDrawMeshTasksIndirect2EXT(VkCommandBuffer commandBuffer, VkDrawIndirect2InfoKHR* pInfo);
+
+
+		[DllImport (libraryName)]
+		public static extern void vkCmdDrawMeshTasksIndirectCount2EXT(VkCommandBuffer commandBuffer, VkDrawIndirectCount2InfoKHR* pInfo);
+
+
+		[DllImport (libraryName)]
+		public static extern void vkCmdWriteMarkerToMemoryAMD(VkCommandBuffer commandBuffer, VkMemoryMarkerInfoAMD* pInfo);
+
+
+		[DllImport (libraryName)]
+		public static extern VkResult vkCreateAccelerationStructure2KHR(VkDevice device, VkAccelerationStructureCreateInfo2KHR* pCreateInfo, VkAllocationCallbacks* pAllocator, VkAccelerationStructureKHR* pAccelerationStructure);
 
 
 		[DllImport (libraryName)]
@@ -2061,6 +2349,10 @@ namespace GPUVulkan;
 
 
 		[DllImport (libraryName)]
+		public static extern void vkCmdTraceRaysIndirect2KHR(VkCommandBuffer commandBuffer, ulong indirectDeviceAddress);
+
+
+		[DllImport (libraryName)]
 		public static extern void vkCmdDrawMultiEXT(VkCommandBuffer commandBuffer, uint drawCount, VkMultiDrawInfoEXT* pVertexInfo, uint instanceCount, uint firstInstance, uint stride);
 
 
@@ -2137,6 +2429,10 @@ namespace GPUVulkan;
 
 
 		[DllImport (libraryName)]
+		public static extern void vkCmdSetDispatchParametersARM(VkCommandBuffer commandBuffer, VkDispatchParametersARM* pDispatchParameters);
+
+
+		[DllImport (libraryName)]
 		public static extern void vkGetDescriptorSetLayoutHostMappingInfoVALVE(VkDevice device, VkDescriptorSetBindingReferenceVALVE* pBindingReference, VkDescriptorSetLayoutHostMappingInfoVALVE* pHostMapping);
 
 
@@ -2173,7 +2469,11 @@ namespace GPUVulkan;
 
 
 		[DllImport (libraryName)]
-		public static extern void vkCmdSetTessellationDomainOriginEXT(VkCommandBuffer commandBuffer, VkTessellationDomainOrigin domainOrigin);
+		public static extern VkResult vkGetNativeBufferPropertiesOHOS(VkDevice device, IntPtr buffer, VkNativeBufferPropertiesOHOS* pProperties);
+
+
+		[DllImport (libraryName)]
+		public static extern VkResult vkGetMemoryNativeBufferOHOS(VkDevice device, VkMemoryGetNativeBufferInfoOHOS* pInfo, IntPtr pBuffer);
 
 
 		[DllImport (libraryName)]
@@ -2217,6 +2517,10 @@ namespace GPUVulkan;
 
 
 		[DllImport (libraryName)]
+		public static extern void vkCmdSetTessellationDomainOriginEXT(VkCommandBuffer commandBuffer, VkTessellationDomainOrigin domainOrigin);
+
+
+		[DllImport (libraryName)]
 		public static extern void vkCmdSetRasterizationStreamEXT(VkCommandBuffer commandBuffer, uint rasterizationStream);
 
 
@@ -2245,7 +2549,7 @@ namespace GPUVulkan;
 
 
 		[DllImport (libraryName)]
-		public static extern void vkCmdSetLineRasterizationModeEXT(VkCommandBuffer commandBuffer, VkLineRasterizationModeEXT lineRasterizationMode);
+		public static extern void vkCmdSetLineRasterizationModeEXT(VkCommandBuffer commandBuffer, VkLineRasterizationMode lineRasterizationMode);
 
 
 		[DllImport (libraryName)]
@@ -2254,6 +2558,90 @@ namespace GPUVulkan;
 
 		[DllImport (libraryName)]
 		public static extern void vkCmdSetDepthClipNegativeOneToOneEXT(VkCommandBuffer commandBuffer, VkBool32 negativeOneToOne);
+
+
+		[DllImport (libraryName)]
+		public static extern void vkCmdSetViewportWScalingEnableNV(VkCommandBuffer commandBuffer, VkBool32 viewportWScalingEnable);
+
+
+		[DllImport (libraryName)]
+		public static extern void vkCmdSetViewportSwizzleNV(VkCommandBuffer commandBuffer, uint firstViewport, uint viewportCount, VkViewportSwizzleNV* pViewportSwizzles);
+
+
+		[DllImport (libraryName)]
+		public static extern void vkCmdSetCoverageToColorEnableNV(VkCommandBuffer commandBuffer, VkBool32 coverageToColorEnable);
+
+
+		[DllImport (libraryName)]
+		public static extern void vkCmdSetCoverageToColorLocationNV(VkCommandBuffer commandBuffer, uint coverageToColorLocation);
+
+
+		[DllImport (libraryName)]
+		public static extern void vkCmdSetCoverageModulationModeNV(VkCommandBuffer commandBuffer, VkCoverageModulationModeNV coverageModulationMode);
+
+
+		[DllImport (libraryName)]
+		public static extern void vkCmdSetCoverageModulationTableEnableNV(VkCommandBuffer commandBuffer, VkBool32 coverageModulationTableEnable);
+
+
+		[DllImport (libraryName)]
+		public static extern void vkCmdSetCoverageModulationTableNV(VkCommandBuffer commandBuffer, uint coverageModulationTableCount, float* pCoverageModulationTable);
+
+
+		[DllImport (libraryName)]
+		public static extern void vkCmdSetShadingRateImageEnableNV(VkCommandBuffer commandBuffer, VkBool32 shadingRateImageEnable);
+
+
+		[DllImport (libraryName)]
+		public static extern void vkCmdSetRepresentativeFragmentTestEnableNV(VkCommandBuffer commandBuffer, VkBool32 representativeFragmentTestEnable);
+
+
+		[DllImport (libraryName)]
+		public static extern void vkCmdSetCoverageReductionModeNV(VkCommandBuffer commandBuffer, VkCoverageReductionModeNV coverageReductionMode);
+
+
+		[DllImport (libraryName)]
+		public static extern VkResult vkCreateTensorARM(VkDevice device, VkTensorCreateInfoARM* pCreateInfo, VkAllocationCallbacks* pAllocator, VkTensorARM* pTensor);
+
+
+		[DllImport (libraryName)]
+		public static extern void vkDestroyTensorARM(VkDevice device, VkTensorARM tensor, VkAllocationCallbacks* pAllocator);
+
+
+		[DllImport (libraryName)]
+		public static extern VkResult vkCreateTensorViewARM(VkDevice device, VkTensorViewCreateInfoARM* pCreateInfo, VkAllocationCallbacks* pAllocator, VkTensorViewARM* pView);
+
+
+		[DllImport (libraryName)]
+		public static extern void vkDestroyTensorViewARM(VkDevice device, VkTensorViewARM tensorView, VkAllocationCallbacks* pAllocator);
+
+
+		[DllImport (libraryName)]
+		public static extern void vkGetTensorMemoryRequirementsARM(VkDevice device, VkTensorMemoryRequirementsInfoARM* pInfo, VkMemoryRequirements2* pMemoryRequirements);
+
+
+		[DllImport (libraryName)]
+		public static extern VkResult vkBindTensorMemoryARM(VkDevice device, uint bindInfoCount, VkBindTensorMemoryInfoARM* pBindInfos);
+
+
+		[DllImport (libraryName)]
+		public static extern void vkGetDeviceTensorMemoryRequirementsARM(VkDevice device, VkDeviceTensorMemoryRequirementsARM* pInfo, VkMemoryRequirements2* pMemoryRequirements);
+
+
+		[DllImport (libraryName)]
+		public static extern void vkCmdCopyTensorARM(VkCommandBuffer commandBuffer, VkCopyTensorInfoARM* pCopyTensorInfo);
+
+
+		[DllImport (libraryName)]
+		public static extern void vkGetPhysicalDeviceExternalTensorPropertiesARM(VkPhysicalDevice physicalDevice, VkPhysicalDeviceExternalTensorInfoARM* pExternalTensorInfo, VkExternalTensorPropertiesARM* pExternalTensorProperties);
+
+
+		[DllImport (libraryName)]
+		public static extern VkResult vkGetTensorOpaqueCaptureDescriptorDataARM(VkDevice device, VkTensorCaptureDescriptorDataInfoARM* pInfo, void* pData);
+
+
+		[DllImport (libraryName)]
+		public static extern VkResult vkGetTensorViewOpaqueCaptureDescriptorDataARM(VkDevice device, VkTensorViewCaptureDescriptorDataInfoARM* pInfo, void* pData);
 
 
 		[DllImport (libraryName)]
@@ -2285,15 +2673,11 @@ namespace GPUVulkan;
 
 
 		[DllImport (libraryName)]
-		public static extern void vkCmdBindIndexBuffer2KHR(VkCommandBuffer commandBuffer, VkBuffer buffer, ulong offset, ulong size, VkIndexType indexType);
+		public static extern void vkAntiLagUpdateAMD(VkDevice device, VkAntiLagDataAMD* pData);
 
 
 		[DllImport (libraryName)]
-		public static extern void vkGetRenderingAreaGranularityKHR(VkDevice device, VkRenderingAreaInfoKHR* pRenderingAreaInfo, VkExtent2D* pGranularity);
-
-
-		[DllImport (libraryName)]
-		public static extern void vkGetDeviceImageSubresourceLayoutKHR(VkDevice device, VkDeviceImageSubresourceInfoKHR* pInfo, VkSubresourceLayout2KHR* pLayout);
+		public static extern VkResult vkWaitForPresent2KHR(VkDevice device, VkSwapchainKHR swapchain, VkPresentWait2InfoKHR* pPresentWait2Info);
 
 
 		[DllImport (libraryName)]
@@ -2313,6 +2697,30 @@ namespace GPUVulkan;
 
 
 		[DllImport (libraryName)]
+		public static extern void vkCmdSetDepthClampRangeEXT(VkCommandBuffer commandBuffer, VkDepthClampModeEXT depthClampMode, VkDepthClampRangeEXT* pDepthClampRange);
+
+
+		[DllImport (libraryName)]
+		public static extern VkResult vkCreatePipelineBinariesKHR(VkDevice device, VkPipelineBinaryCreateInfoKHR* pCreateInfo, VkAllocationCallbacks* pAllocator, VkPipelineBinaryHandlesInfoKHR* pBinaries);
+
+
+		[DllImport (libraryName)]
+		public static extern void vkDestroyPipelineBinaryKHR(VkDevice device, VkPipelineBinaryKHR pipelineBinary, VkAllocationCallbacks* pAllocator);
+
+
+		[DllImport (libraryName)]
+		public static extern VkResult vkGetPipelineKeyKHR(VkDevice device, VkPipelineCreateInfoKHR* pPipelineCreateInfo, VkPipelineBinaryKeyKHR* pPipelineKey);
+
+
+		[DllImport (libraryName)]
+		public static extern VkResult vkGetPipelineBinaryDataKHR(VkDevice device, VkPipelineBinaryDataInfoKHR* pInfo, VkPipelineBinaryKeyKHR* pPipelineBinaryKey, UIntPtr* pPipelineBinaryDataSize, void* pPipelineBinaryData);
+
+
+		[DllImport (libraryName)]
+		public static extern VkResult vkReleaseCapturedPipelineDataKHR(VkDevice device, VkReleaseCapturedPipelineDataInfoKHR* pInfo, VkAllocationCallbacks* pAllocator);
+
+
+		[DllImport (libraryName)]
 		public static extern VkResult vkGetFramebufferTilePropertiesQCOM(VkDevice device, VkFramebuffer framebuffer, uint* pPropertiesCount, VkTilePropertiesQCOM* pProperties);
 
 
@@ -2326,6 +2734,18 @@ namespace GPUVulkan;
 
 		[DllImport (libraryName)]
 		public static extern void vkDestroySemaphoreSciSyncPoolNV(VkDevice device, VkSemaphoreSciSyncPoolNV semaphorePool, VkAllocationCallbacks* pAllocator);
+
+
+		[DllImport (libraryName)]
+		public static extern VkResult vkGetPhysicalDeviceCooperativeVectorPropertiesNV(VkPhysicalDevice physicalDevice, uint* pPropertyCount, VkCooperativeVectorPropertiesNV* pProperties);
+
+
+		[DllImport (libraryName)]
+		public static extern VkResult vkConvertCooperativeVectorMatrixNV(VkDevice device, VkConvertCooperativeVectorMatrixInfoNV* pInfo);
+
+
+		[DllImport (libraryName)]
+		public static extern void vkCmdConvertCooperativeVectorMatrixNV(VkCommandBuffer commandBuffer, uint infoCount, VkConvertCooperativeVectorMatrixInfoNV* pInfos);
 
 
 		[DllImport (libraryName)]
@@ -2353,6 +2773,54 @@ namespace GPUVulkan;
 
 
 		[DllImport (libraryName)]
+		public static extern VkResult vkCreateDataGraphPipelinesARM(VkDevice device, VkDeferredOperationKHR deferredOperation, VkPipelineCache pipelineCache, uint createInfoCount, VkDataGraphPipelineCreateInfoARM* pCreateInfos, VkAllocationCallbacks* pAllocator, VkPipeline* pPipelines);
+
+
+		[DllImport (libraryName)]
+		public static extern VkResult vkCreateDataGraphPipelineSessionARM(VkDevice device, VkDataGraphPipelineSessionCreateInfoARM* pCreateInfo, VkAllocationCallbacks* pAllocator, VkDataGraphPipelineSessionARM* pSession);
+
+
+		[DllImport (libraryName)]
+		public static extern VkResult vkGetDataGraphPipelineSessionBindPointRequirementsARM(VkDevice device, VkDataGraphPipelineSessionBindPointRequirementsInfoARM* pInfo, uint* pBindPointRequirementCount, VkDataGraphPipelineSessionBindPointRequirementARM* pBindPointRequirements);
+
+
+		[DllImport (libraryName)]
+		public static extern void vkGetDataGraphPipelineSessionMemoryRequirementsARM(VkDevice device, VkDataGraphPipelineSessionMemoryRequirementsInfoARM* pInfo, VkMemoryRequirements2* pMemoryRequirements);
+
+
+		[DllImport (libraryName)]
+		public static extern VkResult vkBindDataGraphPipelineSessionMemoryARM(VkDevice device, uint bindInfoCount, VkBindDataGraphPipelineSessionMemoryInfoARM* pBindInfos);
+
+
+		[DllImport (libraryName)]
+		public static extern void vkDestroyDataGraphPipelineSessionARM(VkDevice device, VkDataGraphPipelineSessionARM session, VkAllocationCallbacks* pAllocator);
+
+
+		[DllImport (libraryName)]
+		public static extern void vkCmdDispatchDataGraphARM(VkCommandBuffer commandBuffer, VkDataGraphPipelineSessionARM session, VkDataGraphPipelineDispatchInfoARM* pInfo);
+
+
+		[DllImport (libraryName)]
+		public static extern VkResult vkGetDataGraphPipelineAvailablePropertiesARM(VkDevice device, VkDataGraphPipelineInfoARM* pPipelineInfo, uint* pPropertiesCount, VkDataGraphPipelinePropertyARM* pProperties);
+
+
+		[DllImport (libraryName)]
+		public static extern VkResult vkGetDataGraphPipelinePropertiesARM(VkDevice device, VkDataGraphPipelineInfoARM* pPipelineInfo, uint propertiesCount, VkDataGraphPipelinePropertyQueryResultARM* pProperties);
+
+
+		[DllImport (libraryName)]
+		public static extern VkResult vkGetPhysicalDeviceQueueFamilyDataGraphPropertiesARM(VkPhysicalDevice physicalDevice, uint queueFamilyIndex, uint* pQueueFamilyDataGraphPropertyCount, VkQueueFamilyDataGraphPropertiesARM* pQueueFamilyDataGraphProperties);
+
+
+		[DllImport (libraryName)]
+		public static extern void vkGetPhysicalDeviceQueueFamilyDataGraphProcessingEnginePropertiesARM(VkPhysicalDevice physicalDevice, VkPhysicalDeviceQueueFamilyDataGraphProcessingEngineInfoARM* pQueueFamilyDataGraphProcessingEngineInfo, VkQueueFamilyDataGraphProcessingEnginePropertiesARM* pQueueFamilyDataGraphProcessingEngineProperties);
+
+
+		[DllImport (libraryName)]
+		public static extern VkResult vkGetPhysicalDeviceQueueFamilyDataGraphEngineOperationPropertiesARM(VkPhysicalDevice physicalDevice, uint queueFamilyIndex, VkQueueFamilyDataGraphPropertiesARM* pQueueFamilyDataGraphProperties, VkBaseOutStructure* pProperties);
+
+
+		[DllImport (libraryName)]
 		public static extern void vkCmdSetAttachmentFeedbackLoopEnableEXT(VkCommandBuffer commandBuffer, VkImageAspectFlags aspectMask);
 
 
@@ -2361,11 +2829,179 @@ namespace GPUVulkan;
 
 
 		[DllImport (libraryName)]
-		public static extern void vkCmdBindDescriptorSets2KHR(VkCommandBuffer commandBuffer, VkBindDescriptorSetsInfoKHR* pBindDescriptorSetsInfo);
+		public static extern void vkCmdSetDescriptorBufferOffsets2EXT(VkCommandBuffer commandBuffer, VkSetDescriptorBufferOffsetsInfoEXT* pSetDescriptorBufferOffsetsInfo);
 
 
 		[DllImport (libraryName)]
-		public static extern void vkCmdPushConstants2KHR(VkCommandBuffer commandBuffer, VkPushConstantsInfoKHR* pPushConstantsInfo);
+		public static extern void vkCmdBindDescriptorBufferEmbeddedSamplers2EXT(VkCommandBuffer commandBuffer, VkBindDescriptorBufferEmbeddedSamplersInfoEXT* pBindDescriptorBufferEmbeddedSamplersInfo);
+
+
+		[DllImport (libraryName)]
+		public static extern void vkCmdBindTileMemoryQCOM(VkCommandBuffer commandBuffer, VkTileMemoryBindInfoQCOM* pTileMemoryBindInfo);
+
+
+		[DllImport (libraryName)]
+		public static extern void vkCmdCopyMemoryIndirectKHR(VkCommandBuffer commandBuffer, VkCopyMemoryIndirectInfoKHR* pCopyMemoryIndirectInfo);
+
+
+		[DllImport (libraryName)]
+		public static extern void vkCmdCopyMemoryToImageIndirectKHR(VkCommandBuffer commandBuffer, VkCopyMemoryToImageIndirectInfoKHR* pCopyMemoryToImageIndirectInfo);
+
+
+		[DllImport (libraryName)]
+		public static extern void vkCmdDecompressMemoryEXT(VkCommandBuffer commandBuffer, VkDecompressMemoryInfoEXT* pDecompressMemoryInfoEXT);
+
+
+		[DllImport (libraryName)]
+		public static extern void vkCmdDecompressMemoryIndirectCountEXT(VkCommandBuffer commandBuffer, ulong decompressionMethod, ulong indirectCommandsAddress, ulong indirectCommandsCountAddress, uint maxDecompressionCount, uint stride);
+
+
+		[DllImport (libraryName)]
+		public static extern VkResult vkCreateExternalComputeQueueNV(VkDevice device, VkExternalComputeQueueCreateInfoNV* pCreateInfo, VkAllocationCallbacks* pAllocator, VkExternalComputeQueueNV* pExternalQueue);
+
+
+		[DllImport (libraryName)]
+		public static extern void vkDestroyExternalComputeQueueNV(VkDevice device, VkExternalComputeQueueNV externalQueue, VkAllocationCallbacks* pAllocator);
+
+
+		[DllImport (libraryName)]
+		public static extern void vkGetExternalComputeQueueDataNV(VkExternalComputeQueueNV externalQueue, VkExternalComputeQueueDataParamsNV* vkParams, void* pData);
+
+
+		[DllImport (libraryName)]
+		public static extern void vkGetClusterAccelerationStructureBuildSizesNV(VkDevice device, VkClusterAccelerationStructureInputInfoNV* pInfo, VkAccelerationStructureBuildSizesInfoKHR* pSizeInfo);
+
+
+		[DllImport (libraryName)]
+		public static extern void vkCmdBuildClusterAccelerationStructureIndirectNV(VkCommandBuffer commandBuffer, VkClusterAccelerationStructureCommandsInfoNV* pCommandInfos);
+
+
+		[DllImport (libraryName)]
+		public static extern void vkGetPartitionedAccelerationStructuresBuildSizesNV(VkDevice device, VkPartitionedAccelerationStructureInstancesInputNV* pInfo, VkAccelerationStructureBuildSizesInfoKHR* pSizeInfo);
+
+
+		[DllImport (libraryName)]
+		public static extern void vkCmdBuildPartitionedAccelerationStructuresNV(VkCommandBuffer commandBuffer, VkBuildPartitionedAccelerationStructureInfoNV* pBuildInfo);
+
+
+		[DllImport (libraryName)]
+		public static extern void vkGetGeneratedCommandsMemoryRequirementsEXT(VkDevice device, VkGeneratedCommandsMemoryRequirementsInfoEXT* pInfo, VkMemoryRequirements2* pMemoryRequirements);
+
+
+		[DllImport (libraryName)]
+		public static extern void vkCmdPreprocessGeneratedCommandsEXT(VkCommandBuffer commandBuffer, VkGeneratedCommandsInfoEXT* pGeneratedCommandsInfo, VkCommandBuffer stateCommandBuffer);
+
+
+		[DllImport (libraryName)]
+		public static extern void vkCmdExecuteGeneratedCommandsEXT(VkCommandBuffer commandBuffer, VkBool32 isPreprocessed, VkGeneratedCommandsInfoEXT* pGeneratedCommandsInfo);
+
+
+		[DllImport (libraryName)]
+		public static extern VkResult vkCreateIndirectCommandsLayoutEXT(VkDevice device, VkIndirectCommandsLayoutCreateInfoEXT* pCreateInfo, VkAllocationCallbacks* pAllocator, VkIndirectCommandsLayoutEXT* pIndirectCommandsLayout);
+
+
+		[DllImport (libraryName)]
+		public static extern void vkDestroyIndirectCommandsLayoutEXT(VkDevice device, VkIndirectCommandsLayoutEXT indirectCommandsLayout, VkAllocationCallbacks* pAllocator);
+
+
+		[DllImport (libraryName)]
+		public static extern VkResult vkCreateIndirectExecutionSetEXT(VkDevice device, VkIndirectExecutionSetCreateInfoEXT* pCreateInfo, VkAllocationCallbacks* pAllocator, VkIndirectExecutionSetEXT* pIndirectExecutionSet);
+
+
+		[DllImport (libraryName)]
+		public static extern void vkDestroyIndirectExecutionSetEXT(VkDevice device, VkIndirectExecutionSetEXT indirectExecutionSet, VkAllocationCallbacks* pAllocator);
+
+
+		[DllImport (libraryName)]
+		public static extern void vkUpdateIndirectExecutionSetPipelineEXT(VkDevice device, VkIndirectExecutionSetEXT indirectExecutionSet, uint executionSetWriteCount, VkWriteIndirectExecutionSetPipelineEXT* pExecutionSetWrites);
+
+
+		[DllImport (libraryName)]
+		public static extern void vkUpdateIndirectExecutionSetShaderEXT(VkDevice device, VkIndirectExecutionSetEXT indirectExecutionSet, uint executionSetWriteCount, VkWriteIndirectExecutionSetShaderEXT* pExecutionSetWrites);
+
+
+		[DllImport (libraryName)]
+		public static extern VkResult vkGetDeviceFaultReportsKHR(VkDevice device, ulong timeout, uint* pFaultCounts, VkDeviceFaultInfoKHR* pFaultInfo);
+
+
+		[DllImport (libraryName)]
+		public static extern VkResult vkGetDeviceFaultDebugInfoKHR(VkDevice device, VkDeviceFaultDebugInfoKHR* pDebugInfo);
+
+
+		[DllImport (libraryName)]
+		public static extern VkResult vkCreateSurfaceOHOS(VkInstance instance, VkSurfaceCreateInfoOHOS* pCreateInfo, VkAllocationCallbacks* pAllocator, VkSurfaceKHR* pSurface);
+
+
+		[DllImport (libraryName)]
+		public static extern VkResult vkGetPhysicalDeviceCooperativeMatrixFlexibleDimensionsPropertiesNV(VkPhysicalDevice physicalDevice, uint* pPropertyCount, VkCooperativeMatrixFlexibleDimensionsPropertiesNV* pProperties);
+
+
+		[DllImport (libraryName)]
+		public static extern VkResult vkGetMemoryMetalHandleEXT(VkDevice device, VkMemoryGetMetalHandleInfoEXT* pGetMetalHandleInfo, void** pHandle);
+
+
+		[DllImport (libraryName)]
+		public static extern VkResult vkGetMemoryMetalHandlePropertiesEXT(VkDevice device, VkExternalMemoryHandleTypeFlags handleType, void* pHandle, VkMemoryMetalHandlePropertiesEXT* pMemoryMetalHandleProperties);
+
+
+		[DllImport (libraryName)]
+		public static extern VkResult vkEnumeratePhysicalDeviceQueueFamilyPerformanceCountersByRegionARM(VkPhysicalDevice physicalDevice, uint queueFamilyIndex, uint* pCounterCount, VkPerformanceCounterARM* pCounters, VkPerformanceCounterDescriptionARM* pCounterDescriptions);
+
+
+		[DllImport (libraryName)]
+		public static extern VkResult vkEnumeratePhysicalDeviceShaderInstrumentationMetricsARM(VkPhysicalDevice physicalDevice, uint* pDescriptionCount, VkShaderInstrumentationMetricDescriptionARM* pDescriptions);
+
+
+		[DllImport (libraryName)]
+		public static extern VkResult vkCreateShaderInstrumentationARM(VkDevice device, VkShaderInstrumentationCreateInfoARM* pCreateInfo, VkAllocationCallbacks* pAllocator, VkShaderInstrumentationARM* pInstrumentation);
+
+
+		[DllImport (libraryName)]
+		public static extern void vkDestroyShaderInstrumentationARM(VkDevice device, VkShaderInstrumentationARM instrumentation, VkAllocationCallbacks* pAllocator);
+
+
+		[DllImport (libraryName)]
+		public static extern void vkCmdBeginShaderInstrumentationARM(VkCommandBuffer commandBuffer, VkShaderInstrumentationARM instrumentation);
+
+
+		[DllImport (libraryName)]
+		public static extern void vkCmdEndShaderInstrumentationARM(VkCommandBuffer commandBuffer);
+
+
+		[DllImport (libraryName)]
+		public static extern VkResult vkGetShaderInstrumentationValuesARM(VkDevice device, VkShaderInstrumentationARM instrumentation, uint* pMetricBlockCount, void* pMetricValues, uint flags);
+
+
+		[DllImport (libraryName)]
+		public static extern void vkClearShaderInstrumentationMetricsARM(VkDevice device, VkShaderInstrumentationARM instrumentation);
+
+
+		[DllImport (libraryName)]
+		public static extern void vkCmdEndRendering2KHR(VkCommandBuffer commandBuffer, VkRenderingEndInfoKHR* pRenderingEndInfo);
+
+
+		[DllImport (libraryName)]
+		public static extern void vkCmdBeginCustomResolveEXT(VkCommandBuffer commandBuffer, VkBeginCustomResolveInfoEXT* pBeginCustomResolveInfo);
+
+
+		[DllImport (libraryName)]
+		public static extern VkResult vkGetPhysicalDeviceQueueFamilyDataGraphOpticalFlowImageFormatsARM(VkPhysicalDevice physicalDevice, uint queueFamilyIndex, VkQueueFamilyDataGraphPropertiesARM* pQueueFamilyDataGraphProperties, VkDataGraphOpticalFlowImageFormatInfoARM* pOpticalFlowImageFormatInfo, uint* pFormatCount, VkDataGraphOpticalFlowImageFormatPropertiesARM* pImageFormatProperties);
+
+
+		[DllImport (libraryName)]
+		public static extern void vkCmdSetComputeOccupancyPriorityNV(VkCommandBuffer commandBuffer, VkComputeOccupancyPriorityParametersNV* pParameters);
+
+
+		[DllImport (libraryName)]
+		public static extern VkResult vkCreateUbmSurfaceSEC(VkInstance instance, VkUbmSurfaceCreateInfoSEC* pCreateInfo, VkAllocationCallbacks* pAllocator, VkSurfaceKHR* pSurface);
+
+
+		[DllImport (libraryName)]
+		public static extern VkBool32 vkGetPhysicalDeviceUbmPresentationSupportSEC(VkPhysicalDevice physicalDevice, uint queueFamilyIndex, IntPtr device);
+
+
+		[DllImport (libraryName)]
+		public static extern void vkCmdSetPrimitiveRestartIndexEXT(VkCommandBuffer commandBuffer, uint primitiveRestartIndex);
 
 
 		}

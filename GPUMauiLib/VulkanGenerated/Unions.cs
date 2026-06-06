@@ -25,6 +25,17 @@ namespace GPUVulkan
 	}
 
 	[StructLayout(LayoutKind.Explicit)]
+	public unsafe partial struct VkClusterAccelerationStructureOpInputNV
+	{
+		[FieldOffset(0)]
+		public VkClusterAccelerationStructureClustersBottomLevelInputNV* pClustersBottomLevel;
+		[FieldOffset(0)]
+		public VkClusterAccelerationStructureTriangleClusterInputNV* pTriangleClusters;
+		[FieldOffset(0)]
+		public VkClusterAccelerationStructureMoveObjectsInputNV* pMoveObjects;
+	}
+
+	[StructLayout(LayoutKind.Explicit)]
 	public unsafe partial struct VkPerformanceCounterResultKHR
 	{
 		[FieldOffset(0)]
@@ -108,6 +119,28 @@ namespace GPUVulkan
 	}
 
 	[StructLayout(LayoutKind.Explicit)]
+	public unsafe partial struct VkIndirectExecutionSetInfoEXT
+	{
+		[FieldOffset(0)]
+		public VkIndirectExecutionSetPipelineInfoEXT* pPipelineInfo;
+		[FieldOffset(0)]
+		public VkIndirectExecutionSetShaderInfoEXT* pShaderInfo;
+	}
+
+	[StructLayout(LayoutKind.Explicit)]
+	public unsafe partial struct VkIndirectCommandsTokenDataEXT
+	{
+		[FieldOffset(0)]
+		public VkIndirectCommandsPushConstantTokenEXT* pPushConstant;
+		[FieldOffset(0)]
+		public VkIndirectCommandsVertexBufferTokenEXT* pVertexBuffer;
+		[FieldOffset(0)]
+		public VkIndirectCommandsIndexBufferTokenEXT* pIndexBuffer;
+		[FieldOffset(0)]
+		public VkIndirectCommandsExecutionSetTokenEXT* pExecutionSet;
+	}
+
+	[StructLayout(LayoutKind.Explicit)]
 	public unsafe partial struct VkDescriptorDataEXT
 	{
 		[FieldOffset(0)]
@@ -141,6 +174,46 @@ namespace GPUVulkan
 		public VkAccelerationStructureMatrixMotionInstanceNV matrixMotionInstance;
 		[FieldOffset(0)]
 		public VkAccelerationStructureSRTMotionInstanceNV srtMotionInstance;
+	}
+
+	[StructLayout(LayoutKind.Explicit)]
+	public unsafe partial struct VkResourceDescriptorDataEXT
+	{
+		[FieldOffset(0)]
+		public VkImageDescriptorInfoEXT* pImage;
+		[FieldOffset(0)]
+		public VkTexelBufferDescriptorInfoEXT* pTexelBuffer;
+		[FieldOffset(0)]
+		public VkDeviceAddressRangeKHR* pAddressRange;
+		[FieldOffset(0)]
+		public VkTensorViewCreateInfoARM* pTensorARM;
+	}
+
+	[StructLayout(LayoutKind.Explicit)]
+	public unsafe partial struct VkDescriptorMappingSourceDataEXT
+	{
+		[FieldOffset(0)]
+		public VkDescriptorMappingSourceConstantOffsetEXT constantOffset;
+		[FieldOffset(0)]
+		public VkDescriptorMappingSourcePushIndexEXT pushIndex;
+		[FieldOffset(0)]
+		public VkDescriptorMappingSourceIndirectIndexEXT indirectIndex;
+		[FieldOffset(0)]
+		public VkDescriptorMappingSourceIndirectIndexArrayEXT indirectIndexArray;
+		[FieldOffset(0)]
+		public VkDescriptorMappingSourceHeapDataEXT heapData;
+		[FieldOffset(0)]
+		public uint pushDataOffset;
+		[FieldOffset(0)]
+		public uint pushAddressOffset;
+		[FieldOffset(0)]
+		public VkDescriptorMappingSourceIndirectAddressEXT indirectAddress;
+		[FieldOffset(0)]
+		public VkDescriptorMappingSourceShaderRecordIndexEXT shaderRecordIndex;
+		[FieldOffset(0)]
+		public uint shaderRecordDataOffset;
+		[FieldOffset(0)]
+		public uint shaderRecordAddressOffset;
 	}
 
 }

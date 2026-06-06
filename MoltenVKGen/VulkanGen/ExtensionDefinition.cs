@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -46,8 +46,7 @@ namespace VulkanGen
                 extension.SortOrder = int.Parse(sortString);
             }
 
-            var requires = elem.Element("require");
-            if (requires != null)
+            foreach (var requires in elem.Elements("require"))
             {
                 var enums = requires.Elements("enum");
                 foreach (var e in enums)

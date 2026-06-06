@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -38,6 +38,10 @@ namespace VulkanGen
             else if (name == "event")
             {
                 return "vkEvent";
+            }
+            else if (name == "params")
+            {
+                return "vkParams";
             }
 
             return name;
@@ -242,6 +246,11 @@ namespace VulkanGen
                 case "CAMetalLayer":
                 case "AHardwareBuffer":
                 case "ANativeWindow":
+                case "OHNativeWindow":
+                case "OHBufferHandle":
+                case "OH_NativeBuffer":
+                case "ubm_device":
+                case "ubm_surface":
                 // NV extension
                 case "_screen_context":
                 case "_screen_window":

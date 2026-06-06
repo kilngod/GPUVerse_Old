@@ -379,6 +379,21 @@ namespace GPUVulkan
 		public override int GetHashCode() => Handle.GetHashCode();
 }
 
+	public partial struct VkPipelineBinaryKHR : IEquatable<VkPipelineBinaryKHR>
+{
+		public readonly ulong Handle;
+		public VkPipelineBinaryKHR(ulong existingHandle) { Handle = existingHandle; }
+		public static VkPipelineBinaryKHR Null => new VkPipelineBinaryKHR(0);
+		public static implicit operator VkPipelineBinaryKHR(ulong handle) => new VkPipelineBinaryKHR(handle);
+		public static bool operator ==(VkPipelineBinaryKHR left, VkPipelineBinaryKHR right) => left.Handle == right.Handle;
+		public static bool operator !=(VkPipelineBinaryKHR left, VkPipelineBinaryKHR right) => left.Handle != right.Handle;
+		public static bool operator ==(VkPipelineBinaryKHR left, ulong right) => left.Handle == right;
+		public static bool operator !=(VkPipelineBinaryKHR left, ulong right) => left.Handle != right;
+		public bool Equals(VkPipelineBinaryKHR h) => Handle == h.Handle;
+		public override bool Equals(object o) => o is VkPipelineBinaryKHR h && Equals(h);
+		public override int GetHashCode() => Handle.GetHashCode();
+}
+
 	public partial struct VkIndirectCommandsLayoutNV : IEquatable<VkIndirectCommandsLayoutNV>
 {
 		public readonly ulong Handle;
@@ -391,6 +406,36 @@ namespace GPUVulkan
 		public static bool operator !=(VkIndirectCommandsLayoutNV left, ulong right) => left.Handle != right;
 		public bool Equals(VkIndirectCommandsLayoutNV h) => Handle == h.Handle;
 		public override bool Equals(object o) => o is VkIndirectCommandsLayoutNV h && Equals(h);
+		public override int GetHashCode() => Handle.GetHashCode();
+}
+
+	public partial struct VkIndirectCommandsLayoutEXT : IEquatable<VkIndirectCommandsLayoutEXT>
+{
+		public readonly ulong Handle;
+		public VkIndirectCommandsLayoutEXT(ulong existingHandle) { Handle = existingHandle; }
+		public static VkIndirectCommandsLayoutEXT Null => new VkIndirectCommandsLayoutEXT(0);
+		public static implicit operator VkIndirectCommandsLayoutEXT(ulong handle) => new VkIndirectCommandsLayoutEXT(handle);
+		public static bool operator ==(VkIndirectCommandsLayoutEXT left, VkIndirectCommandsLayoutEXT right) => left.Handle == right.Handle;
+		public static bool operator !=(VkIndirectCommandsLayoutEXT left, VkIndirectCommandsLayoutEXT right) => left.Handle != right.Handle;
+		public static bool operator ==(VkIndirectCommandsLayoutEXT left, ulong right) => left.Handle == right;
+		public static bool operator !=(VkIndirectCommandsLayoutEXT left, ulong right) => left.Handle != right;
+		public bool Equals(VkIndirectCommandsLayoutEXT h) => Handle == h.Handle;
+		public override bool Equals(object o) => o is VkIndirectCommandsLayoutEXT h && Equals(h);
+		public override int GetHashCode() => Handle.GetHashCode();
+}
+
+	public partial struct VkIndirectExecutionSetEXT : IEquatable<VkIndirectExecutionSetEXT>
+{
+		public readonly ulong Handle;
+		public VkIndirectExecutionSetEXT(ulong existingHandle) { Handle = existingHandle; }
+		public static VkIndirectExecutionSetEXT Null => new VkIndirectExecutionSetEXT(0);
+		public static implicit operator VkIndirectExecutionSetEXT(ulong handle) => new VkIndirectExecutionSetEXT(handle);
+		public static bool operator ==(VkIndirectExecutionSetEXT left, VkIndirectExecutionSetEXT right) => left.Handle == right.Handle;
+		public static bool operator !=(VkIndirectExecutionSetEXT left, VkIndirectExecutionSetEXT right) => left.Handle != right.Handle;
+		public static bool operator ==(VkIndirectExecutionSetEXT left, ulong right) => left.Handle == right;
+		public static bool operator !=(VkIndirectExecutionSetEXT left, ulong right) => left.Handle != right;
+		public bool Equals(VkIndirectExecutionSetEXT h) => Handle == h.Handle;
+		public override bool Equals(object o) => o is VkIndirectExecutionSetEXT h && Equals(h);
 		public override int GetHashCode() => Handle.GetHashCode();
 }
 
@@ -649,6 +694,81 @@ namespace GPUVulkan
 		public override int GetHashCode() => Handle.GetHashCode();
 }
 
+	public partial struct VkTensorARM : IEquatable<VkTensorARM>
+{
+		public readonly ulong Handle;
+		public VkTensorARM(ulong existingHandle) { Handle = existingHandle; }
+		public static VkTensorARM Null => new VkTensorARM(0);
+		public static implicit operator VkTensorARM(ulong handle) => new VkTensorARM(handle);
+		public static bool operator ==(VkTensorARM left, VkTensorARM right) => left.Handle == right.Handle;
+		public static bool operator !=(VkTensorARM left, VkTensorARM right) => left.Handle != right.Handle;
+		public static bool operator ==(VkTensorARM left, ulong right) => left.Handle == right;
+		public static bool operator !=(VkTensorARM left, ulong right) => left.Handle != right;
+		public bool Equals(VkTensorARM h) => Handle == h.Handle;
+		public override bool Equals(object o) => o is VkTensorARM h && Equals(h);
+		public override int GetHashCode() => Handle.GetHashCode();
+}
+
+	public partial struct VkTensorViewARM : IEquatable<VkTensorViewARM>
+{
+		public readonly ulong Handle;
+		public VkTensorViewARM(ulong existingHandle) { Handle = existingHandle; }
+		public static VkTensorViewARM Null => new VkTensorViewARM(0);
+		public static implicit operator VkTensorViewARM(ulong handle) => new VkTensorViewARM(handle);
+		public static bool operator ==(VkTensorViewARM left, VkTensorViewARM right) => left.Handle == right.Handle;
+		public static bool operator !=(VkTensorViewARM left, VkTensorViewARM right) => left.Handle != right.Handle;
+		public static bool operator ==(VkTensorViewARM left, ulong right) => left.Handle == right;
+		public static bool operator !=(VkTensorViewARM left, ulong right) => left.Handle != right;
+		public bool Equals(VkTensorViewARM h) => Handle == h.Handle;
+		public override bool Equals(object o) => o is VkTensorViewARM h && Equals(h);
+		public override int GetHashCode() => Handle.GetHashCode();
+}
+
+	public partial struct VkDataGraphPipelineSessionARM : IEquatable<VkDataGraphPipelineSessionARM>
+{
+		public readonly ulong Handle;
+		public VkDataGraphPipelineSessionARM(ulong existingHandle) { Handle = existingHandle; }
+		public static VkDataGraphPipelineSessionARM Null => new VkDataGraphPipelineSessionARM(0);
+		public static implicit operator VkDataGraphPipelineSessionARM(ulong handle) => new VkDataGraphPipelineSessionARM(handle);
+		public static bool operator ==(VkDataGraphPipelineSessionARM left, VkDataGraphPipelineSessionARM right) => left.Handle == right.Handle;
+		public static bool operator !=(VkDataGraphPipelineSessionARM left, VkDataGraphPipelineSessionARM right) => left.Handle != right.Handle;
+		public static bool operator ==(VkDataGraphPipelineSessionARM left, ulong right) => left.Handle == right;
+		public static bool operator !=(VkDataGraphPipelineSessionARM left, ulong right) => left.Handle != right;
+		public bool Equals(VkDataGraphPipelineSessionARM h) => Handle == h.Handle;
+		public override bool Equals(object o) => o is VkDataGraphPipelineSessionARM h && Equals(h);
+		public override int GetHashCode() => Handle.GetHashCode();
+}
+
+	public partial struct VkShaderInstrumentationARM : IEquatable<VkShaderInstrumentationARM>
+{
+		public readonly ulong Handle;
+		public VkShaderInstrumentationARM(ulong existingHandle) { Handle = existingHandle; }
+		public static VkShaderInstrumentationARM Null => new VkShaderInstrumentationARM(0);
+		public static implicit operator VkShaderInstrumentationARM(ulong handle) => new VkShaderInstrumentationARM(handle);
+		public static bool operator ==(VkShaderInstrumentationARM left, VkShaderInstrumentationARM right) => left.Handle == right.Handle;
+		public static bool operator !=(VkShaderInstrumentationARM left, VkShaderInstrumentationARM right) => left.Handle != right.Handle;
+		public static bool operator ==(VkShaderInstrumentationARM left, ulong right) => left.Handle == right;
+		public static bool operator !=(VkShaderInstrumentationARM left, ulong right) => left.Handle != right;
+		public bool Equals(VkShaderInstrumentationARM h) => Handle == h.Handle;
+		public override bool Equals(object o) => o is VkShaderInstrumentationARM h && Equals(h);
+		public override int GetHashCode() => Handle.GetHashCode();
+}
+
+	public partial struct VkGpaSessionAMD : IEquatable<VkGpaSessionAMD>
+{
+		public readonly ulong Handle;
+		public VkGpaSessionAMD(ulong existingHandle) { Handle = existingHandle; }
+		public static VkGpaSessionAMD Null => new VkGpaSessionAMD(0);
+		public static implicit operator VkGpaSessionAMD(ulong handle) => new VkGpaSessionAMD(handle);
+		public static bool operator ==(VkGpaSessionAMD left, VkGpaSessionAMD right) => left.Handle == right.Handle;
+		public static bool operator !=(VkGpaSessionAMD left, VkGpaSessionAMD right) => left.Handle != right.Handle;
+		public static bool operator ==(VkGpaSessionAMD left, ulong right) => left.Handle == right;
+		public static bool operator !=(VkGpaSessionAMD left, ulong right) => left.Handle != right;
+		public bool Equals(VkGpaSessionAMD h) => Handle == h.Handle;
+		public override bool Equals(object o) => o is VkGpaSessionAMD h && Equals(h);
+		public override int GetHashCode() => Handle.GetHashCode();
+}
+
 	public partial struct VkDisplayKHR : IEquatable<VkDisplayKHR>
 {
 		public readonly ulong Handle;
@@ -811,6 +931,21 @@ namespace GPUVulkan
 		public static bool operator !=(VkCudaFunctionNV left, ulong right) => left.Handle != right;
 		public bool Equals(VkCudaFunctionNV h) => Handle == h.Handle;
 		public override bool Equals(object o) => o is VkCudaFunctionNV h && Equals(h);
+		public override int GetHashCode() => Handle.GetHashCode();
+}
+
+	public partial struct VkExternalComputeQueueNV : IEquatable<VkExternalComputeQueueNV>
+{
+		public readonly IntPtr Handle;
+		public VkExternalComputeQueueNV(IntPtr existingHandle) { Handle = existingHandle; }
+		public static VkExternalComputeQueueNV Null => new VkExternalComputeQueueNV(IntPtr.Zero);
+		public static implicit operator VkExternalComputeQueueNV(IntPtr handle) => new VkExternalComputeQueueNV(handle);
+		public static bool operator ==(VkExternalComputeQueueNV left, VkExternalComputeQueueNV right) => left.Handle == right.Handle;
+		public static bool operator !=(VkExternalComputeQueueNV left, VkExternalComputeQueueNV right) => left.Handle != right.Handle;
+		public static bool operator ==(VkExternalComputeQueueNV left, IntPtr right) => left.Handle == right;
+		public static bool operator !=(VkExternalComputeQueueNV left, IntPtr right) => left.Handle != right;
+		public bool Equals(VkExternalComputeQueueNV h) => Handle == h.Handle;
+		public override bool Equals(object o) => o is VkExternalComputeQueueNV h && Equals(h);
 		public override int GetHashCode() => Handle.GetHashCode();
 }
 
