@@ -204,15 +204,6 @@ VK_MVK_moltenvk
 
                 case DeliveryPlatform.iOS:
 
-                    if (support.AvailableExtensions.Find(x => VulkanNative.VK_MVK_IOS_SURFACE_EXTENSION_NAME == x) != null)
-                    {
-                        support.RequiredExtensions.Add(VulkanNative.VK_MVK_IOS_SURFACE_EXTENSION_NAME);
-                    }
-                    else
-                    {
-                        throw new NotSupportedException("ExtMetalSurface Not Supported");
-                    }
-
                     if (support.AvailableExtensions.Find(x => VulkanNative.VK_EXT_METAL_SURFACE_EXTENSION_NAME == x) != null)
                     {
                         support.RequiredExtensions.Add(VulkanNative.VK_EXT_METAL_SURFACE_EXTENSION_NAME);
@@ -225,10 +216,6 @@ VK_MVK_moltenvk
                     if (support.AvailableExtensions.Find(x => "VK_MVK_moltenvk" == x) != null)
                     {
                         support.RequiredExtensions.Add("VK_MVK_moltenvk");
-                    }
-                    else
-                    {
-                        throw new NotSupportedException("ExtMetalSurface Not Supported");
                     }
 
 
@@ -237,15 +224,6 @@ VK_MVK_moltenvk
 
                 case DeliveryPlatform.MacCatalyst:
                 case DeliveryPlatform.MacOS:
-                    if (support.AvailableExtensions.Find(x => VulkanNative.VK_MVK_MACOS_SURFACE_EXTENSION_NAME == x) != null)
-                    {
-                        support.RequiredExtensions.Add(VulkanNative.VK_MVK_MACOS_SURFACE_EXTENSION_NAME);
-                    }
-                    else
-                    {
-                        throw new NotSupportedException("ExtMetalSurface Not Supported");
-                    }
-
                     if (support.AvailableExtensions.Find(x => VulkanNative.VK_EXT_METAL_SURFACE_EXTENSION_NAME == x) != null)
                     {
                         support.RequiredExtensions.Add(VulkanNative.VK_EXT_METAL_SURFACE_EXTENSION_NAME);
@@ -258,10 +236,6 @@ VK_MVK_moltenvk
                     if (support.AvailableExtensions.Find(x => "VK_MVK_moltenvk" == x) != null)
                     {
                         support.RequiredExtensions.Add("VK_MVK_moltenvk");
-                    }
-                    else
-                    {
-                        throw new NotSupportedException("ExtMetalSurface Not Supported");
                     }
 
                     if (support.AvailableExtensions.Find(x => VulkanNative.VK_KHR_GET_PHYSICAL_DEVICE_PROPERTIES_2_EXTENSION_NAME == x) != null)

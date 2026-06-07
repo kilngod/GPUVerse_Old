@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
 #nullable disable
@@ -49,6 +50,19 @@ namespace GPUVulkan
                 return vulkanLibrary;
             }
 
+            string configuredLibrary = Environment.GetEnvironmentVariable("GPUVERSE_VULKAN_LIBRARY");
+            if (string.IsNullOrWhiteSpace(configuredLibrary))
+            {
+                configuredLibrary = Environment.GetEnvironmentVariable("VULKAN_LIBRARY");
+            }
+
+            if (!string.IsNullOrWhiteSpace(configuredLibrary))
+            {
+                return configuredLibrary;
+            }
+
+            string runtimeIdentifier = RuntimeInformation.RuntimeIdentifier.ToLowerInvariant();
+
             if (RuntimeInformation.OSDescription.ToLower().IndexOf("android") > 0)// android
             {
                 return "libvulkan.so";
@@ -61,11 +75,7 @@ namespace GPUVulkan
             {
                 return "libvulkan.so.1";
             }
-            else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
-            {
-                return "libvulkan.dylib";
-            }
-            else if (RuntimeInformation.RuntimeIdentifier.ToLower().IndexOf("ios") >= 0)
+            else if (runtimeIdentifier.IndexOf("ios") >= 0)
             {
                 // note for iOS we will have to rewrite the vulkan code generator to use static linking or setup the library as a framework package
                 // the iphone store does not allow dynamically linked libraries.
@@ -79,11 +89,11 @@ namespace GPUVulkan
                 return "libMoltenVK.dylib";
                 */
             }
-            else if (RuntimeInformation.RuntimeIdentifier.ToLower().IndexOf("tvos") >= 0)
+            else if (runtimeIdentifier.IndexOf("tvos") >= 0)
             {
                 return "libMoltenVK.dylib";
             }
-            else if (RuntimeInformation.RuntimeIdentifier.ToLower().IndexOf("maccatalyst") >=0)
+            else if (runtimeIdentifier.IndexOf("maccatalyst") >=0)
             {
                 string appDirectory = AppDomain.CurrentDomain.BaseDirectory;
                 string dropPoint = "maccatalyst-x64/";
@@ -94,7 +104,56 @@ namespace GPUVulkan
                 //  return "./libMoltenVK.dylib";
 
             }
+            else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
+            {
+                return GetMacOSVulkanName();
+            }
             throw new Exception("Application Type Unknown");
+        }
+
+        private static string GetMacOSVulkanName()
+        {
+            foreach (string candidate in GetMacOSVulkanCandidates())
+            {
+                if (File.Exists(candidate))
+                {
+                    return candidate;
+                }
+            }
+
+            return "libMoltenVK.dylib";
+        }
+
+        private static string[] GetMacOSVulkanCandidates()
+        {
+            string baseDirectory = AppContext.BaseDirectory;
+            string contentsDirectory = GetMacOSBundleContentsDirectory(baseDirectory);
+
+            return new[]
+            {
+                Path.Combine(baseDirectory, "libMoltenVK.dylib"),
+                Path.Combine(contentsDirectory, "MonoBundle", "libMoltenVK.dylib"),
+                Path.Combine(contentsDirectory, "Frameworks", "libMoltenVK.dylib"),
+                Path.Combine(contentsDirectory, "Resources", "libMoltenVK.dylib"),
+                Path.Combine(baseDirectory, "libvulkan.dylib"),
+                Path.Combine(contentsDirectory, "MonoBundle", "libvulkan.dylib"),
+                Path.Combine(contentsDirectory, "Frameworks", "libvulkan.dylib"),
+                Path.Combine(contentsDirectory, "Resources", "libvulkan.dylib"),
+                "/opt/homebrew/lib/libvulkan.dylib",
+                "/usr/local/lib/libvulkan.dylib"
+            };
+        }
+
+        private static string GetMacOSBundleContentsDirectory(string baseDirectory)
+        {
+            DirectoryInfo directory = new DirectoryInfo(baseDirectory);
+
+            while (directory != null && directory.Name != "Contents")
+            {
+                directory = directory.Parent;
+            }
+
+            return directory?.FullName ?? baseDirectory;
         }
     }
 }

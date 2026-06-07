@@ -67,6 +67,7 @@ namespace VulkanPlatform
             
         }
 
+        [Obsolete("Use CreateMetalLayerSurface with a CAMetalLayer handle and VK_EXT_metal_surface.")]
         public static unsafe void CreateiOSMTKViewSurface(IVulkanSupport support, ref VkSurfaceKHR surface, IntPtr mtkViewHandle)
         {
 #if DEBUG
@@ -90,6 +91,7 @@ namespace VulkanPlatform
 
 
 
+        [Obsolete("Use CreateMetalLayerSurface with a CAMetalLayer handle and VK_EXT_metal_surface.")]
         public static unsafe void CreateMacMTKViewSurface(IVulkanSupport support, ref VkSurfaceKHR surface, IntPtr mtkViewHandle)
         {
 #if DEBUG
@@ -97,7 +99,7 @@ namespace VulkanPlatform
 #endif
             VkMacOSSurfaceCreateInfoMVK surfaceCI = new VkMacOSSurfaceCreateInfoMVK()
             {
-                sType = VkStructureType.VK_STRUCTURE_TYPE_METAL_SURFACE_CREATE_INFO_EXT,
+                sType = VkStructureType.VK_STRUCTURE_TYPE_MACOS_SURFACE_CREATE_INFO_MVK,
                 pView = (void*)mtkViewHandle,
                 pNext = null
             };
@@ -114,12 +116,12 @@ namespace VulkanPlatform
         public static unsafe void CreateMetalLayerSurface(IVulkanSupport support, ref VkSurfaceKHR surface, IntPtr LayerHandle)
         {
 #if DEBUG
-            VulkanFlowTracer.AddItem("VulkanSurface.CreateMTKViewSurface");
+            VulkanFlowTracer.AddItem("VulkanSurface.CreateMetalLayerSurface");
 #endif
 
             VkMetalSurfaceCreateInfoEXT surfaceCI = new VkMetalSurfaceCreateInfoEXT()
             {
-                sType = VkStructureType.VK_STRUCTURE_TYPE_EXPORT_METAL_IO_SURFACE_INFO_EXT,
+                sType = VkStructureType.VK_STRUCTURE_TYPE_METAL_SURFACE_CREATE_INFO_EXT,
                 pLayer = LayerHandle,
                 pNext = null
             };
@@ -136,4 +138,3 @@ namespace VulkanPlatform
 
     }
 }
-

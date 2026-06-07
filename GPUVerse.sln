@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MoltenVKGen", "MoltenVKGen\MoltenVKGen.csproj", "{105B3CE8-12A1-4966-91B9-DDBE9791300D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7C4F7556}") = "MoltenVKGen", "MoltenVKGen\MoltenVKGen.csproj", "{105B3CE8-12A1-4966-91B9-DDBE9791300D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{4D72A63F-6834-4166-B5F0-B38CFE3D452A}"
 	ProjectSection(SolutionItems) = preProject
@@ -11,11 +11,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		DirectoryBuild.Targets = DirectoryBuild.Targets
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ILGPU.Vulkan", "ILGPU.Vulkan\ILGPU.Vulkan.csproj", "{549301BC-BA18-401A-ACAF-8E0EEBE1CBFD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7C4F7556}") = "ILGPU.Vulkan", "ILGPU.Vulkan\ILGPU.Vulkan.csproj", "{549301BC-BA18-401A-ACAF-8E0EEBE1CBFD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinVulkanApp", "WinVulkanApp\WinVulkanApp.csproj", "{3F55F5C3-EF7B-4997-BF72-B0006723BA15}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7C4F7556}") = "WinVulkanApp", "WinVulkanApp\WinVulkanApp.csproj", "{3F55F5C3-EF7B-4997-BF72-B0006723BA15}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MacVulkanApp", "MacVulkanApp\MacVulkanApp.csproj", "{8D5CF0EE-60E6-42A3-AD9C-6422B7EF4BB3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7C4F7556}") = "MacVulkanApp", "MacVulkanApp\MacVulkanApp.csproj", "{8D5CF0EE-60E6-42A3-AD9C-6422B7EF4BB3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

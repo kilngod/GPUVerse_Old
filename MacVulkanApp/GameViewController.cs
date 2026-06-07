@@ -11,12 +11,14 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Threading;
 using AppKit;
 using CoreGraphics;
 using GPUVulkan;
 using Metal;
 using MetalKit;
+using ObjCRuntime;
 using VulkanPlatform;
 
 namespace MacVulkanApp
@@ -92,7 +94,7 @@ namespace MacVulkanApp
 
         //GPUAnimator Animator;
 
-        public GameViewController(IntPtr handle) : base(handle)
+        public GameViewController(NativeHandle handle) : base(handle)
         {
 
         }
@@ -113,7 +115,8 @@ namespace MacVulkanApp
 
         private void CreateSurface()
         {
-            VulkanSurface.CreateMacMTKViewSurface(VSupport, ref _surface, _view.Handle);
+            var metalLayer = _view.Layer ?? throw new InvalidOperationException("MTKView does not have a backing Metal layer.");
+            VulkanSurface.CreateMetalLayerSurface(VSupport, ref _surface, metalLayer.Handle);
 
         }
 
@@ -121,6 +124,7 @@ namespace MacVulkanApp
         {
             _view = (MTKView)View;
             _view.Delegate = this;
+            _view.WantsLayer = true;
 
             // Setup the render target, choose values based on your app
             _view.SampleCount = 4;
@@ -184,10 +188,10 @@ namespace MacVulkanApp
             this.CreateRenderPass();
 
             List<VulkanSpirV> orderedShaderList = new List<VulkanSpirV>();
-            string resourceFolder = AppContext.BaseDirectory.Replace("MonoBundle", "Resources");
-            VulkanSpirV vert = new VulkanSpirV() { EntryName = "main", Name = "Vertex for Trangle", ShaderStageType = VkShaderStageFlags.VK_SHADER_STAGE_VERTEX_BIT, SpirVByte = VulkanIO.LoadRawResource(resourceFolder + "vert.spv") };
+            string resourceFolder = GetResourceFolder();
+            VulkanSpirV vert = new VulkanSpirV() { EntryName = "main", Name = "Vertex for Trangle", ShaderStageType = VkShaderStageFlags.VK_SHADER_STAGE_VERTEX_BIT, SpirVByte = VulkanIO.LoadRawResource(Path.Combine(resourceFolder, "vert.spv")) };
             orderedShaderList.Add(vert);
-            VulkanSpirV frag = new VulkanSpirV() { EntryName = "main", Name = "Fragment for Trangle", ShaderStageType = VkShaderStageFlags.VK_SHADER_STAGE_FRAGMENT_BIT, SpirVByte = VulkanIO.LoadRawResource(resourceFolder + "frag.spv") };
+            VulkanSpirV frag = new VulkanSpirV() { EntryName = "main", Name = "Fragment for Trangle", ShaderStageType = VkShaderStageFlags.VK_SHADER_STAGE_FRAGMENT_BIT, SpirVByte = VulkanIO.LoadRawResource(Path.Combine(resourceFolder, "frag.spv")) };
             orderedShaderList.Add(frag);
             this.CreateGraphicsPipeline(orderedShaderList);
 
@@ -195,6 +199,19 @@ namespace MacVulkanApp
             this.CreateCommandPool();
             this.CreateCommandBuffers();
             this.CreateSyncSemaphores();
+        }
+
+        private static string GetResourceFolder()
+        {
+            string baseDirectory = AppContext.BaseDirectory.TrimEnd(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar);
+            string contentsDirectory = Directory.GetParent(baseDirectory)?.FullName;
+
+            if (contentsDirectory is not null && Path.GetFileName(baseDirectory) == "MonoBundle")
+            {
+                return Path.Combine(contentsDirectory, "Resources");
+            }
+
+            return baseDirectory;
         }
 
         private unsafe void CleanUpPipeline()
@@ -230,4 +247,3 @@ namespace MacVulkanApp
 
     }
 }
-

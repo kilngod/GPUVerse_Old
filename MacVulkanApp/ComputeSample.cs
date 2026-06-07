@@ -160,7 +160,7 @@ namespace MacVulkanApp
             {
                 VkSubmitInfo submitInfo = new VkSubmitInfo()
                 {
-                    sType = VkStructureType.VK_STRUCTURE_TYPE_COMMAND_BUFFER_SUBMIT_INFO,
+                    sType = VkStructureType.VK_STRUCTURE_TYPE_SUBMIT_INFO,
                     commandBufferCount = (uint)ComputeCommandBuffers,
                     pCommandBuffers = commandBuffersPtr
                 };
@@ -182,7 +182,7 @@ namespace MacVulkanApp
         private unsafe void CreateBuffersAndMemory()
         {
             // size pixel map
-            buffer_size = (ulong)sizeof(Pixel) * kWidth * kHeight;
+            buffer_size = (ulong)sizeof(VulkanPixel) * kWidth * kHeight;
             _buffer = default(VkBuffer);
             Support.Device.CreateBuffer(buffer_size, ref _buffer);
             
@@ -265,6 +265,7 @@ namespace MacVulkanApp
 
             VkWriteDescriptorSet writeDescriptorSet = new VkWriteDescriptorSet()
             {
+                sType = VkStructureType.VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET,
                 dstSet = _descriptorSets[0],
                 descriptorCount = (uint)_descriptorSets.Length,
                 dstBinding = 0,
@@ -308,7 +309,7 @@ namespace MacVulkanApp
             {
                 VkPipelineLayoutCreateInfo pipelineLayoutInfo = new VkPipelineLayoutCreateInfo()
                 {
-                    sType = VkStructureType.VK_STRUCTURE_TYPE_COMPUTE_PIPELINE_CREATE_INFO,
+                    sType = VkStructureType.VK_STRUCTURE_TYPE_PIPELINE_LAYOUT_CREATE_INFO,
                     setLayoutCount = 1,
                     pSetLayouts = layout
                 };
@@ -327,6 +328,15 @@ namespace MacVulkanApp
                 
                 Support.Device.CreateComputePipeline(ref pipelineCreateInfo, ref _computePipeline);
             }
+
+            for (int i = 0; i < shaderModules.Length; i++)
+            {
+                if (shaderModules[i] != VkShaderModule.Null)
+                {
+                    VulkanNative.vkDestroyShaderModule(Support.Device, shaderModules[i], null);
+                    shaderModules[i] = VkShaderModule.Null;
+                }
+            }
         }
            
         
@@ -337,4 +347,3 @@ namespace MacVulkanApp
         float r, g, b, a;
     };
 }
-
