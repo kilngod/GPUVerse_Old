@@ -9,7 +9,7 @@ class Program
     {
         string vkFile = "..\\net10.0\\KhronosRegistry\\vk.xml";
         string videoFile = "..\\net10.0\\KhronosRegistry\\video.xml";
-        string outputPath = "..\\..\\..\\..\\GPUMauiLib\\VulkanGenerated";
+        string outputPath = "..\\..\\..\\..\\ILGPU.Vulkan\\VulkanGenerated";
 
         if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
         {
