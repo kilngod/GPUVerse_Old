@@ -11,6 +11,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -23,6 +24,31 @@ namespace WinVulkanApp
         public static string DownloadsFolderPath()
         {
             return cGetEnvVars_WinExp.GetPath("{374DE290-123F-4565-9164-39C4925E467B}", cGetEnvVars_WinExp.KnownFolderFlags.DontVerify, false);            
+        }
+
+        public static string WritableOutputFolderPath()
+        {
+            try
+            {
+                string downloadsPath = DownloadsFolderPath();
+                Directory.CreateDirectory(downloadsPath);
+                EnsureWritable(downloadsPath);
+                return downloadsPath;
+            }
+            catch
+            {
+                string outputPath = Path.Combine(AppContext.BaseDirectory, "Output");
+                Directory.CreateDirectory(outputPath);
+                EnsureWritable(outputPath);
+                return outputPath;
+            }
+        }
+
+        private static void EnsureWritable(string path)
+        {
+            string probePath = Path.Combine(path, $".write-test-{Guid.NewGuid():N}.tmp");
+            File.WriteAllText(probePath, string.Empty);
+            File.Delete(probePath);
         }
     }
 

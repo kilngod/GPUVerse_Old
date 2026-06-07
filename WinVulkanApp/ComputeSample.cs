@@ -10,6 +10,8 @@
 // ---------------------------------------------------------------------------------------
 
 using System;
+using System.IO;
+using System.Drawing.Imaging;
 using System.Windows.Forms;
 using GPUVulkan;
 using VulkanPlatform;
@@ -81,7 +83,9 @@ namespace WinVulkanApp
                 int y = (int)(i / kWidth);
                 bitmap.SetPixel(x,y, Color.FromArgb(red, green, blue));
             }
-            bitmap.Save(WinIO.DownloadsFolderPath()+ "\\Mandelbrot.bmp");
+            string outputPath = Path.Combine(WinIO.WritableOutputFolderPath(), "Mandelbrot.bmp");
+            using FileStream outputStream = File.Create(outputPath);
+            bitmap.Save(outputStream, ImageFormat.Bmp);
         }
 
 
@@ -213,7 +217,7 @@ namespace WinVulkanApp
             {
                 VkSubmitInfo submitInfo = new VkSubmitInfo()
                 {
-                    sType = VkStructureType.VK_STRUCTURE_TYPE_COMMAND_BUFFER_SUBMIT_INFO,
+                    sType = VkStructureType.VK_STRUCTURE_TYPE_SUBMIT_INFO,
                     commandBufferCount = (uint)ComputeCommandBuffers,
                     pCommandBuffers = commandBuffersPtr
                 };
@@ -317,6 +321,7 @@ namespace WinVulkanApp
 
             VkWriteDescriptorSet writeDescriptorSet = new VkWriteDescriptorSet()
             {
+                sType = VkStructureType.VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET,
                 dstSet = _descriptorSets[0],
                 descriptorCount = (uint)_descriptorSets.Length,
                 dstBinding = 0,
@@ -359,7 +364,7 @@ namespace WinVulkanApp
             {
                 VkPipelineLayoutCreateInfo pipelineLayoutInfo = new VkPipelineLayoutCreateInfo()
                 {
-                    sType = VkStructureType.VK_STRUCTURE_TYPE_COMPUTE_PIPELINE_CREATE_INFO,
+                    sType = VkStructureType.VK_STRUCTURE_TYPE_PIPELINE_LAYOUT_CREATE_INFO,
                     setLayoutCount = 1,
                     pSetLayouts = layout
                 };
@@ -388,6 +393,62 @@ namespace WinVulkanApp
               
                 
                 Support.Device.CreateComputePipeline(ref pipelineCreateInfo, ref _computePipeline);
+            }
+
+            for (int i = 0; i < shaderModules.Length; i++)
+            {
+                if (shaderModules[i] != VkShaderModule.Null)
+                {
+                    VulkanNative.vkDestroyShaderModule(Support.Device, shaderModules[i], null);
+                    shaderModules[i] = VkShaderModule.Null;
+                }
+            }
+        }
+
+        public unsafe void CleanUp()
+        {
+            VulkanHelpers.CheckErrors(VulkanNative.vkDeviceWaitIdle(Support.Device));
+
+            if (_computePipeline != VkPipeline.Null)
+            {
+                VulkanNative.vkDestroyPipeline(Support.Device, _computePipeline, null);
+                _computePipeline = VkPipeline.Null;
+            }
+
+            if (_pipelineLayout != VkPipelineLayout.Null)
+            {
+                VulkanNative.vkDestroyPipelineLayout(Support.Device, _pipelineLayout, null);
+                _pipelineLayout = VkPipelineLayout.Null;
+            }
+
+            if (_descriptorPool != VkDescriptorPool.Null)
+            {
+                VulkanNative.vkDestroyDescriptorPool(Support.Device, _descriptorPool, null);
+                _descriptorPool = VkDescriptorPool.Null;
+            }
+
+            if (_descriptorSetLayout != VkDescriptorSetLayout.Null)
+            {
+                VulkanNative.vkDestroyDescriptorSetLayout(Support.Device, _descriptorSetLayout, null);
+                _descriptorSetLayout = VkDescriptorSetLayout.Null;
+            }
+
+            if (_buffer != VkBuffer.Null)
+            {
+                VulkanNative.vkDestroyBuffer(Support.Device, _buffer, null);
+                _buffer = VkBuffer.Null;
+            }
+
+            if (_deviceMemory != VkDeviceMemory.Null)
+            {
+                VulkanNative.vkFreeMemory(Support.Device, _deviceMemory, null);
+                _deviceMemory = VkDeviceMemory.Null;
+            }
+
+            if (CommandPool != VkCommandPool.Null)
+            {
+                VulkanNative.vkDestroyCommandPool(Support.Device, CommandPool, null);
+                CommandPool = VkCommandPool.Null;
             }
         }
            

@@ -93,6 +93,11 @@ namespace WinVulkanApp
 
         private unsafe void CreateSurface()
         {
+            if (_surface != VkSurfaceKHR.Null)
+            {
+                return;
+            }
+
             fixed(VkSurfaceKHR* surfacePtr = &_surface)
             {
                 VulkanSurface.CreateWin32Surface(VSupport, surfacePtr, _window.Handle, HInstance);
@@ -116,10 +121,6 @@ namespace WinVulkanApp
 #if DEBUG
             VulkanFlowTracer.AddItem($"RendererVulkan.SetupPipeline");
 #endif
-
-            CreateSurface();
-
-            this.ConfigureDevices(_surface);
 
             this.CreateSwapChain(_surface, ref _swapchain);
             this.CreateImageViews();
@@ -185,7 +186,11 @@ namespace WinVulkanApp
 
             VulkanNative.vkDestroySwapchainKHR(VSupport.Device, _swapchain, null);
 
-            VulkanNative.vkDestroySurfaceKHR(VSupport.Instance, _surface, null);
+            if (_surface != VkSurfaceKHR.Null)
+            {
+                VulkanNative.vkDestroySurfaceKHR(VSupport.Instance, _surface, null);
+                _surface = VkSurfaceKHR.Null;
+            }
 
         }
 

@@ -32,6 +32,7 @@ namespace WinVulkanApp
         private VulkanSupport VSupport;
 
         private IVulkanRenderer renderer;
+        private ComputeSample computeSample;
 
         public Form InitWindow()
         {
@@ -45,7 +46,7 @@ namespace WinVulkanApp
 
         protected void DoCompute()
         {
-            ComputeSample computeSample = new ComputeSample(VSupport);
+            computeSample = new ComputeSample(VSupport);
 
             computeSample.SetupComputePipeline();
             computeSample.Compute();
@@ -80,6 +81,10 @@ namespace WinVulkanApp
             while (!isClosing)
             {
                 Application.DoEvents();
+                if (isClosing)
+                {
+                    break;
+                }
 
                 renderer.DrawFrame();
             }
@@ -89,6 +94,7 @@ namespace WinVulkanApp
 
         public void CleanUp()
         {
+            computeSample?.CleanUp();
             (renderer as WinVulkanRenderer).CleanUpPipeline();
             VSupport.CleanupVulkanSupport();
         }
