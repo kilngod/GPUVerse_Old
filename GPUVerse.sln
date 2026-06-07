@@ -17,6 +17,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7C4F7556}") = "WinVulkanApp", "WinVulkanAp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7C4F7556}") = "MacVulkanApp", "MacVulkanApp\MacVulkanApp.csproj", "{8D5CF0EE-60E6-42A3-AD9C-6422B7EF4BB3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ILGPU.VulkanApp", "ILGPU.VulkanApp\ILGPU.VulkanApp.csproj", "{ACF97928-514F-4AFD-BBA3-245F15459070}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{8D5CF0EE-60E6-42A3-AD9C-6422B7EF4BB3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8D5CF0EE-60E6-42A3-AD9C-6422B7EF4BB3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8D5CF0EE-60E6-42A3-AD9C-6422B7EF4BB3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ACF97928-514F-4AFD-BBA3-245F15459070}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ACF97928-514F-4AFD-BBA3-245F15459070}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ACF97928-514F-4AFD-BBA3-245F15459070}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ACF97928-514F-4AFD-BBA3-245F15459070}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
